@@ -1,11 +1,12 @@
-package uz.uat.mro.apps.model.alt.library.repository;
+package uz.uat.mro.app.model.terms.library.repository;
 
 import org.springframework.data.repository.query.Param;
 
 import com.arangodb.springframework.annotation.Query;
 import com.arangodb.springframework.repository.ArangoRepository;
 
-import uz.uat.mro.apps.model.alt.library.MpdMh;
+import uz.uat.mro.app.model.terms.library.MpdMh;
+
 
 public interface MpdMhsRepo extends ArangoRepository<MpdMh, String> {
 

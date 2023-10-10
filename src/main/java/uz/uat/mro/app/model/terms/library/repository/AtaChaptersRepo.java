@@ -1,8 +1,8 @@
-package uz.uat.mro.apps.model.alt.library.repository;
+package uz.uat.mro.app.model.terms.library.repository;
 
 import com.arangodb.springframework.repository.ArangoRepository;
 
-import uz.uat.mro.apps.model.alt.library.AtaChapter;
+import uz.uat.mro.app.model.terms.library.AtaChapter;
 
 public interface AtaChaptersRepo extends ArangoRepository<AtaChapter, String>{
     

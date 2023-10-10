@@ -1,8 +1,8 @@
-package uz.uat.mro.apps.model.alt.common.repositories;
+package uz.uat.mro.app.model.terms.common.repositories;
 
 import com.arangodb.springframework.repository.ArangoRepository;
 
-import uz.uat.mro.apps.model.alt.common.Workday;
+import uz.uat.mro.app.model.terms.common.Workday;
 
 public interface WorkdayRepo extends ArangoRepository<Workday, String> {
 

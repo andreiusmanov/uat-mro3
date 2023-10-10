@@ -1,4 +1,4 @@
-package uz.uat.mro.apps.model.alt.library;
+package uz.uat.mro.app.model.terms.library;
 
 import java.util.Collection;
 

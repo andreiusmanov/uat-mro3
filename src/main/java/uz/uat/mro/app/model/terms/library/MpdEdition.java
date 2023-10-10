@@ -1,4 +1,4 @@
-package uz.uat.mro.apps.model.alt.library;
+package uz.uat.mro.app.model.terms.library;
 
 import java.time.LocalDate;
 
@@ -9,7 +9,7 @@ import com.arangodb.springframework.annotation.Document;
 import com.arangodb.springframework.annotation.Ref;
 
 import lombok.Data;
-import uz.uat.mro.apps.model.alt.aircraft.MajorModel;
+import uz.uat.mro.app.model.terms.aircraft.MajorModel;
 
 @Data
 @Document("mpd_editions")

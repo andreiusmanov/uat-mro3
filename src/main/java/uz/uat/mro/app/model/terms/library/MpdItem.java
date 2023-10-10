@@ -1,4 +1,4 @@
-package uz.uat.mro.apps.model.alt.library;
+package uz.uat.mro.app.model.terms.library;
 
 import java.util.List;
 
@@ -10,10 +10,10 @@ import com.arangodb.springframework.annotation.Ref;
 import com.arangodb.springframework.annotation.Relations;
 
 import lombok.Data;
-import uz.uat.mro.apps.model.alt.library.edges.MpdItemsAccesses;
-import uz.uat.mro.apps.model.alt.library.edges.MpdItemsMhs;
-import uz.uat.mro.apps.model.alt.library.edges.MpdItemsSubzones;
-import uz.uat.mro.apps.model.alt.library.edges.MpdItemsTaskcards;
+import uz.uat.mro.app.model.terms.library.edges.MpdItemsAccesses;
+import uz.uat.mro.app.model.terms.library.edges.MpdItemsMhs;
+import uz.uat.mro.app.model.terms.library.edges.MpdItemsSubzones;
+import uz.uat.mro.app.model.terms.library.edges.MpdItemsTaskcards;
 
 @Data
 @Document("mpd_items")

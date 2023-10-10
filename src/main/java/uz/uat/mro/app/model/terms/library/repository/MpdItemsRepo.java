@@ -1,4 +1,4 @@
-package uz.uat.mro.apps.model.alt.library.repository;
+package uz.uat.mro.app.model.terms.library.repository;
 
 import java.util.List;
 
@@ -7,8 +7,8 @@ import org.springframework.data.repository.query.Param;
 import com.arangodb.springframework.annotation.Query;
 import com.arangodb.springframework.repository.ArangoRepository;
 
-import uz.uat.mro.apps.model.alt.library.MpdEdition;
-import uz.uat.mro.apps.model.alt.library.MpdItem;
+import uz.uat.mro.app.model.terms.library.MpdEdition;
+import uz.uat.mro.app.model.terms.library.MpdItem;
 
 public interface MpdItemsRepo extends ArangoRepository<MpdItem, String> {
 

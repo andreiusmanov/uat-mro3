@@ -1,4 +1,4 @@
-package uz.uat.mro.apps.model.alt.library.edges;
+package uz.uat.mro.app.model.terms.library.edges;
 
 import org.springframework.data.annotation.Id;
 
@@ -6,8 +6,8 @@ import com.arangodb.springframework.annotation.ArangoId;
 import com.arangodb.springframework.annotation.Edge;
 
 import lombok.Data;
-import uz.uat.mro.apps.model.alt.library.MpdItem;
-import uz.uat.mro.apps.model.alt.library.MpdTaskcard;
+import uz.uat.mro.app.model.terms.library.MpdItem;
+import uz.uat.mro.app.model.terms.library.MpdTaskcard;
 
 @Data
 @Edge("mpd_items_taskcards")

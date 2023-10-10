@@ -1,4 +1,4 @@
-package uz.uat.mro.apps.model.alt.library.edges;
+package uz.uat.mro.app.model.terms.library.edges;
 
 import org.springframework.data.annotation.Id;
 
@@ -7,9 +7,9 @@ import com.arangodb.springframework.annotation.Edge;
 import com.arangodb.springframework.annotation.Ref;
 
 import lombok.Data;
-import uz.uat.mro.apps.model.alt.aircraft.AircraftSubzone;
-import uz.uat.mro.apps.model.alt.library.MpdEdition;
-import uz.uat.mro.apps.model.alt.library.MpdItem;
+import uz.uat.mro.app.model.terms.aircraft.AircraftSubzone;
+import uz.uat.mro.app.model.terms.library.MpdEdition;
+import uz.uat.mro.app.model.terms.library.MpdItem;
 
 @Data
 @Edge("mpd_items_subzones")
