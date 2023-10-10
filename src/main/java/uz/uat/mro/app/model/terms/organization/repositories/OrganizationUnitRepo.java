@@ -7,7 +7,7 @@ import org.springframework.data.repository.query.Param;
 import com.arangodb.springframework.annotation.Query;
 import com.arangodb.springframework.repository.ArangoRepository;
 
-import uz.uat.mro.app.model.terms.organization.OrganizationUnit;
+import uz.uat.mro.app.model.documents.organization.OrganizationUnit;
 
 public interface OrganizationUnitRepo extends ArangoRepository<OrganizationUnit, String>{
  

@@ -8,8 +8,8 @@ import com.arangodb.springframework.annotation.From;
 import com.arangodb.springframework.annotation.To;
 
 import lombok.Data;
-import uz.uat.mro.app.model.terms.organization.Organization;
-import uz.uat.mro.app.model.terms.organization.OrganizationUnit;
+import uz.uat.mro.app.model.documents.organization.Organization;
+import uz.uat.mro.app.model.documents.organization.OrganizationUnit;
 
 @Data
 @Edge("has_unit")

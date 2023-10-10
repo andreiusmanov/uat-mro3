@@ -9,7 +9,7 @@ import com.arangodb.springframework.annotation.Document;
 import com.arangodb.springframework.annotation.Ref;
 
 import lombok.Data;
-import uz.uat.mro.app.model.terms.organization.OrganizationUnit;
+import uz.uat.mro.app.model.documents.organization.OrganizationUnit;
 
 @Data
 @Document("sectors")

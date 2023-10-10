@@ -7,7 +7,7 @@ import com.arangodb.springframework.annotation.Document;
 import com.arangodb.springframework.annotation.Ref;
 
 import lombok.Data;
-import uz.uat.mro.app.model.terms.organization.Organization;
+import uz.uat.mro.app.model.documents.organization.Organization;
 
 @Data
 @Document("aircrafts")

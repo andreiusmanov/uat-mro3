@@ -1,4 +1,4 @@
-package uz.uat.mro.app.model.terms.organization;
+package uz.uat.mro.app.model.documents.organization;
 
 import java.util.Collection;
 
@@ -11,6 +11,7 @@ import com.arangodb.springframework.annotation.Relations;
 
 import lombok.Data;
 import uz.uat.mro.app.model.terms.common.Country;
+import uz.uat.mro.app.model.terms.organization.Facility;
 import uz.uat.mro.app.model.terms.organization.edges.HasFacility;
 import uz.uat.mro.app.model.terms.organization.edges.HasUnit;
 
