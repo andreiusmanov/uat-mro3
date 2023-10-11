@@ -1,4 +1,4 @@
-package uz.uat.mro.app.model.terms.organization.edges;
+package uz.uat.mro.app.model.documents.organization.edges;
 
 import org.springframework.data.annotation.Id;
 
@@ -9,11 +9,11 @@ import com.arangodb.springframework.annotation.To;
 
 import lombok.Data;
 import uz.uat.mro.app.model.documents.organization.Organization;
-import uz.uat.mro.app.model.terms.organization.Facility;
+import uz.uat.mro.app.model.documents.organization.OrganizationUnit;
 
 @Data
-@Edge(collection = "has_facilities")
-public class HasFacility {
+@Edge("has_unit")
+public class HasUnit {
     @Id
     private String id;
     @ArangoId
@@ -21,5 +21,6 @@ public class HasFacility {
     @From
     private Organization organization;
     @To
-    private Facility facility;
+    private OrganizationUnit organizationUnit;
+
 }

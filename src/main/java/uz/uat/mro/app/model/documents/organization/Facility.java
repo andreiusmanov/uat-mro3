@@ -1,4 +1,4 @@
-package uz.uat.mro.app.model.terms.organization;
+package uz.uat.mro.app.model.documents.organization;
 
 import org.springframework.data.annotation.Id;
 
