@@ -7,7 +7,7 @@ import org.springframework.data.repository.query.Param;
 import com.arangodb.springframework.annotation.Query;
 import com.arangodb.springframework.repository.ArangoRepository;
 
-import uz.uat.mro.app.model.terms.organization.Facility;
+import uz.uat.mro.app.model.documents.organization.Facility;
 
 public interface FacilityRepo extends ArangoRepository<Facility, String> {
 

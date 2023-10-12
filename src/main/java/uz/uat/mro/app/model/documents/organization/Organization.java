@@ -10,10 +10,9 @@ import com.arangodb.springframework.annotation.Ref;
 import com.arangodb.springframework.annotation.Relations;
 
 import lombok.Data;
+import uz.uat.mro.app.model.documents.organization.edges.HasFacility;
+import uz.uat.mro.app.model.documents.organization.edges.HasUnit;
 import uz.uat.mro.app.model.terms.common.Country;
-import uz.uat.mro.app.model.terms.organization.Facility;
-import uz.uat.mro.app.model.terms.organization.edges.HasFacility;
-import uz.uat.mro.app.model.terms.organization.edges.HasUnit;
 
 
 @Data
