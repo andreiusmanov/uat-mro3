@@ -13,7 +13,6 @@ import uz.uat.mro.app.views.MainLayout;
 
 @Route(value = "terms/unit-names", layout = MainLayout.class)
 @PageTitle(value = "Типы структурных единиц предприятия")
-
 public class OrganizationUnitNamesView extends VerticalLayout {
     private OrganizationUnitNameService service;
     private GridCrud<OrganizationUnitName> crud;
