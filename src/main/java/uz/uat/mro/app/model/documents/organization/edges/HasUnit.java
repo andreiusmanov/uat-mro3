@@ -8,7 +8,6 @@ import com.arangodb.springframework.annotation.From;
 import com.arangodb.springframework.annotation.To;
 
 import lombok.Data;
-import uz.uat.mro.app.model.documents.organization.Organization;
 import uz.uat.mro.app.model.documents.organization.OrganizationUnit;
 
 @Data
@@ -19,8 +18,7 @@ public class HasUnit {
     @ArangoId
     private String arangoId;
     @From
-    private Organization organization;
+    private OrganizationUnit principle;
     @To
-    private OrganizationUnit organizationUnit;
-
+    private OrganizationUnit subordinate;
 }

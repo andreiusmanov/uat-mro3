@@ -1,13 +1,15 @@
 package uz.uat.mro.app.views.terms;
 
 import org.vaadin.crudui.crud.impl.GridCrud;
+import org.vaadin.crudui.form.CrudFormFactory;
 
 import com.vaadin.flow.component.grid.Grid;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
+import com.vaadin.flow.component.textfield.TextArea;
 import com.vaadin.flow.router.PageTitle;
 import com.vaadin.flow.router.Route;
 
-import uz.uat.mro.app.model.services.OrganizationUnitNameService;
+import uz.uat.mro.app.model.documents.organization.OrganizationUnitNameService;
 import uz.uat.mro.app.model.terms.organization.OrganizationUnitName;
 import uz.uat.mro.app.views.MainLayout;
 
@@ -37,6 +39,15 @@ public class OrganizationUnitNamesView extends VerticalLayout {
         crud.setUpdateOperation(service::save);
         crud.setDeleteOperation(service::delete);
         crud.setFindAllOperation(service::queryAllUnitNames);
-    }
 
+        CrudFormFactory<OrganizationUnitName> factory = crud.getCrudFormFactory();
+        factory.setVisibleProperties("name", "code", "description");
+        factory.setFieldCaptions("Наименование", "Код", "Описание");
+
+        factory.setFieldProvider("description", val -> {
+            TextArea ta = new TextArea("Описание");
+            return ta;
+        });
+        factory.setShowNotifications(true);
+    }
 }

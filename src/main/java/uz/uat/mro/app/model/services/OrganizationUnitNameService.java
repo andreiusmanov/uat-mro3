@@ -6,8 +6,8 @@ import java.util.stream.StreamSupport;
 import org.springframework.stereotype.Service;
 
 import lombok.AllArgsConstructor;
+import uz.uat.mro.app.model.documents.organization.repositories.OrganizationUnitNameRepo;
 import uz.uat.mro.app.model.terms.organization.OrganizationUnitName;
-import uz.uat.mro.app.model.terms.organization.repositories.OrganizationUnitNameRepo;
 
 @AllArgsConstructor
 @Service

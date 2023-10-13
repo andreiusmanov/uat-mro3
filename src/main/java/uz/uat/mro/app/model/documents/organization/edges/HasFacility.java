@@ -9,7 +9,7 @@ import com.arangodb.springframework.annotation.To;
 
 import lombok.Data;
 import uz.uat.mro.app.model.documents.organization.Facility;
-import uz.uat.mro.app.model.documents.organization.Organization;
+import uz.uat.mro.app.model.documents.organization.OrganizationUnit;
 
 @Data
 @Edge(collection = "has_facilities")
@@ -19,7 +19,7 @@ public class HasFacility {
     @ArangoId
     private String arangoId;
     @From
-    private Organization organization;
+    private OrganizationUnit organization;
     @To
     private Facility facility;
 }

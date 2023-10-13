@@ -24,7 +24,4 @@ public class Person {
     private String fio;
     private String shortFio;
     private LocalDate dob;
-    //@Relations(edges = Works.class, lazy = false)
-    private Collection<Department> departments;
-
 }

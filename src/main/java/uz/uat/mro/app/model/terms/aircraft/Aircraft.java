@@ -7,7 +7,7 @@ import com.arangodb.springframework.annotation.Document;
 import com.arangodb.springframework.annotation.Ref;
 
 import lombok.Data;
-import uz.uat.mro.app.model.documents.organization.Organization;
+import uz.uat.mro.app.model.documents.organization.OrganizationUnit;
 
 @Data
 @Document("aircrafts")
@@ -18,9 +18,9 @@ public class Aircraft {
     private String arangoId;
     private String regNumber;
     @Ref
-    private Organization airline;
+    private OrganizationUnit airline;
     @Ref
-    private Organization owner;
+    private OrganizationUnit owner;
     @Ref
     private AircraftModel model;
 
