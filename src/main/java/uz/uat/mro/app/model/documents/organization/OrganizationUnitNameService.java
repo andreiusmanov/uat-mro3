@@ -1,4 +1,4 @@
-package uz.uat.mro.app.model.services;
+package uz.uat.mro.app.model.documents.organization;
 
 import java.util.List;
 import java.util.stream.StreamSupport;
