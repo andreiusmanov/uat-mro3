@@ -12,7 +12,7 @@ import com.arangodb.springframework.annotation.Relations;
 
 import lombok.Data;
 import uz.uat.mro.app.model.documents.organization.edges.HasFacility;
-import uz.uat.mro.app.model.documents.organization.edges.HasUnit;
+import uz.uat.mro.app.model.documents.organization.edges.HasOrganizationUnit;
 import uz.uat.mro.app.model.terms.common.Country;
 import uz.uat.mro.app.model.terms.organization.OrganizationUnitName;
 
@@ -33,7 +33,7 @@ public class OrganizationUnit {
     private String type;
     @Ref(lazy = false)
     private OrganizationUnitName unitName;
-    @Relations(edges = HasUnit.class, lazy = false)
+    @Relations(edges = HasOrganizationUnit.class, lazy = false)
     private Collection<OrganizationUnit> units;
     @Relations(edges = HasFacility.class, lazy = false)
     private Collection<Facility> facilities;
