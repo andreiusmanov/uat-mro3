@@ -2,7 +2,6 @@ package uz.uat.mro.app.model.documents.organization;
 
 import java.util.Collection;
 
-import org.springframework.boot.autoconfigure.amqp.RabbitConnectionDetails.Address;
 import org.springframework.data.annotation.Id;
 
 import com.arangodb.springframework.annotation.ArangoId;
@@ -25,11 +24,11 @@ public class OrganizationUnit {
     private String arangoId;
     @Ref(lazy = true)
     private Country country;
-    private Address address;
+
     private String name;
     private String code;
     private String description;
-    private String shortName; 
+    private String shortName;
     private String type;
     @Ref(lazy = false)
     private OrganizationUnitName unitName;
@@ -37,4 +36,6 @@ public class OrganizationUnit {
     private Collection<OrganizationUnit> units;
     @Relations(edges = HasFacility.class, lazy = false)
     private Collection<Facility> facilities;
+    // @Relations(edges = HasAddress.class, lazy = false)
+    // private Address address;
 }

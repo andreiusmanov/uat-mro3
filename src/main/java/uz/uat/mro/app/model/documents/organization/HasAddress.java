@@ -1,4 +1,4 @@
-package uz.uat.mro.app.model.documents.organization.edges;
+package uz.uat.mro.app.model.documents.organization;
 
 import java.time.LocalDate;
 
@@ -10,19 +10,17 @@ import com.arangodb.springframework.annotation.From;
 import com.arangodb.springframework.annotation.To;
 
 import lombok.Data;
-import uz.uat.mro.app.model.documents.organization.OrganizationUnit;
-import uz.uat.mro.app.model.terms.organization.Address;
 
 @Data
-@Edge(value = "has_address")
+@Edge(collection = "has_address")
 public class HasAddress {
     @Id
     private String id;
     @ArangoId
     private String arangoId;
-    @From
+    @From(lazy = true)
     private OrganizationUnit organization;
-    @To
+    @To(lazy = true)
     private Address address;
     private LocalDate dateStart;
     private LocalDate dateEnd;
