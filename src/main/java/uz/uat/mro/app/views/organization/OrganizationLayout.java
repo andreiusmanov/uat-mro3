@@ -1,4 +1,4 @@
-package uz.uat.mro.app.views;
+package uz.uat.mro.app.views.organization;
 
 import org.vaadin.lineawesome.LineAwesomeIcon;
 
@@ -8,25 +8,18 @@ import com.vaadin.flow.component.html.Footer;
 import com.vaadin.flow.component.html.H1;
 import com.vaadin.flow.component.html.H2;
 import com.vaadin.flow.component.html.Header;
-import com.vaadin.flow.component.icon.VaadinIcon;
 import com.vaadin.flow.component.orderedlayout.Scroller;
 import com.vaadin.flow.component.sidenav.SideNav;
 import com.vaadin.flow.component.sidenav.SideNavItem;
 import com.vaadin.flow.router.PageTitle;
 import com.vaadin.flow.theme.lumo.LumoUtility;
 
-import uz.uat.mro.app.views.about.AboutView;
 import uz.uat.mro.app.views.start.StartView;
-import uz.uat.mro.app.views.terms.OrganizationUnitNamesView;
 
-/**
- * The main view is a top-level placeholder for other views.
- */
-public class MainLayout extends AppLayout {
+public class OrganizationLayout extends AppLayout {
+        private H2 viewTitle;
 
-    private H2 viewTitle;
-
-    public MainLayout() {
+    public OrganizationLayout() {
         setPrimarySection(Section.DRAWER);
         addDrawerContent();
         addHeaderContent();
@@ -55,10 +48,7 @@ public class MainLayout extends AppLayout {
     private SideNav createNavigation() {
         SideNav nav = new SideNav();
 
-        nav.addItem(new SideNavItem("Start", StartView.class, LineAwesomeIcon.LIST_SOLID.create()));
-        nav.addItem(new SideNavItem("About", AboutView.class, LineAwesomeIcon.FILE.create()));
-        nav.addItem(new SideNavItem("OrganizationUnitNames", OrganizationUnitNamesView.class,
-                VaadinIcon.AIRPLANE.create()));
+        nav.addItem(new SideNavItem("Start", StartView.class, LineAwesomeIcon.HOME_SOLID.create()));
         return nav;
     }
 
@@ -78,4 +68,5 @@ public class MainLayout extends AppLayout {
         PageTitle title = getContent().getClass().getAnnotation(PageTitle.class);
         return title == null ? "" : title.value();
     }
+
 }

@@ -7,7 +7,7 @@ import com.arangodb.springframework.annotation.Document;
 import com.arangodb.springframework.annotation.Ref;
 
 import lombok.Data;
-import uz.uat.mro.app.model.documents.organization.Organization;
+import uz.uat.mro.app.model.documents.organization.OrganizationUnit;
 
 @Data
 @Document("major_models")
@@ -21,6 +21,6 @@ public class MajorModel {
     private String name;
     private String description;
     @Ref
-    private Organization producer;
+    private OrganizationUnit producer;
 
 }

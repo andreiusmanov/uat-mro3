@@ -112,6 +112,12 @@
             <version>32.1.2-jre</version>
         </dependency>
 
+        <dependency>
+            <groupId>org.vaadin.crudui</groupId>
+            <artifactId>crudui</artifactId>
+            <version>7.1.0</version>
+        </dependency>
+
     </dependencies>
 
     <build>
