@@ -5,9 +5,11 @@ import java.util.List;
 import org.springframework.stereotype.Service;
 
 import lombok.AllArgsConstructor;
+import uz.uat.mro.app.model.documents.organization.edges.HasAddress;
 import uz.uat.mro.app.model.documents.organization.edges.HasOrganizationUnit;
 import uz.uat.mro.app.model.documents.organization.repositories.HasOrganizationUnitRepo;
 import uz.uat.mro.app.model.documents.organization.repositories.OrganizationUnitRepo;
+import uz.uat.mro.app.model.terms.organization.Address;
 
 @Service
 @AllArgsConstructor
@@ -44,6 +46,13 @@ public void linkOrganizationUnits(OrganizationUnit master, OrganizationUnit subo
         hasUnitRepo.save(hasUnit);
     }
 
+public void linkAddress(OrganizationUnit master, Address address) {
+    Address savedSubordinate = save(address);    
+    HasAddress hasUnit = new HasAddress();
+        hasUnit.setOrganization(master);
+        hasUnit.setAddress(savedSubordinate);
+        hasUnitRepo.save(hasUnit);
+    }
 
 
 
