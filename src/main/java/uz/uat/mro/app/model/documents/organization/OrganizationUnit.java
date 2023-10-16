@@ -13,7 +13,6 @@ import lombok.Data;
 import uz.uat.mro.app.model.documents.organization.edges.HasFacility;
 import uz.uat.mro.app.model.documents.organization.edges.HasOrganizationUnit;
 import uz.uat.mro.app.model.terms.common.Country;
-import uz.uat.mro.app.model.terms.organization.OrganizationUnitName;
 
 @Data
 @Document("organization_units")
@@ -29,13 +28,10 @@ public class OrganizationUnit {
     private String code;
     private String description;
     private String shortName;
-    private String type;
     @Ref(lazy = false)
-    private OrganizationUnitName unitName;
+    private OrganizationUnitType type;
     @Relations(edges = HasOrganizationUnit.class, lazy = false)
     private Collection<OrganizationUnit> units;
     @Relations(edges = HasFacility.class, lazy = false)
     private Collection<Facility> facilities;
-    // @Relations(edges = HasAddress.class, lazy = false)
-    // private Address address;
 }

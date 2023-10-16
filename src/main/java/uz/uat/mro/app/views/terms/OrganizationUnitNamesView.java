@@ -9,17 +9,17 @@ import com.vaadin.flow.component.textfield.TextArea;
 import com.vaadin.flow.router.PageTitle;
 import com.vaadin.flow.router.Route;
 
-import uz.uat.mro.app.model.documents.organization.OrganizationUnitNameService;
-import uz.uat.mro.app.model.terms.organization.OrganizationUnitName;
+import uz.uat.mro.app.model.documents.organization.OrganizationUnitType;
+import uz.uat.mro.app.model.documents.organization.OrganizationUnitTypeService;
 import uz.uat.mro.app.views.MainLayout;
 
 @Route(value = "terms/unit-names", layout = MainLayout.class)
 @PageTitle(value = "Типы структурных единиц предприятия")
 public class OrganizationUnitNamesView extends VerticalLayout {
-    private OrganizationUnitNameService service;
-    private GridCrud<OrganizationUnitName> crud;
+    private OrganizationUnitTypeService service;
+    private GridCrud<OrganizationUnitType> crud;
 
-    public OrganizationUnitNamesView(OrganizationUnitNameService service) {
+    public OrganizationUnitNamesView(OrganizationUnitTypeService service) {
         super();
         this.service = service;
         crud();
@@ -27,8 +27,8 @@ public class OrganizationUnitNamesView extends VerticalLayout {
     }
 
     private void crud() {
-        this.crud = new GridCrud<>(OrganizationUnitName.class);
-        Grid<OrganizationUnitName> grid = crud.getGrid();
+        this.crud = new GridCrud<>(OrganizationUnitType.class);
+        Grid<OrganizationUnitType> grid = crud.getGrid();
 
         grid.setColumns("name", "code", "description");
         grid.getColumnByKey("name").setHeader("Наименование");
@@ -40,7 +40,7 @@ public class OrganizationUnitNamesView extends VerticalLayout {
         crud.setDeleteOperation(service::delete);
         crud.setFindAllOperation(service::queryAllUnitNames);
 
-        CrudFormFactory<OrganizationUnitName> factory = crud.getCrudFormFactory();
+        CrudFormFactory<OrganizationUnitType> factory = crud.getCrudFormFactory();
         factory.setVisibleProperties("name", "code", "description");
         factory.setFieldCaptions("Наименование", "Код", "Описание");
 
