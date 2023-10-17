@@ -28,6 +28,7 @@ public class OrganizationsView extends VerticalLayout {
     private MenuItem unitsItem;
     private MenuItem facilitiesItem;
     private MenuItem specialItem;
+    private MenuItem reportItem;
 
     public OrganizationsView(OrganizationService service) {
         this.service = service;
@@ -55,9 +56,15 @@ public class OrganizationsView extends VerticalLayout {
             Notification.show("Просмотр объектов");
         });
 
+        reportItem = menu.addItem("Отчеты");
+        reportItem.addClickListener(click -> {
+            Notification.show("Отчеты");
+        });
+
         specialItem = menu.addItem("Спец. операции", "Спец. операции", click -> {
             Notification.show("Спец. операции");
         });
+        
         addItem = specialItem.getSubMenu().addItem("Добавить");
         addItem.addClickListener(click -> {
             Notification.show("Добавить");
@@ -66,13 +73,19 @@ public class OrganizationsView extends VerticalLayout {
         deleteItem.addClickListener(click -> {
             Notification.show("Удалить");
         });
+
+        viewItem.setEnabled(false);
+        editItem.setEnabled(false);
+        unitsItem.setEnabled(false);
+        facilitiesItem.setEnabled(false);
+        deleteItem.setEnabled(false);
     }
 
     private void grid() {
         this.grid = new Grid<>(OrganizationUnit.class);
         List<OrganizationUnit> units = service.findMainOrganizations("Организация");
         this.grid.getSelectionModel().addSelectionListener(selected -> {
-            boolean res = selected.getFirstSelectedItem().isPresent();
+            boolean res = !grid.getSelectedItems().isEmpty();
             viewItem.setEnabled(res);
             editItem.setEnabled(res);
             unitsItem.setEnabled(res);
@@ -81,6 +94,8 @@ public class OrganizationsView extends VerticalLayout {
         });
         this.grid.setItems(units);
         this.grid.setColumns("name", "code", "description");
+        this.grid.getColumnByKey("name").setHeader("Наименование");
+        this.grid.getColumnByKey("code").setHeader("Код");
+        this.grid.getColumnByKey("description").setHeader("Описание");
     }
-
 }
