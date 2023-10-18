@@ -2,12 +2,17 @@ package uz.uat.mro.app.views.organization;
 
 import java.util.List;
 
+import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.contextmenu.MenuItem;
 import com.vaadin.flow.component.grid.Grid;
+import com.vaadin.flow.component.grid.dataview.GridListDataView;
+import com.vaadin.flow.component.icon.VaadinIcon;
 import com.vaadin.flow.component.menubar.MenuBar;
 import com.vaadin.flow.component.menubar.MenuBarVariant;
 import com.vaadin.flow.component.notification.Notification;
+import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
+import com.vaadin.flow.component.textfield.TextField;
 import com.vaadin.flow.router.PageTitle;
 import com.vaadin.flow.router.Route;
 
@@ -29,17 +34,43 @@ public class OrganizationsView extends VerticalLayout {
     private MenuItem facilitiesItem;
     private MenuItem specialItem;
     private MenuItem reportItem;
+    private TextField searchField;
+    private Button searchButton;
+    private GridListDataView<OrganizationUnit> dataView;
+    private HorizontalLayout operations;
 
     public OrganizationsView(OrganizationService service) {
         this.service = service;
         grid();
         menu();
-        add(menu, grid);
+        operations();
+        add(operations, grid);
+    }
+
+    private void operations() {
+        this.operations = new HorizontalLayout();
+        this.operations.add(searchField, searchButton, menu);
     }
 
     private void menu() {
         this.menu = new MenuBar();
-        menu.addThemeVariants(MenuBarVariant.LUMO_PRIMARY);
+        menu.addThemeVariants(MenuBarVariant.LUMO_TERTIARY);
+
+        this.searchField = new TextField();
+        this.searchButton = new Button(VaadinIcon.SEARCH.create());
+        dataView = grid.getListDataView();
+
+        menu.addItem(searchField);
+        menu.addItem(searchButton);
+
+        searchButton.addClickListener(e -> dataView.removeFilters());
+
+        searchButton.addClickListener(click -> {
+            dataView.removeFilters();
+            dataView.setFilter(unit -> unit.getCode().contains(searchField.getValue())
+                    || unit.getName().contains(searchField.getValue()));
+        });
+
         viewItem = menu.addItem("Просмотр", " Просмотреть данные об организации", click -> {
             Notification.show("Просмотр");
         });
@@ -64,7 +95,7 @@ public class OrganizationsView extends VerticalLayout {
         specialItem = menu.addItem("Спец. операции", "Спец. операции", click -> {
             Notification.show("Спец. операции");
         });
-        
+
         addItem = specialItem.getSubMenu().addItem("Добавить");
         addItem.addClickListener(click -> {
             Notification.show("Добавить");
