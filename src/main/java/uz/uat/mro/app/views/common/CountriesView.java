@@ -1,7 +1,5 @@
 package uz.uat.mro.app.views.common;
 
-import java.util.List;
-
 import org.vaadin.crudui.crud.impl.GridCrud;
 import org.vaadin.crudui.form.CrudFormFactory;
 

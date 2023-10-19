@@ -14,7 +14,7 @@ import uz.uat.mro.app.model.terms.common.services.CurrencyService;
 @PageTitle(value = "Валюты")
 @Route(value = "common/currencies", layout = CommonLayout.class)
 public class CurrenciesView extends VerticalLayout {
-  private CurrencyService service;
+    private CurrencyService service;
     private GridCrud<Currency> grid;
 
     /**

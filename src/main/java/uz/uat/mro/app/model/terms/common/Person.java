@@ -1,7 +1,6 @@
 package uz.uat.mro.app.model.terms.common;
 
 import java.time.LocalDate;
-import java.util.Collection;
 
 import org.springframework.data.annotation.Id;
 
