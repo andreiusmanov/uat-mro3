@@ -71,6 +71,10 @@ public class OrganizationsView extends VerticalLayout {
                     || unit.getName().contains(searchField.getValue()));
         });
 
+        searchField.addValueChangeListener(event -> {
+            dataView.removeFilters();
+        });
+
         viewItem = menu.addItem("Просмотр", " Просмотреть данные об организации", click -> {
             Notification.show("Просмотр");
         });
@@ -78,24 +82,19 @@ public class OrganizationsView extends VerticalLayout {
         editItem = menu.addItem("Редактирование", " Редактировать данные об организации", click -> {
             Notification.show("Редатировать");
         });
-
         unitsItem = menu.addItem("Подразделения", " Просмотреть данные о подразделениях организации", click -> {
             Notification.show("Просмотр подразделений");
         });
-
         facilitiesItem = menu.addItem("Объекты", " Просмотреть данные об объектах организации", click -> {
             Notification.show("Просмотр объектов");
         });
-
         reportItem = menu.addItem("Отчеты");
         reportItem.addClickListener(click -> {
             Notification.show("Отчеты");
         });
-
         specialItem = menu.addItem("Спец. операции", "Спец. операции", click -> {
             Notification.show("Спец. операции");
         });
-
         addItem = specialItem.getSubMenu().addItem("Добавить");
         addItem.addClickListener(click -> {
             Notification.show("Добавить");
@@ -104,7 +103,6 @@ public class OrganizationsView extends VerticalLayout {
         deleteItem.addClickListener(click -> {
             Notification.show("Удалить");
         });
-
         viewItem.setEnabled(false);
         editItem.setEnabled(false);
         unitsItem.setEnabled(false);
