@@ -50,12 +50,13 @@ public class CommonLayout extends AppLayout {
 
         nav.addItem(new SideNavItem("Start", StartView.class, LineAwesomeIcon.HOME_SOLID.create()));
         nav.addItem(new SideNavItem("Страны", CountriesView.class, LineAwesomeIcon.GLOBE_ASIA_SOLID.create()));
-        nav.addItem(new SideNavItem("Станции", StationsView.class, LineAwesomeIcon.GLOBE_ASIA_SOLID.create()));
+        nav.addItem(new SideNavItem("Станции", StationsView.class, LineAwesomeIcon.MAP.create()));
         nav.addItem(new SideNavItem("Валюты", CurrenciesView.class, LineAwesomeIcon.MONEY_BILL_ALT.create()));
         nav.addItem(new SideNavItem("Виды работ", MaintenancesView.class, LineAwesomeIcon.MONEY_BILL_ALT.create()));
         nav.addItem(new SideNavItem("Персоналии", PersonsView.class, LineAwesomeIcon.MALE_SOLID.create()));
-        nav.addItem(new SideNavItem("Персоналии", PersonsView.class, LineAwesomeIcon.FEMALE_SOLID.create()));
-
+        nav.addItem(new SideNavItem("Сотрудники", EmployeesView.class, LineAwesomeIcon.FEMALE_SOLID.create()));
+        nav.addItem(new SideNavItem("Ед. измерения", UomsView.class, LineAwesomeIcon.FEMALE_SOLID.create()));
+        nav.addItem(new SideNavItem("Календарь", WorkDaysView.class, LineAwesomeIcon.FEMALE_SOLID.create()));
         return nav;
     }
 
