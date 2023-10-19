@@ -7,13 +7,13 @@ import com.arangodb.springframework.annotation.Document;
 
 import lombok.Data;
 
-@Document("work_dates")
 @Data
-public class WorkDate {
+@Document(collection = "employees")
+public class Employee {
     @Id
     private String id;
     @ArangoId
     private String arangoId;
-    private String date;
-
+    private String name;
+    
 }
