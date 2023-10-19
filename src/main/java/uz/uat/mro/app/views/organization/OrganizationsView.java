@@ -63,8 +63,6 @@ public class OrganizationsView extends VerticalLayout {
         menu.addItem(searchField);
         menu.addItem(searchButton);
 
-        searchButton.addClickListener(e -> dataView.removeFilters());
-
         searchButton.addClickListener(click -> {
             dataView.removeFilters();
             dataView.setFilter(unit -> unit.getCode().contains(searchField.getValue())
