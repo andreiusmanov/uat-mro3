@@ -1,4 +1,4 @@
-package uz.uat.mro.app.views.terms;
+package uz.uat.mro.app.views.common;
 
 import org.vaadin.crudui.crud.impl.GridCrud;
 import org.vaadin.crudui.form.CrudFormFactory;
@@ -11,9 +11,8 @@ import com.vaadin.flow.router.Route;
 
 import uz.uat.mro.app.model.documents.organization.OrganizationUnitType;
 import uz.uat.mro.app.model.documents.organization.OrganizationUnitTypeService;
-import uz.uat.mro.app.views.MainLayout;
 
-@Route(value = "terms/unit-names", layout = MainLayout.class)
+@Route(value = "terms/unit-names", layout = CommonLayout.class)
 @PageTitle(value = "Типы структурных единиц предприятия")
 public class OrganizationUnitNamesView extends VerticalLayout {
     private OrganizationUnitTypeService service;

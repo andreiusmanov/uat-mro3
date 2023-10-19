@@ -16,9 +16,10 @@ import com.vaadin.flow.router.PageTitle;
 import com.vaadin.flow.theme.lumo.LumoUtility;
 
 import uz.uat.mro.app.views.about.AboutView;
+import uz.uat.mro.app.views.common.CommonsView;
+import uz.uat.mro.app.views.common.OrganizationUnitNamesView;
 import uz.uat.mro.app.views.organization.OrganizationsView;
 import uz.uat.mro.app.views.start.StartView;
-import uz.uat.mro.app.views.terms.OrganizationUnitNamesView;
 
 /**
  * The main view is a top-level placeholder for other views.
@@ -58,9 +59,10 @@ public class MainLayout extends AppLayout {
 
         nav.addItem(new SideNavItem("Start", StartView.class, LineAwesomeIcon.LIST_SOLID.create()));
         nav.addItem(new SideNavItem("About", AboutView.class, LineAwesomeIcon.FILE.create()));
-        nav.addItem(new SideNavItem("OrganizationUnitNames", OrganizationUnitNamesView.class,
-                VaadinIcon.AIRPLANE.create()));
+        nav.addItem(new SideNavItem("Общие данные", CommonsView.class, VaadinIcon.OFFICE.create()));
+        
         nav.addItem(new SideNavItem("Организации", OrganizationsView.class, VaadinIcon.OFFICE.create()));
+        
         return nav;
     }
 

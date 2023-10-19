@@ -8,6 +8,7 @@ import com.vaadin.flow.component.html.Footer;
 import com.vaadin.flow.component.html.H1;
 import com.vaadin.flow.component.html.H2;
 import com.vaadin.flow.component.html.Header;
+import com.vaadin.flow.component.icon.VaadinIcon;
 import com.vaadin.flow.component.orderedlayout.Scroller;
 import com.vaadin.flow.component.sidenav.SideNav;
 import com.vaadin.flow.component.sidenav.SideNavItem;
@@ -57,6 +58,8 @@ public class CommonLayout extends AppLayout {
         nav.addItem(new SideNavItem("Сотрудники", EmployeesView.class, LineAwesomeIcon.FEMALE_SOLID.create()));
         nav.addItem(new SideNavItem("Ед. измерения", UomsView.class, LineAwesomeIcon.FEMALE_SOLID.create()));
         nav.addItem(new SideNavItem("Календарь", WorkDaysView.class, LineAwesomeIcon.FEMALE_SOLID.create()));
+        nav.addItem(new SideNavItem("OrganizationUnitNames", OrganizationUnitNamesView.class,
+                VaadinIcon.AIRPLANE.create()));
         return nav;
     }
 
