@@ -4,19 +4,17 @@ import org.springframework.data.annotation.Id;
 
 import com.arangodb.springframework.annotation.ArangoId;
 import com.arangodb.springframework.annotation.Document;
-import com.arangodb.springframework.annotation.Ref;
 
 import lombok.Data;
 
 @Data
-@Document("uoms")
-
-public class Uom {
+@Document(collection = "uom_types", allowUserKeys = true)
+public class UomType {
     @Id
     private String id;
     @ArangoId
     private String arangoId;
+    private String name; // russian name
+    private String code;
     private String description;
-    @Ref(lazy = true)
-    private UomType type;
 }

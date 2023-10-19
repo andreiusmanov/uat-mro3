@@ -21,7 +21,8 @@ public class CountriesView extends VerticalLayout {
     public CountriesView(CountriesService service) {
         this.service = service;
         grid();
-        add(new H3("Страны"), crud);
+        add(crud);
+        //add(new H3("Страны"), crud);
     }
 
     private void grid() {

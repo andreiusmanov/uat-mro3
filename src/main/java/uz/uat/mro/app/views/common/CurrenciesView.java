@@ -3,7 +3,6 @@ package uz.uat.mro.app.views.common;
 import org.vaadin.crudui.crud.impl.GridCrud;
 import org.vaadin.crudui.form.CrudFormFactory;
 
-import com.vaadin.flow.component.html.H3;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.router.PageTitle;
 import com.vaadin.flow.router.Route;
@@ -23,7 +22,8 @@ public class CurrenciesView extends VerticalLayout {
     public CurrenciesView(CurrencyService service) {
         this.service = service;
         grid();
-        add(new H3("Валюты"), grid);
+        // add(new H3("Валюты"), grid);
+        add(grid);
     }
 
     private void grid() {
