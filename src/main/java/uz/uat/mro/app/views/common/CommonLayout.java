@@ -56,6 +56,7 @@ public class CommonLayout extends AppLayout {
         nav.addItem(new SideNavItem("Виды работ", MaintenancesView.class, LineAwesomeIcon.MONEY_BILL_ALT.create()));
         nav.addItem(new SideNavItem("Персоналии", PersonsView.class, LineAwesomeIcon.MALE_SOLID.create()));
         nav.addItem(new SideNavItem("Сотрудники", EmployeesView.class, LineAwesomeIcon.FEMALE_SOLID.create()));
+        nav.addItem(new SideNavItem("Виды Ед. измерения", UomTypesView.class, LineAwesomeIcon.FEMALE_SOLID.create()));
         nav.addItem(new SideNavItem("Ед. измерения", UomsView.class, LineAwesomeIcon.FEMALE_SOLID.create()));
         nav.addItem(new SideNavItem("Календарь", WorkDaysView.class, LineAwesomeIcon.FEMALE_SOLID.create()));
         nav.addItem(new SideNavItem("OrganizationUnitNames", OrganizationUnitNamesView.class,

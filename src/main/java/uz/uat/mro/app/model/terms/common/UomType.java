@@ -15,6 +15,5 @@ public class UomType {
     @ArangoId
     private String arangoId;
     private String name; // russian name
-    private String code;
     private String description;
 }

@@ -9,13 +9,15 @@ import com.arangodb.springframework.annotation.Ref;
 import lombok.Data;
 
 @Data
-@Document("uoms")
+@Document(collection =  "uoms")
 
 public class Uom {
     @Id
     private String id;
     @ArangoId
     private String arangoId;
+    private String name;
+    private String code;
     private String description;
     @Ref(lazy = true)
     private UomType type;

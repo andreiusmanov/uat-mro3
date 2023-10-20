@@ -1,6 +1,7 @@
 package uz.uat.mro.app.views.common;
 
 import org.vaadin.crudui.crud.impl.GridCrud;
+import org.vaadin.crudui.form.CrudFormFactory;
 
 import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.grid.dataview.GridListDataView;
@@ -61,5 +62,8 @@ public class MaintenancesView extends VerticalLayout {
             }
         });
 
+        CrudFormFactory<Maintenance> factory = crud.getCrudFormFactory();
+        factory.setVisibleProperties("code", "index", "description");
+        factory.setFieldCaptions("Код", "Индекс", "Описание");
     }
 }
