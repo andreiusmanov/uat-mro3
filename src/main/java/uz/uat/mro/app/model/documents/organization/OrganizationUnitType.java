@@ -7,7 +7,7 @@ import com.arangodb.springframework.annotation.Document;
 import lombok.Data;
 
 @Data
-@Document("organization_unit_types")
+@Document(collection = "organization_unit_types", allowUserKeys = true)
 public class OrganizationUnitType {
     @Id
     private String id;
