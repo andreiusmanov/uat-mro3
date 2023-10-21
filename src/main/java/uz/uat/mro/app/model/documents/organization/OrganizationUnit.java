@@ -23,7 +23,6 @@ public class OrganizationUnit {
     private String arangoId;
     @Ref(lazy = true)
     private Country country;
-
     private String name;
     private String code;
     private String description;

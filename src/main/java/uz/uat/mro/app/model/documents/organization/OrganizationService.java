@@ -1,18 +1,22 @@
 package uz.uat.mro.app.model.documents.organization;
 
 import java.util.List;
+import java.util.Optional;
 
+import org.springframework.data.domain.Example;
 import org.springframework.stereotype.Service;
 
 import lombok.AllArgsConstructor;
 import uz.uat.mro.app.model.documents.organization.edges.HasOrganizationUnit;
 import uz.uat.mro.app.model.documents.organization.repositories.HasOrganizationUnitRepo;
 import uz.uat.mro.app.model.documents.organization.repositories.OrganizationUnitRepo;
+import uz.uat.mro.app.model.documents.organization.repositories.OrganizationUnitTypeRepo;
 
 @Service
 @AllArgsConstructor
 public class OrganizationService {
     private OrganizationUnitRepo unitRepo;
+    private OrganizationUnitTypeRepo unitTypeRepo;
     private HasOrganizationUnitRepo hasUnitRepo;
 
     public OrganizationUnit save(OrganizationUnit unit) {
@@ -45,8 +49,14 @@ public class OrganizationService {
         hasUnitRepo.save(hasUnit);
     }
 
-public List<OrganizationUnit> findMainOrganizations(String type){
-    return unitRepo.findMainOrganizations(type);
+    public List<OrganizationUnit> findMainOrganizations(String type) {
+        return unitRepo.findMainOrganizations(type);
+    }
+
+public Optional<OrganizationUnitType> findOrganizationType(){
+    OrganizationUnitType type = new OrganizationUnitType();
+    type.setCode("Организация");
+    return unitTypeRepo.findOne(Example.of(type));
 }
 
 }

@@ -15,6 +15,8 @@ import com.vaadin.flow.component.sidenav.SideNavItem;
 import com.vaadin.flow.router.PageTitle;
 import com.vaadin.flow.theme.lumo.LumoUtility;
 
+import uz.uat.mro.app.views.employee.EmployeesView;
+import uz.uat.mro.app.views.employee.PositionView;
 import uz.uat.mro.app.views.start.StartView;
 
 public class CommonLayout extends AppLayout {
@@ -37,7 +39,7 @@ public class CommonLayout extends AppLayout {
     }
 
     private void addDrawerContent() {
-        H1 appName = new H1("UAT MRO");
+        H1 appName = new H1("UAT Общие данные");
         appName.addClassNames(LumoUtility.FontSize.LARGE, LumoUtility.Margin.NONE);
         Header header = new Header(appName);
 
@@ -54,13 +56,14 @@ public class CommonLayout extends AppLayout {
         nav.addItem(new SideNavItem("Станции", StationsView.class, LineAwesomeIcon.MAP.create()));
         nav.addItem(new SideNavItem("Валюты", CurrenciesView.class, LineAwesomeIcon.MONEY_BILL_ALT.create()));
         nav.addItem(new SideNavItem("Виды работ", MaintenancesView.class, LineAwesomeIcon.MONEY_BILL_ALT.create()));
-        nav.addItem(new SideNavItem("Персоналии", PersonsView.class, LineAwesomeIcon.MALE_SOLID.create()));
+        nav.addItem(new SideNavItem("Персоналии", PositionView.class, LineAwesomeIcon.MALE_SOLID.create()));
         nav.addItem(new SideNavItem("Сотрудники", EmployeesView.class, LineAwesomeIcon.FEMALE_SOLID.create()));
+        nav.addItem(new SideNavItem("Типы подразделений", OrganizationUnitNamesView.class,
+                VaadinIcon.AIRPLANE.create()));
         nav.addItem(new SideNavItem("Виды Ед. измерения", UomTypesView.class, LineAwesomeIcon.FEMALE_SOLID.create()));
         nav.addItem(new SideNavItem("Ед. измерения", UomsView.class, LineAwesomeIcon.FEMALE_SOLID.create()));
         nav.addItem(new SideNavItem("Календарь", WorkDaysView.class, LineAwesomeIcon.FEMALE_SOLID.create()));
-        nav.addItem(new SideNavItem("OrganizationUnitNames", OrganizationUnitNamesView.class,
-                VaadinIcon.AIRPLANE.create()));
+        
         return nav;
     }
 

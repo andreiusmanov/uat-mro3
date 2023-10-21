@@ -1,9 +1,12 @@
-package uz.uat.mro.app.model.terms.common;
+package uz.uat.mro.app.model.documents.staff;
+
+import java.util.List;
 
 import org.springframework.data.annotation.Id;
 
 import com.arangodb.springframework.annotation.ArangoId;
 import com.arangodb.springframework.annotation.Document;
+import com.arangodb.springframework.annotation.Ref;
 
 import lombok.Data;
 import uz.uat.mro.app.model.documents.organization.OrganizationUnit;
@@ -20,5 +23,14 @@ public class Employee {
     private String surname;
     private String patronymic;
     private String tabel;
-
+    @Ref(lazy =true)
+    /**
+     * current position
+     */
+    private Position position;
+    @Ref(lazy =false)
+    /**
+     * all positions
+     */
+    private List<Position> positions;
 }

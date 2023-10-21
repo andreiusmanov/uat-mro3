@@ -1,4 +1,4 @@
-package uz.uat.mro.app.model.terms.common.services;
+package uz.uat.mro.app.model.documents.staff.services;
 
 import java.util.List;
 import java.util.stream.StreamSupport;
@@ -6,8 +6,8 @@ import java.util.stream.StreamSupport;
 import org.springframework.stereotype.Service;
 
 import lombok.AllArgsConstructor;
-import uz.uat.mro.app.model.terms.common.Employee;
-import uz.uat.mro.app.model.terms.common.repositories.EmployeesRepo;
+import uz.uat.mro.app.model.documents.staff.Employee;
+import uz.uat.mro.app.model.documents.staff.repositories.EmployeesRepo;
 
 @Service
 @AllArgsConstructor

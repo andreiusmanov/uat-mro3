@@ -17,7 +17,6 @@ import com.vaadin.flow.theme.lumo.LumoUtility;
 
 import uz.uat.mro.app.views.about.AboutView;
 import uz.uat.mro.app.views.common.CommonsView;
-import uz.uat.mro.app.views.common.OrganizationUnitNamesView;
 import uz.uat.mro.app.views.organization.OrganizationsView;
 import uz.uat.mro.app.views.start.StartView;
 
@@ -45,7 +44,7 @@ public class MainLayout extends AppLayout {
     }
 
     private void addDrawerContent() {
-        H1 appName = new H1("UAT MRO");
+        H1 appName = new H1("UAT MRO Меню");
         appName.addClassNames(LumoUtility.FontSize.LARGE, LumoUtility.Margin.NONE);
         Header header = new Header(appName);
 

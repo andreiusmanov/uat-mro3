@@ -2,6 +2,7 @@ package uz.uat.mro.app.views.organization;
 
 import java.util.List;
 
+import com.vaadin.flow.component.UI;
 import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.contextmenu.MenuItem;
 import com.vaadin.flow.component.grid.Grid;
@@ -18,6 +19,8 @@ import com.vaadin.flow.router.Route;
 
 import uz.uat.mro.app.model.documents.organization.OrganizationService;
 import uz.uat.mro.app.model.documents.organization.OrganizationUnit;
+import uz.uat.mro.app.utils.Keys;
+import uz.uat.mro.app.utils.UatUtils;
 import uz.uat.mro.app.views.MainLayout;
 
 @PageTitle(value = "Список Организаций")
@@ -95,7 +98,8 @@ public class OrganizationsView extends VerticalLayout {
         });
         addItem = specialItem.getSubMenu().addItem("Добавить");
         addItem.addClickListener(click -> {
-            Notification.show("Добавить");
+            UatUtils.setAttribute(Keys.PROJECT, new OrganizationUnit());
+            UI.getCurrent().navigate(OrganizationView.class);
         });
         deleteItem = specialItem.getSubMenu().addItem("Удалить");
         deleteItem.addClickListener(click -> {

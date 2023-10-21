@@ -1,4 +1,4 @@
-package uz.uat.mro.app.model.terms.common;
+package uz.uat.mro.app.model.documents.staff;
 
 import org.springframework.data.annotation.Id;
 
@@ -8,15 +8,12 @@ import com.arangodb.springframework.annotation.Document;
 import lombok.Data;
 
 @Data
-@Document(collection = "countries", allowUserKeys = true)
-public class Country {
+@Document(collection = "positions")
+public class Position {
     @Id
     private String id;
     @ArangoId
     private String arangoId;
-    private String shortName;
-    private String code3;
-    private String numeric;
     private String name;
-
+    private String code;
 }
