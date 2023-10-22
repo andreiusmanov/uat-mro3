@@ -28,6 +28,7 @@ import uz.uat.mro.app.views.MainLayout;
 public class OrganizationsView extends VerticalLayout {
     private OrganizationService service;
     private Grid<OrganizationUnit> grid;
+    private OrganizationUnit organization;
     private MenuBar menu;
     private MenuItem viewItem;
     private MenuItem editItem;
@@ -77,11 +78,13 @@ public class OrganizationsView extends VerticalLayout {
         });
 
         viewItem = menu.addItem("Просмотр", " Просмотреть данные об организации", click -> {
-            Notification.show("Просмотр");
+            UatUtils.setAttribute(Keys.PROJECT, organization);
+            UI.getCurrent().navigate(OrganizationView.class);
         });
 
         editItem = menu.addItem("Редактирование", " Редактировать данные об организации", click -> {
-            Notification.show("Редатировать");
+            UatUtils.setAttribute(Keys.PROJECT, organization);
+            UI.getCurrent().navigate(OrganizationView.class);
         });
         unitsItem = menu.addItem("Подразделения", " Просмотреть данные о подразделениях организации", click -> {
             Notification.show("Просмотр подразделений");
@@ -122,6 +125,7 @@ public class OrganizationsView extends VerticalLayout {
             unitsItem.setEnabled(res);
             facilitiesItem.setEnabled(res);
             deleteItem.setEnabled(res);
+            this.organization = grid.getSelectionModel().getFirstSelectedItem().orElse(new OrganizationUnit());
         });
         this.grid.setItems(units);
         this.grid.setColumns("name", "code", "description");

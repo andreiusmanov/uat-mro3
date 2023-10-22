@@ -2,6 +2,7 @@ package uz.uat.mro.app.model.documents.organization;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.StreamSupport;
 
 import org.springframework.data.domain.Example;
 import org.springframework.stereotype.Service;
@@ -11,13 +12,24 @@ import uz.uat.mro.app.model.documents.organization.edges.HasOrganizationUnit;
 import uz.uat.mro.app.model.documents.organization.repositories.HasOrganizationUnitRepo;
 import uz.uat.mro.app.model.documents.organization.repositories.OrganizationUnitRepo;
 import uz.uat.mro.app.model.documents.organization.repositories.OrganizationUnitTypeRepo;
+import uz.uat.mro.app.model.terms.common.Country;
+import uz.uat.mro.app.model.terms.common.repositories.CountriesRepo;
 
 @Service
 @AllArgsConstructor
 public class OrganizationService {
+    private CountriesRepo countriesRepo;
     private OrganizationUnitRepo unitRepo;
     private OrganizationUnitTypeRepo unitTypeRepo;
     private HasOrganizationUnitRepo hasUnitRepo;
+
+    public List<Country> findAllCountries() {
+        return StreamSupport.stream(countriesRepo.findAll().spliterator(), false).toList();
+    }
+
+    public OrganizationUnit getOrganizationUnitById(String unitId) {
+        return unitRepo.findById(unitId).get();
+    }
 
     public OrganizationUnit save(OrganizationUnit unit) {
         return unitRepo.save(unit);
@@ -53,10 +65,10 @@ public class OrganizationService {
         return unitRepo.findMainOrganizations(type);
     }
 
-public Optional<OrganizationUnitType> findOrganizationType(){
-    OrganizationUnitType type = new OrganizationUnitType();
-    type.setCode("Организация");
-    return unitTypeRepo.findOne(Example.of(type));
-}
+    public Optional<OrganizationUnitType> findOrganizationType(String typeCode) {
+        OrganizationUnitType type = new OrganizationUnitType();
+        type.setCode(typeCode);
+        return unitTypeRepo.findOne(Example.of(type));
+    }
 
 }

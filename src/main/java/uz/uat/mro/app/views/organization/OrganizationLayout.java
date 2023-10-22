@@ -17,7 +17,7 @@ import com.vaadin.flow.theme.lumo.LumoUtility;
 import uz.uat.mro.app.views.start.StartView;
 
 public class OrganizationLayout extends AppLayout {
-        private H2 viewTitle;
+    private H2 viewTitle;
 
     public OrganizationLayout() {
         setPrimarySection(Section.DRAWER);
@@ -47,8 +47,9 @@ public class OrganizationLayout extends AppLayout {
 
     private SideNav createNavigation() {
         SideNav nav = new SideNav();
-
-        nav.addItem(new SideNavItem("Start", StartView.class, LineAwesomeIcon.HOME_SOLID.create()));
+        nav.addItem(new SideNavItem("Организации меню", OrganizationsView.class, LineAwesomeIcon.HOME_SOLID.create()));
+        // nav.addItem(new SideNavItem("Основное меню", StartView.class,
+        // LineAwesomeIcon.HOME_SOLID.create()));
         nav.addItem(new SideNavItem("Организация", OrganizationView.class, LineAwesomeIcon.BUILDING.create()));
         return nav;
     }
