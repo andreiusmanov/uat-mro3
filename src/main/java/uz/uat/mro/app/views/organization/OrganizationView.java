@@ -12,7 +12,7 @@ import com.vaadin.flow.router.Route;
 import uz.uat.mro.app.model.documents.organization.OrganizationService;
 import uz.uat.mro.app.model.documents.organization.OrganizationUnit;
 import uz.uat.mro.app.utils.Keys;
-import uz.uat.mro.app.utils.UatUtils;
+import uz.uat.mro.app.utils.MyUtils;
 import uz.uat.mro.app.views.organization.forms.OrganizationForm;
 
 @PageTitle("Организация")
@@ -28,7 +28,7 @@ public class OrganizationView extends VerticalLayout {
     public OrganizationView(OrganizationService service) {
         super();
         this.service = service;
-        this.organization = (OrganizationUnit) UatUtils.getAttribute(Keys.ORGANIZATION);
+        this.organization = (OrganizationUnit) MyUtils.getAttribute(Keys.ORGANIZATION);
         form();
         data();
         buttons();

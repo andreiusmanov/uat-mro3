@@ -7,6 +7,8 @@ import java.util.stream.StreamSupport;
 import org.springframework.data.domain.Example;
 import org.springframework.stereotype.Service;
 
+import com.arangodb.springframework.annotation.ArangoId;
+
 import lombok.AllArgsConstructor;
 import uz.uat.mro.app.model.documents.organization.edges.HasOrganizationUnit;
 import uz.uat.mro.app.model.documents.organization.repositories.HasOrganizationUnitRepo;
@@ -75,4 +77,24 @@ public class OrganizationService {
         return StreamSupport.stream(unitTypeRepo.findAll().spliterator(), false).toList();
     }
 
+    /**
+     * List all links between organization and its's units 
+     */
+
+     public List<HasOrganizationUnit> findOrganizationUnits(OrganizationUnit unit){
+        return hasUnitRepo.findOrganizationUnits(unit.getArangoId());
+     }
+
+     public HasOrganizationUnit saveHasUnit(HasOrganizationUnit hasUnit){
+        return hasUnitRepo.save(hasUnit);
+     }
+
+     public void deleteHasUnit(HasOrganizationUnit hasUnit){
+        hasUnitRepo.delete(hasUnit);
+     }
+
+     public HasOrganizationUnit findHasOrganizationUnitById(HasOrganizationUnit hasUnit){
+        return hasUnitRepo.findById(hasUnit.getArangoId()).get();
+     }
+     
 }

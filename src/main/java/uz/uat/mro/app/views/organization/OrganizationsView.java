@@ -20,7 +20,7 @@ import com.vaadin.flow.router.Route;
 import uz.uat.mro.app.model.documents.organization.OrganizationService;
 import uz.uat.mro.app.model.documents.organization.OrganizationUnit;
 import uz.uat.mro.app.utils.Keys;
-import uz.uat.mro.app.utils.UatUtils;
+import uz.uat.mro.app.utils.MyUtils;
 import uz.uat.mro.app.views.MainLayout;
 
 @PageTitle(value = "Список Организаций")
@@ -78,16 +78,16 @@ public class OrganizationsView extends VerticalLayout {
         });
 
         viewItem = menu.addItem("Просмотр", " Просмотреть данные об организации", click -> {
-            UatUtils.setAttribute(Keys.ORGANIZATION, organization);
+            MyUtils.setAttribute(Keys.ORGANIZATION, organization);
             UI.getCurrent().navigate(OrganizationView.class);
         });
 
         editItem = menu.addItem("Редактирование", " Редактировать данные об организации", click -> {
-            UatUtils.setAttribute(Keys.ORGANIZATION, organization);
+            MyUtils.setAttribute(Keys.ORGANIZATION, organization);
             UI.getCurrent().navigate(OrganizationView.class);
         });
         unitsItem = menu.addItem("Подразделения", " Просмотреть данные о подразделениях организации", click -> {
-            UatUtils.setAttribute(Keys.ORGANIZATION, organization);
+            MyUtils.setAttribute(Keys.ORGANIZATION, organization);
             UI.getCurrent().navigate(OrganizationUnitsView.class);
             Notification.show("Просмотр подразделений");
         });
@@ -103,7 +103,7 @@ public class OrganizationsView extends VerticalLayout {
         });
         addItem = specialItem.getSubMenu().addItem("Добавить");
         addItem.addClickListener(click -> {
-            UatUtils.setAttribute(Keys.PROJECT, new OrganizationUnit());
+            MyUtils.setAttribute(Keys.PROJECT, new OrganizationUnit());
             UI.getCurrent().navigate(OrganizationView.class);
         });
         deleteItem = specialItem.getSubMenu().addItem("Удалить");

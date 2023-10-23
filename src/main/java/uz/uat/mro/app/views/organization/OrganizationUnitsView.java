@@ -3,6 +3,7 @@ package uz.uat.mro.app.views.organization;
 import com.google.common.collect.ImmutableList;
 import com.vaadin.flow.component.combobox.ComboBox;
 import com.vaadin.flow.component.contextmenu.MenuItem;
+import com.vaadin.flow.component.dialog.Dialog;
 import com.vaadin.flow.component.grid.Grid;
 import com.vaadin.flow.component.grid.dataview.GridListDataView;
 import com.vaadin.flow.component.menubar.MenuBar;
@@ -10,36 +11,37 @@ import com.vaadin.flow.component.menubar.MenuBarVariant;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.component.radiobutton.RadioButtonGroup;
-import com.vaadin.flow.component.radiobutton.RadioGroupVariant;
 import com.vaadin.flow.router.PageTitle;
 import com.vaadin.flow.router.Route;
 
 import uz.uat.mro.app.model.documents.organization.OrganizationService;
 import uz.uat.mro.app.model.documents.organization.OrganizationUnit;
 import uz.uat.mro.app.model.documents.organization.OrganizationUnitType;
+import uz.uat.mro.app.model.documents.organization.edges.HasOrganizationUnit;
 import uz.uat.mro.app.utils.Keys;
-import uz.uat.mro.app.utils.UatUtils;
+import uz.uat.mro.app.utils.MyUtils;
 
-@PageTitle(value = "Орг. Структуры")
+@PageTitle(value = "Подразделения")
 @Route(value = "organization/units", layout = OrganizationLayout.class)
 public class OrganizationUnitsView extends VerticalLayout {
     private OrganizationService service;
     private OrganizationUnit organization;
-    private Grid<OrganizationUnit> grid;
+    private Grid<HasOrganizationUnit> grid;
     private ComboBox<OrganizationUnitType> types;
     private MenuBar menu;
     private ComboBox<OrganizationUnit> organizationBox;
-    private GridListDataView<OrganizationUnit> dataView;
+    private GridListDataView<HasOrganizationUnit> dataView;
     private RadioButtonGroup<String> radioGroup;
     private MenuItem viewItem;
     private MenuItem addItem;
     private MenuItem editItem;
     private MenuItem deleteItem;
     private MenuItem reportItem;
+    private Dialog dialog;
 
     public OrganizationUnitsView(OrganizationService service) {
         this.service = service;
-        this.organization = (OrganizationUnit) UatUtils.getAttribute(Keys.ORGANIZATION);
+        this.organization = (OrganizationUnit) MyUtils.getAttribute(Keys.ORGANIZATION);
         fields();
         crud();
         menu();
@@ -47,6 +49,10 @@ public class OrganizationUnitsView extends VerticalLayout {
 
         add(new HorizontalLayout(organizationBox, types, radioGroup), menu, grid);
 
+    }
+
+    private void dialog() {
+        this.dialog = new Dialog(null, null);
     }
 
     private void radioGroup() {
@@ -67,8 +73,8 @@ public class OrganizationUnitsView extends VerticalLayout {
     }
 
     private void crud() {
-        this.grid = new Grid<>(OrganizationUnit.class);
-        this.grid.setItems(service.findSubordinates(organization));
+        this.grid = new Grid<>(HasOrganizationUnit.class);
+        this.grid.setItems(service.findOrganizationUnits(organization));
         this.grid.setColumns("name", "code", "shortName", "description");
         this.grid.getColumnByKey("name").setHeader("Наименование");
         this.grid.getColumnByKey("code").setHeader("Код");
@@ -89,8 +95,7 @@ public class OrganizationUnitsView extends VerticalLayout {
         this.types.setItemLabelGenerator(item -> item.getName());
 
         types.addValueChangeListener(change -> {
-            dataView.setFilter(t -> t.getType().equals(types.getValue()));
+            dataView.setFilter(t -> t.getSubordinate().getType().equals(types.getValue()));
         });
-
     }
 }
