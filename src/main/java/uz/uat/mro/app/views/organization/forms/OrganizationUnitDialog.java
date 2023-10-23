@@ -51,7 +51,7 @@ public class OrganizationUnitDialog extends Dialog {
         form();
         data();
         buttons();
-        add(form, new HorizontalLayout(saveButton, cancelButton));
+        add(form, new HorizontalLayout(saveButton, cancelButton, deleteButton));
     }
 
 

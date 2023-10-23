@@ -20,6 +20,7 @@ import uz.uat.mro.app.model.documents.organization.OrganizationUnitType;
 import uz.uat.mro.app.model.documents.organization.edges.HasOrganizationUnit;
 import uz.uat.mro.app.utils.Keys;
 import uz.uat.mro.app.utils.MyUtils;
+import uz.uat.mro.app.views.organization.forms.OrganizationUnitDialog;
 
 @PageTitle(value = "Подразделения")
 @Route(value = "organization/units", layout = OrganizationLayout.class)
@@ -27,6 +28,7 @@ public class OrganizationUnitsView extends VerticalLayout {
     private OrganizationService service;
     private OrganizationUnit organization;
     private Grid<HasOrganizationUnit> grid;
+    private HasOrganizationUnit hasUnit;
     private ComboBox<OrganizationUnitType> types;
     private MenuBar menu;
     private ComboBox<OrganizationUnit> organizationBox;
@@ -52,7 +54,11 @@ public class OrganizationUnitsView extends VerticalLayout {
     }
 
     private void dialog() {
-        this.dialog = new Dialog(null, null);
+        this.dialog = new OrganizationUnitDialog(service, hasUnit);
+        dialog.addDialogCloseActionListener(event -> {
+            grid.getDataProvider().refreshAll();
+        });
+        dialog.setCloseOnEsc(true);
     }
 
     private void radioGroup() {
@@ -64,7 +70,12 @@ public class OrganizationUnitsView extends VerticalLayout {
     private void menu() {
         menu = new MenuBar();
         menu.addThemeVariants(MenuBarVariant.LUMO_TERTIARY);
-        viewItem = menu.addItem("Обзор");
+        viewItem = menu.addItem("Обзор", click -> {
+            dialog();
+            dialog.open();
+            dialog.setHeaderTitle("Просмотр " + hasUnit.getSubordinate().getName());
+        });
+
         addItem = menu.addItem("Добавить");
         editItem = menu.addItem("Редактировать");
         deleteItem = menu.addItem("Удалить");
