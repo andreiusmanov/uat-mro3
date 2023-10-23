@@ -71,4 +71,8 @@ public class OrganizationService {
         return unitTypeRepo.findOne(Example.of(type));
     }
 
+    public List<OrganizationUnitType> findAllOrganizationTypes() {
+        return StreamSupport.stream(unitTypeRepo.findAll().spliterator(), false).toList();
+    }
+
 }

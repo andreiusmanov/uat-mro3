@@ -78,15 +78,17 @@ public class OrganizationsView extends VerticalLayout {
         });
 
         viewItem = menu.addItem("Просмотр", " Просмотреть данные об организации", click -> {
-            UatUtils.setAttribute(Keys.PROJECT, organization);
+            UatUtils.setAttribute(Keys.ORGANIZATION, organization);
             UI.getCurrent().navigate(OrganizationView.class);
         });
 
         editItem = menu.addItem("Редактирование", " Редактировать данные об организации", click -> {
-            UatUtils.setAttribute(Keys.PROJECT, organization);
+            UatUtils.setAttribute(Keys.ORGANIZATION, organization);
             UI.getCurrent().navigate(OrganizationView.class);
         });
         unitsItem = menu.addItem("Подразделения", " Просмотреть данные о подразделениях организации", click -> {
+            UatUtils.setAttribute(Keys.ORGANIZATION, organization);
+            UI.getCurrent().navigate(OrganizationUnitsView.class);
             Notification.show("Просмотр подразделений");
         });
         facilitiesItem = menu.addItem("Объекты", " Просмотреть данные об объектах организации", click -> {

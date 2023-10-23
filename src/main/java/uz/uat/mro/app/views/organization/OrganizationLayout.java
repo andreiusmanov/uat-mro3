@@ -48,9 +48,8 @@ public class OrganizationLayout extends AppLayout {
     private SideNav createNavigation() {
         SideNav nav = new SideNav();
         nav.addItem(new SideNavItem("Организации меню", OrganizationsView.class, LineAwesomeIcon.HOME_SOLID.create()));
-        // nav.addItem(new SideNavItem("Основное меню", StartView.class,
-        // LineAwesomeIcon.HOME_SOLID.create()));
         nav.addItem(new SideNavItem("Организация", OrganizationView.class, LineAwesomeIcon.BUILDING.create()));
+        nav.addItem(new SideNavItem("Подразделения", OrganizationUnitsView.class, LineAwesomeIcon.DESKPRO.create()));
         return nav;
     }
 

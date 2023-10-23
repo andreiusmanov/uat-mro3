@@ -28,7 +28,7 @@ public class OrganizationView extends VerticalLayout {
     public OrganizationView(OrganizationService service) {
         super();
         this.service = service;
-        this.organization = (OrganizationUnit) UatUtils.getAttribute(Keys.PROJECT);
+        this.organization = (OrganizationUnit) UatUtils.getAttribute(Keys.ORGANIZATION);
         form();
         data();
         buttons();
