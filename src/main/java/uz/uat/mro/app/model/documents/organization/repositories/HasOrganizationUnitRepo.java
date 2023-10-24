@@ -11,6 +11,6 @@ import uz.uat.mro.app.model.documents.organization.edges.HasOrganizationUnit;
 
 public interface HasOrganizationUnitRepo extends ArangoRepository<HasOrganizationUnit, String> {
 
-@Query(value = "for i in has_unit filter _from == @unit return i")
+@Query(value = "for i in has_unit filter i._from == @unit return i")
 public List<HasOrganizationUnit> findOrganizationUnits(@Param("unit") String unit);
 }

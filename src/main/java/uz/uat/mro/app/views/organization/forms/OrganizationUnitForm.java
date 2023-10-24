@@ -38,7 +38,7 @@ public class OrganizationUnitForm extends FormLayout {
         this.name = new TextField("Наименование");
         this.code = new TextField("Код");
         this.shortName = new TextField("Аббревиатура");
-        this.type = new ComboBox<>("Тип подразделения", service.findOrganizationType(typeName).get());
+        this.type = new ComboBox<>("Тип подразделения", service.findAllOrganizationTypes());
         this.type.setItemLabelGenerator((entry) -> entry.getName());
         this.description = new TextArea("Описание");
 

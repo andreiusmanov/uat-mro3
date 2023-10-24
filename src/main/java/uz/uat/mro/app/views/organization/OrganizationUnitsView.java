@@ -45,7 +45,7 @@ public class OrganizationUnitsView extends VerticalLayout {
         this.service = service;
         this.organization = (OrganizationUnit) MyUtils.getAttribute(Keys.ORGANIZATION);
         fields();
-        crud();
+        grid();
         menu();
         radioGroup();
 
@@ -73,7 +73,7 @@ public class OrganizationUnitsView extends VerticalLayout {
         viewItem = menu.addItem("Обзор", click -> {
             dialog();
             dialog.open();
-            dialog.setHeaderTitle("Просмотр " + hasUnit.getSubordinate().getName());
+            // dialog.setHeaderTitle("Просмотр " + hasUnit.getSubordinate().getName());
         });
 
         addItem = menu.addItem("Добавить");
@@ -83,17 +83,29 @@ public class OrganizationUnitsView extends VerticalLayout {
 
     }
 
-    private void crud() {
+    private void grid() {
         this.grid = new Grid<>(HasOrganizationUnit.class);
         this.grid.setItems(service.findOrganizationUnits(organization));
-        this.grid.setColumns("name", "code", "shortName", "description");
-        this.grid.getColumnByKey("name").setHeader("Наименование");
-        this.grid.getColumnByKey("code").setHeader("Код");
-        this.grid.getColumnByKey("shortName").setHeader("Аббрев.");
-        this.grid.getColumnByKey("description").setHeader("Описание");
+        this.grid.setColumns("subordinate.name", "subordinate.code", "subordinate.shortName", "subordinate.description",
+                "active");
+        this.grid.getColumnByKey("subordinate.name").setHeader("Наименование");
+        this.grid.getColumnByKey("subordinate.code").setHeader("Код");
+        this.grid.getColumnByKey("subordinate.shortName").setHeader("Аббрев.");
+        this.grid.getColumnByKey("subordinate.description").setHeader("Описание");
+        this.grid.getColumnByKey("active").setHeader("Статус");
+
+        HasOrganizationUnit emptyUnit = new HasOrganizationUnit();
+        emptyUnit.setMaster(organization);
+        this.hasUnit = emptyUnit;
 
         // filter
         dataView = grid.getListDataView();
+
+        // listener
+        grid.getSelectionModel().addSelectionListener(selected -> {
+            this.hasUnit = grid.getSelectionModel().getFirstSelectedItem().orElse(emptyUnit);
+            System.out.println(hasUnit.toString());
+        });
 
     }
 

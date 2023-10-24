@@ -48,19 +48,12 @@ public class OrganizationUnitDialog extends Dialog {
         this.service = service;
         this.master = hasUnit.getMaster();
         this.subordinate = new OrganizationUnit();
+        System.out.println();
         form();
         data();
         buttons();
         add(form, new HorizontalLayout(saveButton, cancelButton, deleteButton));
     }
-
-
-
-
-
-
-
-
 
     private void form() {
         this.form = new OrganizationUnitForm(true, service);
