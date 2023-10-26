@@ -4,6 +4,8 @@ import java.time.LocalDate;
 
 import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.dialog.Dialog;
+import com.vaadin.flow.component.html.H3;
+import com.vaadin.flow.component.icon.VaadinIcon;
 import com.vaadin.flow.component.notification.Notification;
 import com.vaadin.flow.component.notification.Notification.Position;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
@@ -20,6 +22,7 @@ public class OrganizationUnitDialog extends Dialog {
     private OrganizationUnit subordinate;
     private HasOrganizationUnit hasUnit;
     private Binder<HasOrganizationUnit> binder;
+    private Binder<OrganizationUnit> binder2;
     private Button saveButton;
     private Button cancelButton;
     private Button deleteButton;
@@ -27,28 +30,56 @@ public class OrganizationUnitDialog extends Dialog {
     private LocalDate endDate;
     private boolean active;
 
-
-/**
- * Конструктор новый отдел, новыя связь с master подразделением/организацией
-  * @param service
- * @param hasUnit
- */
-
- public OrganizationUnitDialog(OrganizationService service){
-    this.service = service;
- }
+    /**
+     * Конструктор новый отдел, новыя связь с master подразделением/организацией
+     * 
+     * @param service
+     * @param hasUnit
+     */
 
     /**
-     *  конструктор для редактирования и удаления связки между  master и subordinate units
+     * конструктор для редактирования и удаления связки между master и subordinate
+     * units
+     * 
      * @param service
      * @param hasUnit
      */
     public OrganizationUnitDialog(OrganizationService service, HasOrganizationUnit hasUnit) {
         super();
+        
         this.service = service;
         this.master = hasUnit.getMaster();
         this.subordinate = new OrganizationUnit();
-        System.out.println();
+        this.setCloseOnEsc(true);
+        this.getHeader().add(new Button(VaadinIcon.CLOSE.create(), click -> {
+            this.close();
+        }));
+        form();
+        data();
+        buttons();
+        add(form, new HorizontalLayout(saveButton, cancelButton, deleteButton));
+    }
+/**
+     * конструктор для создания связки между master и subordinate
+     * units
+     * 
+     * @param service
+     * @param hasUnit
+     */
+    public OrganizationUnitDialog(OrganizationService service, OrganizationUnit organization) {
+        super();
+        //this.getHeader().add(new H3("Подразделение " + master.getShortName()));
+        this.service = service;
+        this.master = organization;
+        this.subordinate = new OrganizationUnit();
+        this.hasUnit = new HasOrganizationUnit();
+        hasUnit.setMaster(master);
+        hasUnit.setSubordinate(subordinate);
+        this.setCloseOnEsc(true);
+        this.getHeader().add(new H3("Подразделение " + master.getShortName()));
+        this.getHeader().add(new Button(VaadinIcon.CLOSE.create(), click -> {
+            this.close();
+        }));
         form();
         data();
         buttons();
@@ -71,6 +102,7 @@ public class OrganizationUnitDialog extends Dialog {
 
     private void delete() {
         try {
+            service.delete(subordinate);
             service.deleteHasUnit(hasUnit);
         } catch (Exception e) {
             // TODO: handle exception
@@ -79,6 +111,7 @@ public class OrganizationUnitDialog extends Dialog {
 
     private void save() {
         try {
+            service.save(binder2.getBean());
             service.saveHasUnit(binder.getBean());
             Notification.show("Запись " + subordinate.getName() + " сохранена", 5000, Position.MIDDLE);
         } catch (Exception e) {
@@ -88,6 +121,7 @@ public class OrganizationUnitDialog extends Dialog {
 
     private void cancel() {
         try {
+            binder2.setBean(service.getOrganizationUnitById(subordinate.getArangoId()));
             binder.setBean(service.findHasOrganizationUnitById(hasUnit));
             Notification.show("Запись " + subordinate.getName() + " отменена", 5000, Position.MIDDLE);
         } catch (Exception e) {
@@ -99,6 +133,10 @@ public class OrganizationUnitDialog extends Dialog {
         this.binder = new Binder<>(HasOrganizationUnit.class);
         binder.setBean(hasUnit);
         binder.bindInstanceFields(form);
+
+        this.binder2 = new Binder<>(OrganizationUnit.class);
+        binder2.setBean(subordinate);
+        binder2.bindInstanceFields(form);
     }
 
 }

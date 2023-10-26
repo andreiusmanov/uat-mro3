@@ -15,14 +15,13 @@ import uz.uat.mro.app.model.documents.organization.OrganizationUnitType;
 
 public class OrganizationUnitForm extends FormLayout {
     private OrganizationService service;
-    private final String typeName = "Подразделение";
     private TextField name;
     private TextField code;
     private TextArea description;
     private TextField shortName;
     private ComboBox<OrganizationUnitType> type;
-    private DatePicker startDate;
-    private DatePicker endDate;
+    private DatePicker dateStart;
+    private DatePicker dateEnd;
     private Checkbox active;
 
     public OrganizationUnitForm(boolean enabled, OrganizationService service) {
@@ -30,7 +29,7 @@ public class OrganizationUnitForm extends FormLayout {
         this.service = service;
         data();
         this.add(name, code, shortName, type, description,
-                startDate, endDate, active);
+                dateStart, dateEnd, active);
         this.setEnabled(enabled);
     }
 
@@ -42,10 +41,12 @@ public class OrganizationUnitForm extends FormLayout {
         this.type.setItemLabelGenerator((entry) -> entry.getName());
         this.description = new TextArea("Описание");
 
-        this.startDate = new DatePicker(LocalDate.now(), Locale.forLanguageTag("ru-RU"));
-        this.endDate = new DatePicker(LocalDate.now(), Locale.forLanguageTag("ru-RU"));
-        this.active = new Checkbox("Активная запись");
-
+        this.dateStart = new DatePicker(LocalDate.now(), Locale.forLanguageTag("ru-RU"));
+        this.dateEnd = new DatePicker();
+        dateStart.setLabel("Дата Открытия");
+        dateEnd.setLabel("Дата Закрытия");
+        dateEnd.setLocale(Locale.forLanguageTag("ru-RU"));
+        this.active = new Checkbox("Действующее подразделение");
         this.setColspan(description, 2);
     }
 
