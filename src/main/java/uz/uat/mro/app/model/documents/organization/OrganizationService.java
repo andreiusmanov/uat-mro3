@@ -7,8 +7,6 @@ import java.util.stream.StreamSupport;
 import org.springframework.data.domain.Example;
 import org.springframework.stereotype.Service;
 
-import com.arangodb.springframework.annotation.ArangoId;
-
 import lombok.AllArgsConstructor;
 import uz.uat.mro.app.model.documents.organization.edges.HasOrganizationUnit;
 import uz.uat.mro.app.model.documents.organization.repositories.HasOrganizationUnitRepo;
