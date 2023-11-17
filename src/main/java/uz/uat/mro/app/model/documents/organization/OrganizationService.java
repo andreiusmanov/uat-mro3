@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 import lombok.AllArgsConstructor;
 import uz.uat.mro.app.model.documents.organization.edges.HasOrganizationUnit;
 import uz.uat.mro.app.model.documents.organization.repositories.HasOrganizationUnitRepo;
+import uz.uat.mro.app.model.documents.organization.repositories.OrganizationStructureRepo;
 import uz.uat.mro.app.model.documents.organization.repositories.OrganizationUnitRepo;
 import uz.uat.mro.app.model.documents.organization.repositories.OrganizationUnitTypeRepo;
 import uz.uat.mro.app.model.terms.common.Country;
@@ -22,6 +23,7 @@ public class OrganizationService {
     private OrganizationUnitRepo unitRepo;
     private OrganizationUnitTypeRepo unitTypeRepo;
     private HasOrganizationUnitRepo hasUnitRepo;
+    private OrganizationStructureRepo structureRepo;
 
     public List<Country> findAllCountries() {
         return StreamSupport.stream(countriesRepo.findAll().spliterator(), false).toList();
@@ -94,5 +96,20 @@ public class OrganizationService {
      public HasOrganizationUnit findHasOrganizationUnitById(HasOrganizationUnit hasUnit){
         return hasUnitRepo.findById(hasUnit.getArangoId()).get();
      }
+
+
+
+     // Organization structures
+
+     public OrganizationStructure saveStructure(OrganizationStructure structure){
+        return structureRepo.save(structure);
+     }
+     public void deleteStructure(OrganizationStructure structure){
+        structureRepo.delete(structure);
+     }
      
+public List<OrganizationStructure> findAllStructures(OrganizationUnit organization){
+    return structureRepo.getStructuresByOrganization(organization.getArangoId());
+}
+
 }
