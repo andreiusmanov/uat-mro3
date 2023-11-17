@@ -7,5 +7,6 @@ public class Keys {
     public static final String ORGANIZATION = "organization";
     public static final String MASTER_UNIT = "master-unit";
     public static final String SUBORDINATE_UNIT = "subordinate-unit";
+    public static final String STRUCTURE = "structure";
 
 }
