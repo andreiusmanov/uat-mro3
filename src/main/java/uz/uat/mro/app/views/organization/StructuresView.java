@@ -5,7 +5,7 @@ import org.vaadin.crudui.crud.impl.GridCrud;
 import org.vaadin.crudui.form.CrudFormFactory;
 
 import com.vaadin.flow.component.UI;
-import com.vaadin.flow.component.button.Button;
+import com.vaadin.flow.component.contextmenu.MenuItem;
 import com.vaadin.flow.component.grid.Grid;
 import com.vaadin.flow.component.menubar.MenuBar;
 import com.vaadin.flow.component.menubar.MenuBarVariant;
@@ -27,23 +27,14 @@ public class StructuresView extends VerticalLayout {
     private OrganizationUnit organization;
     private OrganizationStructure structure;
     private MenuBar menu;
-    private Button updateButton;
+    private MenuItem addItem;
 
     public StructuresView(OrganizationService service) {
         this.service = service;
         this.organization = (OrganizationUnit) MyUtils.getAttribute(Keys.ORGANIZATION);
         crud();
         menu();
-        button();
         add(menu, crud);
-    }
-
-    private void button() {
-        this.updateButton = new Button("Заполнить");
-        updateButton.addClickListener(click -> {
-            MyUtils.setAttribute(Keys.STRUCTURE, structure);
-            UI.getCurrent().navigate(OrganizationStructureView.class);
-        });
     }
 
     private void crud() {
@@ -82,6 +73,11 @@ public class StructuresView extends VerticalLayout {
     private void menu() {
         this.menu = new MenuBar();
         menu.addThemeVariants(MenuBarVariant.LUMO_TERTIARY);
+        this.addItem = menu.addItem("Обзор");
+        addItem.addClickListener(click -> {
+            MyUtils.setAttribute(Keys.STRUCTURE, structure);
+            UI.getCurrent().navigate(OrganizationStructureView.class);
+        });
     }
 
 }
