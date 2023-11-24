@@ -28,11 +28,10 @@ public class CurrenciesView extends VerticalLayout {
 
     private void grid() {
         this.grid = new GridCrud<>(Currency.class);
-        this.grid.getGrid().setColumns("id", "numeric", "name", "countries");
+        this.grid.getGrid().setColumns("id", "numeric", "name");
         this.grid.getGrid().getColumnByKey("id").setHeader("Код");
         this.grid.getGrid().getColumnByKey("numeric").setHeader("Цифр. код");
         this.grid.getGrid().getColumnByKey("name").setHeader("Наименование");
-        this.grid.getGrid().getColumnByKey("countries").setHeader("Страны");
 
         CrudFormFactory<Currency> factory = grid.getCrudFormFactory();
         factory.setVisibleProperties("id", "numeric", "name");

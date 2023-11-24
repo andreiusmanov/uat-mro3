@@ -35,15 +35,15 @@ public class OrganizationStructureView extends VerticalLayout {
     private void tabs() {
         this.tabSheet = new TabSheet();
         listTab = tabSheet.add("Список", listData());
-        listTab.add(listData());
-        chartTab = tabSheet.add("График", chartData());
+        //listTab.add(listData());
+        chartTab = tabSheet.add("График", null);//, chartData());
     }
 
     private VerticalLayout listData() {
         H3 lo = new H3("Орг структура в виде списка");
         VerticalLayout v = new VerticalLayout();
         Grid<OrganizationUnit> grid = new Grid<>(OrganizationUnit.class);
-        v.add(lo, grid);
+        v.add(lo);
         return v;
     }
 
@@ -51,7 +51,7 @@ public class OrganizationStructureView extends VerticalLayout {
         H3 lo = new H3("Орг структура в виде графика");
         VerticalLayout v = new VerticalLayout();
         Grid<OrganizationUnit> grid = new Grid<>(OrganizationUnit.class);
-        v.add(lo, grid);
+        v.add(lo);
         return v;
     }
 

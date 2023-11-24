@@ -5,6 +5,7 @@ import org.vaadin.crudui.crud.impl.GridCrud;
 import org.vaadin.crudui.form.CrudFormFactory;
 
 import com.vaadin.flow.component.UI;
+import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.contextmenu.MenuItem;
 import com.vaadin.flow.component.grid.Grid;
 import com.vaadin.flow.component.menubar.MenuBar;
@@ -26,15 +27,22 @@ public class StructuresView extends VerticalLayout {
     private GridCrud<OrganizationStructure> crud;
     private OrganizationUnit organization;
     private OrganizationStructure structure;
-    private MenuBar menu;
-    private MenuItem addItem;
+    private Button reviewButton;
 
     public StructuresView(OrganizationService service) {
         this.service = service;
         this.organization = (OrganizationUnit) MyUtils.getAttribute(Keys.ORGANIZATION);
+        button();
         crud();
-        menu();
-        add(menu, crud);
+        add(crud);
+    }
+
+    private void button() {
+        this.reviewButton = new Button("Обзор");
+        this.reviewButton.addClickListener(click -> {
+            MyUtils.setAttribute(Keys.STRUCTURE, structure);
+            UI.getCurrent().navigate(OrganizationStructureView.class);
+        });
     }
 
     private void crud() {
@@ -54,6 +62,7 @@ public class StructuresView extends VerticalLayout {
         crud.setUpdateOperation(service::saveStructure);
         crud.setDeleteOperation(service::deleteStructure);
         crud.setFindAllOperation(() -> service.findAllStructures(organization));
+        crud.getCrudLayout().addToolbarComponent(reviewButton);
 
         CrudFormFactory<OrganizationStructure> factory = crud.getCrudFormFactory();
 
@@ -62,22 +71,8 @@ public class StructuresView extends VerticalLayout {
             s.setOrganization(organization);
             return s;
         });
-
         factory.buildCaption(CrudOperation.UPDATE, structure);
         factory.buildCaption(CrudOperation.DELETE, structure);
-
         factory.setVisibleProperties("startDate", "endDate", "active");
-
     }
-
-    private void menu() {
-        this.menu = new MenuBar();
-        menu.addThemeVariants(MenuBarVariant.LUMO_TERTIARY);
-        this.addItem = menu.addItem("Обзор");
-        addItem.addClickListener(click -> {
-            MyUtils.setAttribute(Keys.STRUCTURE, structure);
-            UI.getCurrent().navigate(OrganizationStructureView.class);
-        });
-    }
-
 }

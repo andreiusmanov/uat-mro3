@@ -18,6 +18,4 @@ public class Currency {
     private String arangoId;
     private String numeric;
     private String name;
-    // @Relations(edges = ForeignKey.class, lazy = false)
-    private List<Country> countries;
 }
