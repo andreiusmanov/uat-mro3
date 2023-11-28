@@ -86,10 +86,10 @@ public class OrganizationsView extends VerticalLayout {
             MyUtils.setAttribute(Keys.ORGANIZATION, organization);
             UI.getCurrent().navigate(OrganizationView.class);
         });
-        unitsItem = menu.addItem("Подразделения", " Просмотреть данные о подразделениях организации", click -> {
+        unitsItem = menu.addItem("Орг. Структура", " Просмотреть данные о подразделениях организации", click -> {
             MyUtils.setAttribute(Keys.ORGANIZATION, organization);
-            UI.getCurrent().navigate(OrganizationUnitsView.class);
-            Notification.show("Просмотр подразделений");
+            UI.getCurrent().navigate(OrganizationStructureView.class);
+            Notification.show("Просмотр орг. структуры");
         });
         facilitiesItem = menu.addItem("Объекты", " Просмотреть данные об объектах организации", click -> {
             Notification.show("Просмотр объектов");
@@ -120,6 +120,7 @@ public class OrganizationsView extends VerticalLayout {
     private void grid() {
         this.grid = new Grid<>(OrganizationUnit.class);
         List<OrganizationUnit> units = service.findMainOrganizations("Организация");
+        
         this.grid.getSelectionModel().addSelectionListener(selected -> {
             boolean res = !grid.getSelectedItems().isEmpty();
             viewItem.setEnabled(res);

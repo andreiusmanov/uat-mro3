@@ -28,6 +28,4 @@ public class AircraftAccess {
     private String name;
     private Boolean synthetic;
     private String mmReference;
-    private String subzoneString;
-
 }
