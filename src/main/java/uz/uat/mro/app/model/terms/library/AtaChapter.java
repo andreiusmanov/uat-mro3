@@ -9,7 +9,7 @@ import com.arangodb.springframework.annotation.Document;
 import lombok.Data;
 
 @Data
-@Document("ata_chapters")
+@Document(collection = "ata_chapters", allowUserKeys = true)
 
 public class AtaChapter {
     @Id
@@ -17,7 +17,6 @@ public class AtaChapter {
     @ArangoId
     private String arangoId;
     private String general;
-    private String number;
     private String name;
 
 }

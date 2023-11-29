@@ -44,7 +44,7 @@ public class OrganizationStructureView extends VerticalLayout {
         H3 lo = new H3("Орг структура в виде списка");
         VerticalLayout v = new VerticalLayout();
         Grid<OrganizationUnit> grid = new Grid<>(OrganizationUnit.class);
-        grid.setColumns("#", "type", "shortName", "code", "name", "description");
+        grid.setColumns("type", "shortName", "code", "name", "description");
         grid.getColumnByKey("type").setHeader("Тип");
         grid.getColumnByKey("shortName").setHeader("Аббрев.");
         grid.getColumnByKey("code").setHeader("Код");
