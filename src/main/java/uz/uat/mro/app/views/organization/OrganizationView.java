@@ -1,6 +1,9 @@
 package uz.uat.mro.app.views.organization;
 
 import com.vaadin.flow.component.button.Button;
+import com.vaadin.flow.component.contextmenu.MenuItem;
+import com.vaadin.flow.component.menubar.MenuBar;
+import com.vaadin.flow.component.menubar.MenuBarVariant;
 import com.vaadin.flow.component.notification.Notification;
 import com.vaadin.flow.component.notification.Notification.Position;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
@@ -25,14 +28,28 @@ public class OrganizationView extends VerticalLayout {
     private Button saveButton;
     private Button cancelButton;
 
+    private MenuBar menu;
+
     public OrganizationView(OrganizationService service) {
         super();
         this.service = service;
         this.organization = (OrganizationUnit) MyUtils.getAttribute(Keys.ORGANIZATION);
         form();
         data();
+        menu();
         buttons();
-        add(form, new HorizontalLayout(saveButton, cancelButton));
+        enableEditing(false);
+        add(menu, form, new HorizontalLayout(saveButton, cancelButton));
+    }
+
+    private void menu() {
+        this.menu = new MenuBar();
+        menu.addThemeVariants(MenuBarVariant.LUMO_TERTIARY);
+        MenuItem editItem = menu.addItem("Редактировать");
+        editItem.addClickListener(click -> {
+            Notification.show("clicked");
+            enableEditing(true);
+        });
     }
 
     private void form() {
@@ -41,9 +58,15 @@ public class OrganizationView extends VerticalLayout {
 
     private void buttons() {
         this.saveButton = new Button("Сохранить");
-        saveButton.addClickListener(click -> save());
+        saveButton.addClickListener(click -> {
+            save();
+            setEnabled(false);
+        });
         this.cancelButton = new Button("Отменить");
-        cancelButton.addClickListener(click -> cancel());
+        cancelButton.addClickListener(click -> {
+            cancel();
+            setEnabled(false);
+        });
     }
 
     private void save() {
@@ -68,6 +91,13 @@ public class OrganizationView extends VerticalLayout {
         this.binder = new Binder<>(OrganizationUnit.class);
         binder.setBean(organization);
         binder.bindInstanceFields(form);
+    }
+
+    private void enableEditing(boolean enabled) {
+        this.form.setEnabled(enabled);
+        this.saveButton.setVisible(enabled);
+        this.cancelButton.setVisible(enabled);
+        this.menu.setEnabled(!enabled);
     }
 
 }

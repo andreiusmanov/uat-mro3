@@ -1,9 +1,13 @@
 package uz.uat.mro.app.views.organization;
 
+import com.vaadin.flow.component.UI;
+import com.vaadin.flow.component.contextmenu.MenuItem;
 import com.vaadin.flow.component.grid.Grid;
 import com.vaadin.flow.component.html.Div;
 import com.vaadin.flow.component.html.H3;
 import com.vaadin.flow.component.html.Image;
+import com.vaadin.flow.component.menubar.MenuBar;
+import com.vaadin.flow.component.menubar.MenuBarVariant;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.component.tabs.Tab;
 import com.vaadin.flow.component.tabs.TabSheet;
@@ -23,12 +27,24 @@ public class OrganizationStructureView extends VerticalLayout {
     private OrganizationStructure structure;
     private TabSheet tabSheet;
     private Grid<OrganizationUnit> grid;
+    private MenuBar menu;
 
     public OrganizationStructureView(StructureService service) {
         this.service = service;
         this.structure = (OrganizationStructure) MyUtils.getAttribute(Keys.STRUCTURE);
         tabs();
-        add(tabSheet);
+        menu();
+        add(menu, tabSheet);
+
+    }
+
+    private void menu() {
+        menu = new MenuBar();
+        menu.addThemeVariants(MenuBarVariant.LUMO_TERTIARY);
+        MenuItem home = menu.addItem("Организация");
+        home.addClickListener(click -> {
+            UI.getCurrent().navigate(StructuresView.class);
+        });
 
     }
 
@@ -36,8 +52,8 @@ public class OrganizationStructureView extends VerticalLayout {
         this.tabSheet = new TabSheet();
         tabSheet.setSizeFull();
         Tab listTab = tabSheet.add("Список", listData());
-        //listTab.add(listData());
-        Tab chartTab = tabSheet.add("График", chartData());//, chartData());
+        // listTab.add(listData());
+        Tab chartTab = tabSheet.add("График", chartData());// , chartData());
     }
 
     private VerticalLayout listData() {
@@ -58,9 +74,9 @@ public class OrganizationStructureView extends VerticalLayout {
     private VerticalLayout chartData() {
         H3 lo = new H3("Орг структура в виде графика");
         VerticalLayout v = new VerticalLayout();
-        
+
         Div picture = new Div(new Image("https://randomuser.me/api/portraits/men/76.jpg", ""));
-        //Grid<OrganizationUnit> grid = new Grid<>(OrganizationUnit.class);
+        // Grid<OrganizationUnit> grid = new Grid<>(OrganizationUnit.class);
         v.add(lo, picture);
         return v;
     }

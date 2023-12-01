@@ -40,6 +40,7 @@ public class StructuresView extends VerticalLayout {
             MyUtils.setAttribute(Keys.STRUCTURE, structure);
             UI.getCurrent().navigate(OrganizationStructureView.class);
         });
+        reviewButton.setEnabled(false);
     }
 
     private void crud() {
@@ -52,7 +53,7 @@ public class StructuresView extends VerticalLayout {
         grid.getColumnByKey("active").setHeader("Действующая");
         grid.getSelectionModel().addSelectionListener(event -> {
             this.structure = grid.getSelectionModel().getFirstSelectedItem().orElse(null);
-
+            this.reviewButton.setEnabled(this.structure != null);
         });
 
         crud.setAddOperation(service::saveStructure);

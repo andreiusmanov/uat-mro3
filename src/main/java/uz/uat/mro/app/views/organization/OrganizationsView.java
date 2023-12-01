@@ -24,17 +24,17 @@ import uz.uat.mro.app.utils.MyUtils;
 import uz.uat.mro.app.views.MainLayout;
 
 @PageTitle(value = "Список Организаций")
-@Route(value = "uat/organizations", layout = MainLayout.class)
+@Route(value = "organizations", layout = MainLayout.class)
 public class OrganizationsView extends VerticalLayout {
     private OrganizationService service;
     private Grid<OrganizationUnit> grid;
     private OrganizationUnit organization;
     private MenuBar menu;
     private MenuItem viewItem;
-    private MenuItem editItem;
+    // private MenuItem editItem;
     private MenuItem addItem;
     private MenuItem deleteItem;
-    private MenuItem unitsItem;
+    // private MenuItem unitsItem;
     private MenuItem facilitiesItem;
     private MenuItem specialItem;
     private MenuItem reportItem;
@@ -82,15 +82,19 @@ public class OrganizationsView extends VerticalLayout {
             UI.getCurrent().navigate(OrganizationView.class);
         });
 
-        editItem = menu.addItem("Редактирование", " Редактировать данные об организации", click -> {
-            MyUtils.setAttribute(Keys.ORGANIZATION, organization);
-            UI.getCurrent().navigate(OrganizationView.class);
-        });
-        unitsItem = menu.addItem("Орг. Структура", " Просмотреть данные о подразделениях организации", click -> {
-            MyUtils.setAttribute(Keys.ORGANIZATION, organization);
-            UI.getCurrent().navigate(OrganizationStructureView.class);
-            Notification.show("Просмотр орг. структуры");
-        });
+        /*
+         * editItem = menu.addItem("Редактирование",
+         * " Редактировать данные об организации", click -> {
+         * MyUtils.setAttribute(Keys.ORGANIZATION, organization);
+         * UI.getCurrent().navigate(OrganizationView.class);
+         * });
+         * unitsItem = menu.addItem("Орг. Структура",
+         * " Просмотреть данные о подразделениях организации", click -> {
+         * MyUtils.setAttribute(Keys.ORGANIZATION, organization);
+         * UI.getCurrent().navigate(OrganizationStructureView.class);
+         * Notification.show("Просмотр орг. структуры");
+         * });
+         */
         facilitiesItem = menu.addItem("Объекты", " Просмотреть данные об объектах организации", click -> {
             Notification.show("Просмотр объектов");
         });
@@ -111,8 +115,8 @@ public class OrganizationsView extends VerticalLayout {
             Notification.show("Удалить");
         });
         viewItem.setEnabled(false);
-        editItem.setEnabled(false);
-        unitsItem.setEnabled(false);
+        // editItem.setEnabled(false);
+        // unitsItem.setEnabled(false);
         facilitiesItem.setEnabled(false);
         deleteItem.setEnabled(false);
     }
@@ -120,12 +124,12 @@ public class OrganizationsView extends VerticalLayout {
     private void grid() {
         this.grid = new Grid<>(OrganizationUnit.class);
         List<OrganizationUnit> units = service.findMainOrganizations("Организация");
-        
+
         this.grid.getSelectionModel().addSelectionListener(selected -> {
             boolean res = !grid.getSelectedItems().isEmpty();
             viewItem.setEnabled(res);
-            editItem.setEnabled(res);
-            unitsItem.setEnabled(res);
+            // editItem.setEnabled(res);
+            // unitsItem.setEnabled(res);
             facilitiesItem.setEnabled(res);
             deleteItem.setEnabled(res);
             this.organization = grid.getSelectionModel().getFirstSelectedItem().orElse(new OrganizationUnit());
