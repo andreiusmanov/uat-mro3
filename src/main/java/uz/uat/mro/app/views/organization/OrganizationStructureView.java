@@ -52,7 +52,6 @@ public class OrganizationStructureView extends VerticalLayout {
         this.tabSheet = new TabSheet();
         tabSheet.setSizeFull();
         Tab listTab = tabSheet.add("Список", listData());
-        // listTab.add(listData());
         Tab chartTab = tabSheet.add("График", chartData());// , chartData());
     }
 
@@ -77,7 +76,7 @@ public class OrganizationStructureView extends VerticalLayout {
 
         Div picture = new Div(new Image("https://randomuser.me/api/portraits/men/76.jpg", ""));
         // Grid<OrganizationUnit> grid = new Grid<>(OrganizationUnit.class);
-        v.add(lo, picture);
+         v.add(lo, picture);
         return v;
     }
 

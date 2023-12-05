@@ -23,7 +23,7 @@ public class OrganizationStructure {
     private LocalDate endDate;
     private boolean active;
 
-    public void setInactive() {
+    public void deactivate() {
         this.active = false;
     }
 

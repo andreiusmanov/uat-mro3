@@ -16,5 +16,4 @@ public class OrganizationUnitType {
     private String name;
     private String code;
     private String description;
-    
 }
