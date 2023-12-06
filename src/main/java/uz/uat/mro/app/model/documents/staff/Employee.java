@@ -25,11 +25,6 @@ public class Employee {
     private String tabel;
     @Ref(lazy =true)
     /**
-     * current position
-     */
-    private Position position;
-    @Ref(lazy =false)
-    /**
      * all positions
      */
     private List<Position> positions;

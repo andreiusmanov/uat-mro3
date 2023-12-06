@@ -1,4 +1,4 @@
-package uz.uat.mro.app.views.organization;
+package uz.uat.mro.app.views.employee;
 
 import org.vaadin.lineawesome.LineAwesomeIcon;
 
@@ -15,12 +15,14 @@ import com.vaadin.flow.component.sidenav.SideNavItem;
 import com.vaadin.flow.router.PageTitle;
 import com.vaadin.flow.theme.lumo.LumoUtility;
 
-import uz.uat.mro.app.views.employee.EmployeesView;
+import uz.uat.mro.app.views.organization.OrganizationView;
+import uz.uat.mro.app.views.organization.OrganizationsView;
+import uz.uat.mro.app.views.organization.StructuresView;
 
-public class OrganizationLayout extends AppLayout {
-    private H2 viewTitle;
+public class EmployeeLayout extends AppLayout {
+private H2 viewTitle;
 
-    public OrganizationLayout() {
+    public EmployeeLayout() {
         setPrimarySection(Section.DRAWER);
         addDrawerContent();
         addHeaderContent();
@@ -48,10 +50,8 @@ public class OrganizationLayout extends AppLayout {
 
     private SideNav createNavigation() {
         SideNav nav = new SideNav();
-        nav.addItem(new SideNavItem("Организации меню", OrganizationsView.class, LineAwesomeIcon.HOME_SOLID.create()));
-        nav.addItem(new SideNavItem("Организация", OrganizationView.class, LineAwesomeIcon.BUILDING.create()));
-        nav.addItem(new SideNavItem("Орг. Структуры", StructuresView.class, VaadinIcon.STAR.create()));
         nav.addItem(new SideNavItem("Сотрудники", EmployeesView.class, LineAwesomeIcon.USERS_SOLID.create()));
+        nav.addItem(new SideNavItem("Штатное Расписание", PositionView.class, LineAwesomeIcon.USERS_SOLID.create()));
         return nav;
     }
 
@@ -71,5 +71,6 @@ public class OrganizationLayout extends AppLayout {
         PageTitle title = getContent().getClass().getAnnotation(PageTitle.class);
         return title == null ? "" : title.value();
     }
+
 
 }

@@ -7,7 +7,7 @@ import com.vaadin.flow.router.Route;
 import uz.uat.mro.app.views.common.CommonLayout;
 
 @PageTitle(value = "Сотрудники")
-@Route(value = "common/employees", layout = CommonLayout.class)
+@Route(value = "common/employees", layout = EmployeeLayout.class)
 public class EmployeesView extends VerticalLayout {
 
 }

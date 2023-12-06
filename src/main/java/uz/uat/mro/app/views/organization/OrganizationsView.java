@@ -77,24 +77,11 @@ public class OrganizationsView extends VerticalLayout {
             dataView.removeFilters();
         });
 
-        viewItem = menu.addItem("Просмотр", " Просмотреть данные об организации", click -> {
+        viewItem = menu.addItem("Обзор", " Просмотреть данные об организации", click -> {
             MyUtils.setAttribute(Keys.ORGANIZATION, organization);
             UI.getCurrent().navigate(OrganizationView.class);
         });
 
-        /*
-         * editItem = menu.addItem("Редактирование",
-         * " Редактировать данные об организации", click -> {
-         * MyUtils.setAttribute(Keys.ORGANIZATION, organization);
-         * UI.getCurrent().navigate(OrganizationView.class);
-         * });
-         * unitsItem = menu.addItem("Орг. Структура",
-         * " Просмотреть данные о подразделениях организации", click -> {
-         * MyUtils.setAttribute(Keys.ORGANIZATION, organization);
-         * UI.getCurrent().navigate(OrganizationStructureView.class);
-         * Notification.show("Просмотр орг. структуры");
-         * });
-         */
         facilitiesItem = menu.addItem("Объекты", " Просмотреть данные об объектах организации", click -> {
             Notification.show("Просмотр объектов");
         });
@@ -128,8 +115,6 @@ public class OrganizationsView extends VerticalLayout {
         this.grid.getSelectionModel().addSelectionListener(selected -> {
             boolean res = !grid.getSelectedItems().isEmpty();
             viewItem.setEnabled(res);
-            // editItem.setEnabled(res);
-            // unitsItem.setEnabled(res);
             facilitiesItem.setEnabled(res);
             deleteItem.setEnabled(res);
             this.organization = grid.getSelectionModel().getFirstSelectedItem().orElse(new OrganizationUnit());
