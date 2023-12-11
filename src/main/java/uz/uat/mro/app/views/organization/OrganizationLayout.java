@@ -48,10 +48,11 @@ public class OrganizationLayout extends AppLayout {
 
     private SideNav createNavigation() {
         SideNav nav = new SideNav();
-        nav.addItem(new SideNavItem("Организации меню", OrganizationsView.class, LineAwesomeIcon.HOME_SOLID.create()));
-        nav.addItem(new SideNavItem("Организация", OrganizationView.class, LineAwesomeIcon.BUILDING.create()));
-        nav.addItem(new SideNavItem("Орг. Структуры", StructuresView.class, VaadinIcon.STAR.create()));
-        nav.addItem(new SideNavItem("Сотрудники", EmployeesView.class, LineAwesomeIcon.USERS_SOLID.create()));
+        SideNavItem menu = new SideNavItem("Организации меню", OrganizationsView.class, LineAwesomeIcon.HOME_SOLID.create());
+        SideNavItem org = new SideNavItem("Организация", OrganizationView.class, LineAwesomeIcon.BUILDING.create());
+        SideNavItem structure = new SideNavItem("Орг. Структуры", StructuresView.class, VaadinIcon.STAR.create());
+        SideNavItem employee = new SideNavItem("Сотрудники", EmployeesView.class, LineAwesomeIcon.USERS_SOLID.create());
+        nav.addItem(menu, org, structure, employee);
         return nav;
     }
 

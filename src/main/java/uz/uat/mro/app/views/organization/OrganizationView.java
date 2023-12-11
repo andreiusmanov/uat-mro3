@@ -95,9 +95,9 @@ public class OrganizationView extends VerticalLayout {
 
     private void disableEditing(boolean enabled) {
         this.form.setReadOnly(enabled);
-        this.saveButton.setVisible(enabled);
-        this.cancelButton.setVisible(enabled);
-        this.menu.setEnabled(!enabled);
+        this.saveButton.setVisible(!enabled);
+        this.cancelButton.setVisible(!enabled);
+        this.menu.setEnabled(enabled);
     }
 
 }
