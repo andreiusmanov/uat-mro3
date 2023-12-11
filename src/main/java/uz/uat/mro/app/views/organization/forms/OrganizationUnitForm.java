@@ -24,13 +24,13 @@ public class OrganizationUnitForm extends FormLayout {
     private DatePicker dateEnd;
     private Checkbox active;
 
-    public OrganizationUnitForm(boolean enabled, OrganizationService service) {
+    public OrganizationUnitForm(boolean readOnly, OrganizationService service) {
         super();
         this.service = service;
         data();
         this.add(name, code, shortName, type, description,
                 dateStart, dateEnd, active);
-        this.setEnabled(enabled);
+        this.setReadOnly(readOnly);
     }
 
     private void data() {
@@ -48,6 +48,17 @@ public class OrganizationUnitForm extends FormLayout {
         dateEnd.setLocale(Locale.forLanguageTag("ru-RU"));
         this.active = new Checkbox("Действующее подразделение");
         this.setColspan(description, 2);
+    }
+
+    private void setReadOnly(boolean readOnly) {
+        name.setReadOnly(readOnly);
+        code.setReadOnly(readOnly);
+        shortName.setReadOnly(readOnly);
+        type.setReadOnly(readOnly);
+        description.setReadOnly(readOnly);
+        dateStart.setReadOnly(readOnly);
+        dateEnd.setReadOnly(readOnly);
+        active.setReadOnly(readOnly);
     }
 
 }
