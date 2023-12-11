@@ -31,10 +31,8 @@ public class OrganizationsView extends VerticalLayout {
     private OrganizationUnit organization;
     private MenuBar menu;
     private MenuItem viewItem;
-    // private MenuItem editItem;
     private MenuItem addItem;
     private MenuItem deleteItem;
-    // private MenuItem unitsItem;
     private MenuItem facilitiesItem;
     private MenuItem specialItem;
     private MenuItem reportItem;

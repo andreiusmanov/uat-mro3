@@ -38,7 +38,7 @@ public class OrganizationView extends VerticalLayout {
         data();
         menu();
         buttons();
-        enableEditing(false);
+        disableEditing(true);
         add(menu, form, new HorizontalLayout(saveButton, cancelButton));
     }
 
@@ -48,7 +48,7 @@ public class OrganizationView extends VerticalLayout {
         MenuItem editItem = menu.addItem("Редактировать");
         editItem.addClickListener(click -> {
             Notification.show("clicked");
-            enableEditing(true);
+            disableEditing(true);
         });
     }
 
@@ -60,12 +60,12 @@ public class OrganizationView extends VerticalLayout {
         this.saveButton = new Button("Сохранить");
         saveButton.addClickListener(click -> {
             save();
-            setEnabled(false);
+            disableEditing(true);
         });
         this.cancelButton = new Button("Отменить");
         cancelButton.addClickListener(click -> {
             cancel();
-            setEnabled(false);
+            disableEditing(true);
         });
     }
 
@@ -93,8 +93,8 @@ public class OrganizationView extends VerticalLayout {
         binder.bindInstanceFields(form);
     }
 
-    private void enableEditing(boolean enabled) {
-        this.form.setEnabled(enabled);
+    private void disableEditing(boolean enabled) {
+        this.form.setReadOnly(enabled);
         this.saveButton.setVisible(enabled);
         this.cancelButton.setVisible(enabled);
         this.menu.setEnabled(!enabled);

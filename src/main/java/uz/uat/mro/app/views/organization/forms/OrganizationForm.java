@@ -19,12 +19,12 @@ public class OrganizationForm extends FormLayout {
     private TextField shortName;
     private ComboBox<OrganizationUnitType> type;
 
-    public OrganizationForm(boolean enabled, OrganizationService service) {
+    public OrganizationForm(boolean readOnly, OrganizationService service) {
         super();
         this.service = service;
         data();
         this.add(country, name, code, shortName, type, description);
-        this.setEnabled(enabled);
+        this.setReadOnly(readOnly);
     }
 
     private void data() {
@@ -38,4 +38,15 @@ public class OrganizationForm extends FormLayout {
         this.description = new TextArea("Описание");
         this.setColspan(description, 2);
     }
+
+    public void setReadOnly(boolean readOnly) {
+        country.setReadOnly(readOnly);
+        name.setReadOnly(readOnly);
+        code.setReadOnly(readOnly);
+        shortName.setReadOnly(readOnly);
+        type.setReadOnly(readOnly);
+        description.setReadOnly(readOnly);
+    }
+
+    
 }
