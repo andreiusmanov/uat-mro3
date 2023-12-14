@@ -17,7 +17,7 @@ import com.vaadin.flow.theme.lumo.LumoUtility;
 
 import uz.uat.mro.app.views.organization.OrganizationView;
 import uz.uat.mro.app.views.organization.OrganizationsView;
-import uz.uat.mro.app.views.organization.StructuresView;
+import uz.uat.mro.app.views.organization.OrganizationStructuresView;
 
 public class EmployeeLayout extends AppLayout {
 private H2 viewTitle;

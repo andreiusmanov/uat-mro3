@@ -19,14 +19,14 @@ import uz.uat.mro.app.utils.MyUtils;
 
 @PageTitle(value = "Орг. Структура")
 @Route(value = "organization/structure", layout = OrganizationLayout.class)
-public class StructuresView extends VerticalLayout {
+public class OrganizationStructuresView extends VerticalLayout {
     private OrganizationService service;
     private GridCrud<OrganizationStructure> crud;
     private OrganizationUnit organization;
     private OrganizationStructure structure;
     private Button reviewButton;
 
-    public StructuresView(OrganizationService service) {
+    public OrganizationStructuresView(OrganizationService service) {
         this.service = service;
         this.organization = (OrganizationUnit) MyUtils.getAttribute(Keys.ORGANIZATION);
         button();

@@ -57,7 +57,7 @@ public class OrganizationLayout extends AppLayout {
         // SideNavItem menu = new SideNavItem("Организации меню",
         // OrganizationsView.class, LineAwesomeIcon.HOME_SOLID.create());
         SideNavItem org = new SideNavItem("Организация", OrganizationView.class, LineAwesomeIcon.BUILDING.create());
-        SideNavItem structure = new SideNavItem("Орг. Структуры", StructuresView.class, VaadinIcon.STAR.create());
+        SideNavItem structure = new SideNavItem("Орг. Структуры", OrganizationStructuresView.class, VaadinIcon.STAR.create());
         SideNavItem employee = new SideNavItem("Сотрудники", EmployeesView.class, LineAwesomeIcon.USERS_SOLID.create());
         nav.addItem(// menu,
                 org, structure, employee);

@@ -19,12 +19,11 @@ public class OrganizationForm extends FormLayout {
     private TextField shortName;
     private ComboBox<OrganizationUnitType> type;
 
-    public OrganizationForm(boolean readOnly, OrganizationService service) {
+    public OrganizationForm(OrganizationService service) {
         super();
         this.service = service;
         data();
         this.add(country, name, code, shortName, type, description);
-        this.setReadOnly(readOnly);
     }
 
     private void data() {
