@@ -2,13 +2,16 @@ package uz.uat.mro.app.views.organization;
 
 import org.vaadin.lineawesome.LineAwesomeIcon;
 
+import com.vaadin.flow.component.Text;
 import com.vaadin.flow.component.applayout.AppLayout;
 import com.vaadin.flow.component.applayout.DrawerToggle;
+import com.vaadin.flow.component.html.Anchor;
 import com.vaadin.flow.component.html.Footer;
 import com.vaadin.flow.component.html.H1;
 import com.vaadin.flow.component.html.H2;
 import com.vaadin.flow.component.html.Header;
 import com.vaadin.flow.component.icon.VaadinIcon;
+import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.component.orderedlayout.Scroller;
 import com.vaadin.flow.component.sidenav.SideNav;
 import com.vaadin.flow.component.sidenav.SideNavItem;
@@ -43,16 +46,21 @@ public class OrganizationLayout extends AppLayout {
 
         Scroller scroller = new Scroller(createNavigation());
 
-        addToDrawer(header, scroller, createFooter());
+        Anchor home = new Anchor("organizations", VaadinIcon.HOME.create(), new Text("Организации"));
+        HorizontalLayout div = new HorizontalLayout(home);
+
+        addToDrawer(header, div, scroller, createFooter());
     }
 
     private SideNav createNavigation() {
         SideNav nav = new SideNav();
-        SideNavItem menu = new SideNavItem("Организации меню", OrganizationsView.class, LineAwesomeIcon.HOME_SOLID.create());
+        // SideNavItem menu = new SideNavItem("Организации меню",
+        // OrganizationsView.class, LineAwesomeIcon.HOME_SOLID.create());
         SideNavItem org = new SideNavItem("Организация", OrganizationView.class, LineAwesomeIcon.BUILDING.create());
         SideNavItem structure = new SideNavItem("Орг. Структуры", StructuresView.class, VaadinIcon.STAR.create());
         SideNavItem employee = new SideNavItem("Сотрудники", EmployeesView.class, LineAwesomeIcon.USERS_SOLID.create());
-        nav.addItem(menu, org, structure, employee);
+        nav.addItem(// menu,
+                org, structure, employee);
         return nav;
     }
 

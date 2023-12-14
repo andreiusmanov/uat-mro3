@@ -100,4 +100,5 @@ public class OrganizationView extends VerticalLayout {
         this.menu.setEnabled(enabled);
     }
 
+
 }

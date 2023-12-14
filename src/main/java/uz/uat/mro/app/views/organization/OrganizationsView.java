@@ -77,7 +77,7 @@ public class OrganizationsView extends VerticalLayout {
 
         viewItem = menu.addItem("Обзор", " Просмотреть данные об организации", click -> {
             MyUtils.setAttribute(Keys.ORGANIZATION, organization);
-            UI.getCurrent().navigate(OrganizationView2.class);
+            UI.getCurrent().navigate(OrganizationView.class);
         });
 
         facilitiesItem = menu.addItem("Объекты", " Просмотреть данные об объектах организации", click -> {
@@ -93,7 +93,7 @@ public class OrganizationsView extends VerticalLayout {
         addItem = specialItem.getSubMenu().addItem("Добавить");
         addItem.addClickListener(click -> {
             MyUtils.setAttribute(Keys.PROJECT, new OrganizationUnit());
-            UI.getCurrent().navigate(OrganizationView2.class);
+            UI.getCurrent().navigate(OrganizationView.class);
         });
         deleteItem = specialItem.getSubMenu().addItem("Удалить");
         deleteItem.addClickListener(click -> {
