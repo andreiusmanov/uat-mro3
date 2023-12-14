@@ -9,9 +9,10 @@ import com.vaadin.flow.router.Route;
 
 import uz.uat.mro.app.model.terms.common.Currency;
 import uz.uat.mro.app.model.terms.common.services.CurrencyService;
+import uz.uat.mro.app.views.MainLayout;
 
 @PageTitle(value = "Валюты")
-@Route(value = "common/currencies", layout = CommonLayout.class)
+@Route(value = "common/currencies", layout = MainLayout.class)
 public class CurrenciesView extends VerticalLayout {
     private CurrencyService service;
     private GridCrud<Currency> grid;

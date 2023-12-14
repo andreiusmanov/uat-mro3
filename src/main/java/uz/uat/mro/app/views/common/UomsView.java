@@ -15,9 +15,10 @@ import com.vaadin.flow.router.Route;
 import uz.uat.mro.app.model.terms.common.Uom;
 import uz.uat.mro.app.model.terms.common.UomType;
 import uz.uat.mro.app.model.terms.common.services.UomService;
+import uz.uat.mro.app.views.MainLayout;
 
 @PageTitle(value = "Ед. измерения")
-@Route(value = "common/uoms", layout = CommonLayout.class)
+@Route(value = "common/uoms", layout = MainLayout.class)
 public class UomsView extends VerticalLayout {
     private UomService service;
     private GridCrud<Uom> crud;

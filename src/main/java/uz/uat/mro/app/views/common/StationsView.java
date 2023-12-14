@@ -15,9 +15,10 @@ import com.vaadin.flow.router.Route;
 import uz.uat.mro.app.model.terms.common.Country;
 import uz.uat.mro.app.model.terms.common.Station;
 import uz.uat.mro.app.model.terms.common.services.StationService;
+import uz.uat.mro.app.views.MainLayout;
 
 @PageTitle(value = "Станции")
-@Route(value = "common/stations", layout = CommonLayout.class)
+@Route(value = "common/stations", layout = MainLayout.class)
 public class StationsView extends VerticalLayout {
     private StationService service;
     private GridCrud<Station> crud;

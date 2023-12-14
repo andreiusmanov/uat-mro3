@@ -3,26 +3,25 @@ package uz.uat.mro.app.views.common;
 import org.vaadin.crudui.crud.impl.GridCrud;
 import org.vaadin.crudui.form.CrudFormFactory;
 
-import com.vaadin.flow.component.html.H3;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.router.PageTitle;
 import com.vaadin.flow.router.Route;
 
 import uz.uat.mro.app.model.terms.common.Country;
 import uz.uat.mro.app.model.terms.common.services.CountriesService;
+import uz.uat.mro.app.views.MainLayout;
 
 @PageTitle(value = "Страны")
-@Route(value = "common/countries", layout = CommonLayout.class)
+@Route(value = "common/countries", layout = MainLayout.class)
 public class CountriesView extends VerticalLayout {
     private CountriesService service;
     private GridCrud<Country> crud;
 
-    
     public CountriesView(CountriesService service) {
         this.service = service;
         grid();
         add(crud);
-        //add(new H3("Страны"), crud);
+        // add(new H3("Страны"), crud);
     }
 
     private void grid() {

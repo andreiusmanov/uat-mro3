@@ -17,6 +17,14 @@ import com.vaadin.flow.theme.lumo.LumoUtility;
 
 import uz.uat.mro.app.views.about.AboutView;
 import uz.uat.mro.app.views.common.CommonsView;
+import uz.uat.mro.app.views.common.CountriesView;
+import uz.uat.mro.app.views.common.CurrenciesView;
+import uz.uat.mro.app.views.common.MaintenancesView;
+import uz.uat.mro.app.views.common.OrganizationUnitNamesView;
+import uz.uat.mro.app.views.common.StationsView;
+import uz.uat.mro.app.views.common.UomTypesView;
+import uz.uat.mro.app.views.common.UomsView;
+import uz.uat.mro.app.views.common.WorkDaysView;
 import uz.uat.mro.app.views.organization.OrganizationsView;
 import uz.uat.mro.app.views.start.StartView;
 
@@ -39,7 +47,6 @@ public class MainLayout extends AppLayout {
 
         viewTitle = new H2();
         viewTitle.addClassNames(LumoUtility.FontSize.LARGE, LumoUtility.Margin.NONE);
-
         addToNavbar(true, toggle, viewTitle);
     }
 
@@ -55,13 +62,27 @@ public class MainLayout extends AppLayout {
 
     private SideNav createNavigation() {
         SideNav nav = new SideNav();
+        SideNavItem start = new SideNavItem("Start", StartView.class, LineAwesomeIcon.LIST_SOLID.create());
+        SideNavItem about = new SideNavItem("About", AboutView.class, LineAwesomeIcon.FILE.create());
+        SideNavItem terms = new SideNavItem("Общие данные", CommonsView.class, VaadinIcon.OFFICE.create());
+        terms.setPrefixComponent(VaadinIcon.BOOK.create());
+        SideNavItem countries = new SideNavItem("Страны", CountriesView.class,
+                LineAwesomeIcon.GLOBE_ASIA_SOLID.create());
+        SideNavItem stations = new SideNavItem("Станции", StationsView.class, LineAwesomeIcon.MAP.create());
+        SideNavItem currencies = new SideNavItem("Валюты", CurrenciesView.class,
+                LineAwesomeIcon.MONEY_BILL_ALT.create());
+        SideNavItem maintenance = new SideNavItem("Виды работ", MaintenancesView.class,
+                LineAwesomeIcon.MONEY_BILL_ALT.create());
+        SideNavItem unitTypes = new SideNavItem("Типы подразделений", OrganizationUnitNamesView.class,
+                VaadinIcon.AIRPLANE.create());
+        SideNavItem uomTypes = new SideNavItem("Виды Ед. измерения", UomTypesView.class,
+                LineAwesomeIcon.FEMALE_SOLID.create());
+        SideNavItem uoms = new SideNavItem("Ед. измерения", UomsView.class, LineAwesomeIcon.FEMALE_SOLID.create());
+        SideNavItem calendar = new SideNavItem("Календарь", WorkDaysView.class, LineAwesomeIcon.FEMALE_SOLID.create());
 
-        nav.addItem(new SideNavItem("Start", StartView.class, LineAwesomeIcon.LIST_SOLID.create()));
-        nav.addItem(new SideNavItem("About", AboutView.class, LineAwesomeIcon.FILE.create()));
-        nav.addItem(new SideNavItem("Общие данные", CommonsView.class, VaadinIcon.OFFICE.create()));
-        
-        nav.addItem(new SideNavItem("Организации", OrganizationsView.class, VaadinIcon.OFFICE.create()));
-        
+        terms.addItem(countries, stations, currencies, maintenance, unitTypes, uomTypes, uoms, calendar);
+        SideNavItem org = new SideNavItem("Организации", OrganizationsView.class, VaadinIcon.OFFICE.create());
+        nav.addItem(start, about, terms, org);
         return nav;
     }
 

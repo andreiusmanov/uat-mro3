@@ -13,9 +13,10 @@ import com.vaadin.flow.router.Route;
 
 import uz.uat.mro.app.model.terms.common.Maintenance;
 import uz.uat.mro.app.model.terms.common.services.MaintenanceService;
+import uz.uat.mro.app.views.MainLayout;
 
 @PageTitle(value = "Виды работ")
-@Route(value = "common/maintenances", layout = CommonLayout.class)
+@Route(value = "common/maintenances", layout = MainLayout.class)
 public class MaintenancesView extends VerticalLayout {
     private MaintenanceService service;
     private GridCrud<Maintenance> crud;
