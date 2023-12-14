@@ -29,25 +29,17 @@ public class OrganizationStructureView extends VerticalLayout {
     private OrganizationStructure structure;
     private TabSheet tabSheet;
     private Grid<OrganizationUnit> grid;
-    private MenuBar menu;
+    private OrganizationUnit organizationUnit;
+    private MenuItem findItem;
+    private MenuItem addItem;
+    private MenuItem editItem;
+    private MenuItem deleteItem;
 
     public OrganizationStructureView(StructureService service) {
         this.service = service;
         this.structure = (OrganizationStructure) MyUtils.getAttribute(Keys.STRUCTURE);
         tabs();
-        menu();
-        add(menu, tabSheet);
-
-    }
-
-    private void menu() {
-        menu = new MenuBar();
-        menu.addThemeVariants(MenuBarVariant.LUMO_TERTIARY);
-        MenuItem home = menu.addItem("Организация");
-        home.addClickListener(click -> {
-            UI.getCurrent().navigate(OrganizationStructuresView.class);
-        });
-
+        add(tabSheet);
     }
 
     private void tabs() {
@@ -64,18 +56,21 @@ public class OrganizationStructureView extends VerticalLayout {
 
         MenuBar menu = new MenuBar();
         menu.addThemeVariants(MenuBarVariant.LUMO_TERTIARY);
-        menu.addItem(VaadinIcon.HOME_O.create());
-        menu.addItem("Добавить", "Добавить орг. структуру", click -> {
+        menu.addItem(VaadinIcon.HOME_O.create(), click -> {
+            UI.getCurrent().navigate(OrganizationStructuresView.class);
+        });
+
+        findItem = menu.addItem("Показать", "Показать орг. структуру", click -> {
+            Notification.show("Показать");
+        });
+        addItem = menu.addItem("Добавить", "Добавить орг. структуру", click -> {
             Notification.show("Добавить");
         });
-        menu.addItem("Редактировать", "Редактировать орг. структуру", click -> {
+        editItem = menu.addItem("Редактировать", "Редактировать орг. структуру", click -> {
             Notification.show("Редактировать");
         });
-        menu.addItem("Удалить", "Удалить орг. структуру", click -> {
+        deleteItem = menu.addItem("Удалить", "Удалить орг. структуру", click -> {
             Notification.show("Удалить");
-        });
-        menu.addItem("Показать", "Показать орг. структуру", click -> {
-            Notification.show("Показать");
         });
 
         Grid<OrganizationUnit> grid = new Grid<>(OrganizationUnit.class);
@@ -86,7 +81,13 @@ public class OrganizationStructureView extends VerticalLayout {
         grid.getColumnByKey("name").setHeader("Наименование");
         grid.getColumnByKey("description").setHeader("Описание");
 
-        v.add(lo, grid);
+        grid.getSelectionModel().addSelectionListener(selected -> {
+            this.editItem.setEnabled(grid.getSelectedItems().isEmpty());
+            this.deleteItem.setEnabled(grid.getSelectedItems().isEmpty());
+            this.organizationUnit = grid.getSelectionModel().getFirstSelectedItem().orElse(null);
+        });
+
+        v.add(lo, menu, grid);
         return v;
     }
 
@@ -95,7 +96,6 @@ public class OrganizationStructureView extends VerticalLayout {
         VerticalLayout v = new VerticalLayout();
 
         Div picture = new Div(new Image("https://randomuser.me/api/portraits/men/76.jpg", ""));
-        // Grid<OrganizationUnit> grid = new Grid<>(OrganizationUnit.class);
         v.add(lo, picture);
         return v;
     }
