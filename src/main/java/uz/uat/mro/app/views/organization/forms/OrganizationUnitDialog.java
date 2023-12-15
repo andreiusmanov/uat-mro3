@@ -1,7 +1,5 @@
 package uz.uat.mro.app.views.organization.forms;
 
-import java.time.LocalDate;
-
 import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.dialog.Dialog;
 import com.vaadin.flow.component.html.H3;
@@ -26,16 +24,7 @@ public class OrganizationUnitDialog extends Dialog {
     private Button saveButton;
     private Button cancelButton;
     private Button deleteButton;
-    private LocalDate startDate;
-    private LocalDate endDate;
-    private boolean active;
-
-    /**
-     * Конструктор новый отдел, новыя связь с master подразделением/организацией
-     * 
-     * @param service
-     * @param hasUnit
-     */
+    private boolean readOnly;
 
     /**
      * конструктор для редактирования и удаления связки между master и subordinate
@@ -44,9 +33,9 @@ public class OrganizationUnitDialog extends Dialog {
      * @param service
      * @param hasUnit
      */
-    public OrganizationUnitDialog(OrganizationService service, HasOrganizationUnit hasUnit) {
+    public OrganizationUnitDialog(OrganizationService service, HasOrganizationUnit hasUnit, boolean readOnly) {
         super();
-        
+
         this.service = service;
         this.master = hasUnit.getMaster();
         this.subordinate = new OrganizationUnit();
@@ -59,16 +48,16 @@ public class OrganizationUnitDialog extends Dialog {
         buttons();
         add(form, new HorizontalLayout(saveButton, cancelButton, deleteButton));
     }
-/**
+
+    /**
      * конструктор для создания связки между master и subordinate
      * units
      * 
      * @param service
      * @param hasUnit
      */
-    public OrganizationUnitDialog(OrganizationService service, OrganizationUnit organization) {
+    public OrganizationUnitDialog(OrganizationService service, OrganizationUnit organization, boolean readOnly) {
         super();
-        //this.getHeader().add(new H3("Подразделение " + master.getShortName()));
         this.service = service;
         this.master = organization;
         this.subordinate = new OrganizationUnit();
@@ -83,11 +72,11 @@ public class OrganizationUnitDialog extends Dialog {
         form();
         data();
         buttons();
-        add(form, new HorizontalLayout(saveButton, cancelButton, deleteButton));
+        add(form, new HorizontalLayout(saveButton, cancelButton));
     }
 
     private void form() {
-        this.form = new OrganizationUnitForm(true, service);
+        this.form = new OrganizationUnitForm(readOnly, service);
     }
 
     private void buttons() {

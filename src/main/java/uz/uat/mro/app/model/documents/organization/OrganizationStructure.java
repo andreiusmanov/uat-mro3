@@ -17,7 +17,7 @@ public class OrganizationStructure {
     private String id;
     @ArangoId
     private String arangoId;
-    @Ref(lazy = true)
+    @Ref(lazy = false)
     private OrganizationUnit organization;
     private LocalDate startDate;
     private LocalDate endDate;

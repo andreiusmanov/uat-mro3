@@ -43,13 +43,17 @@ public class OrganizationLayout extends AppLayout {
         H1 appName = new H1("UAT MRO");
         appName.addClassNames(LumoUtility.FontSize.LARGE, LumoUtility.Margin.NONE);
         Header header = new Header(appName);
-
+        SideNav altNavigation = createAltNavigation();
         Scroller scroller = new Scroller(createNavigation());
 
-        Anchor home = new Anchor("organizations", VaadinIcon.HOME.create(), new Text("Организации"));
-        HorizontalLayout div = new HorizontalLayout(home);
+        addToDrawer(header, altNavigation, scroller, createFooter());
+    }
 
-        addToDrawer(header, div, scroller, createFooter());
+    private SideNav createAltNavigation() {
+        SideNav nav = new SideNav();
+        SideNavItem home = new SideNavItem("Организации", OrganizationsView.class, VaadinIcon.HOME_O.create());
+        nav.addItem(home);
+        return nav;
     }
 
     private SideNav createNavigation() {
@@ -57,10 +61,10 @@ public class OrganizationLayout extends AppLayout {
         // SideNavItem menu = new SideNavItem("Организации меню",
         // OrganizationsView.class, LineAwesomeIcon.HOME_SOLID.create());
         SideNavItem org = new SideNavItem("Организация", OrganizationView.class, LineAwesomeIcon.BUILDING.create());
-        SideNavItem structure = new SideNavItem("Орг. Структуры", OrganizationStructuresView.class, VaadinIcon.STAR.create());
+        SideNavItem structure = new SideNavItem("Орг. Структуры", OrganizationStructuresView.class,
+                VaadinIcon.STAR.create());
         SideNavItem employee = new SideNavItem("Сотрудники", EmployeesView.class, LineAwesomeIcon.USERS_SOLID.create());
-        nav.addItem(// menu,
-                org, structure, employee);
+        nav.addItem(org, structure, employee);
         return nav;
     }
 

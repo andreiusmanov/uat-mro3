@@ -47,7 +47,7 @@ public class OrganizationUnitsView extends VerticalLayout {
     }
 
     private void dialog() {
-        this.dialog = new OrganizationUnitDialog(service, organization);
+        this.dialog = new OrganizationUnitDialog(service, organization, false);
         dialog.addDialogCloseActionListener(event -> {
             grid.getDataProvider().refreshAll();
         });
@@ -55,7 +55,7 @@ public class OrganizationUnitsView extends VerticalLayout {
     }
 
     private void dialogNew() {
-        this.dialog = new OrganizationUnitDialog(service, organization);
+        this.dialog = new OrganizationUnitDialog(service, organization, false);
         dialog.addDialogCloseActionListener(event -> {
             grid.getDataProvider().refreshAll();
         });
