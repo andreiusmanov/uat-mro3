@@ -28,7 +28,7 @@ import uz.uat.mro.app.views.organization.forms.OrganizationUnitDialog;
 @PageTitle(value = "Орг. Структура")
 @Route(value = "org-structure")
 public class OrganizationStructureView extends VerticalLayout {
-    private StructureService service;
+    // private StructureService service;
     private OrganizationService service2;
     private OrganizationStructure structure;
     private TabSheet tabSheet;
@@ -46,7 +46,7 @@ public class OrganizationStructureView extends VerticalLayout {
     private OrganizationUnitDialog dialog;
 
     public OrganizationStructureView(StructureService service, OrganizationService service2) {
-        this.service = service;
+        // this.service = service;
         this.service2 = service2;
         this.structure = (OrganizationStructure) MyUtils.getAttribute(Keys.STRUCTURE);
         this.organization = structure.getOrganization();
@@ -62,17 +62,17 @@ public class OrganizationStructureView extends VerticalLayout {
         });
 
         findItem = menu.addItem("Показать", "Показать орг. структуру", click -> {
-            dialog();
+            editDialog();
             dialog.open();
             Notification.show("Показать");
         });
         addItem = menu.addItem("Добавить", "Добавить орг. структуру", click -> {
-            dialogNew();
+            newDialog();
             dialog.open();
             Notification.show("Добавить");
         });
         editItem = menu.addItem("Редактировать", "Редактировать орг. структуру", click -> {
-            dialog();
+            editDialog();
             dialog.open();
             Notification.show("Редактировать");
         });
@@ -95,17 +95,25 @@ public class OrganizationStructureView extends VerticalLayout {
         // filter
         dataView = grid.getListDataView();
 
+        this.findItem.setEnabled(false);
+        this.editItem.setEnabled(false);
+        this.deleteItem.setEnabled(false);
+
         // listener
         grid.getSelectionModel().addSelectionListener(selected -> {
             boolean res = grid.getSelectionModel().getFirstSelectedItem().isPresent();
             if (res) {
                 this.hasUnit = grid.getSelectionModel().getFirstSelectedItem().get();
                 this.selectedUnit = hasUnit.getSubordinate();
-                this.editItem.setEnabled(true);
-                this.deleteItem.setEnabled(true);
+                this.findItem.setEnabled(res);
+                this.editItem.setEnabled(res);
+                this.deleteItem.setEnabled(res);
             } else {
                 HasOrganizationUnit emptyHasUnit = new HasOrganizationUnit();
                 emptyHasUnit.setMaster(organization);
+                this.findItem.setEnabled(!res);
+                this.editItem.setEnabled(!res);
+                this.deleteItem.setEnabled(!res);
             }
         });
     }
@@ -137,15 +145,15 @@ public class OrganizationStructureView extends VerticalLayout {
         return v;
     }
 
-    private void dialog() {
-        this.dialog = OrganizationUnitDialog.editOrganizationUnit(service2, selectedUnit, false);
+    private void editDialog() {
+        this.dialog = OrganizationUnitDialog.editOrganizationUnit(service2, selectedUnit, true);
         dialog.addDialogCloseActionListener(event -> {
             grid.getDataProvider().refreshAll();
         });
         this.dialog.open();
     }
 
-    private void dialogNew() {
+    private void newDialog() {
         this.dialog = OrganizationUnitDialog.createOrganizationUnit(service2, hasUnit);
         dialog.addDialogCloseActionListener(event -> {
             grid.getDataProvider().refreshAll();

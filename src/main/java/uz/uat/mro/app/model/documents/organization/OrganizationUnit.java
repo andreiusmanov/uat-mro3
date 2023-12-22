@@ -1,5 +1,6 @@
 package uz.uat.mro.app.model.documents.organization;
 
+import java.time.LocalDate;
 import java.util.Collection;
 
 import org.springframework.data.annotation.Id;
@@ -27,6 +28,9 @@ public class OrganizationUnit {
     private String code;
     private String description;
     private String shortName;
+    private LocalDate startDate;
+    private LocalDate endDate;
+    private boolean active;
     @Ref(lazy = false)
     private OrganizationUnitType type;
     @Relations(edges = HasOrganizationUnit.class, lazy = true)
