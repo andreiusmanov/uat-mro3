@@ -33,7 +33,7 @@ public class OrganizationUnitDialog extends Dialog {
      * @param service
      * @param hasUnit
      */
-    public OrganizationUnitDialog(OrganizationService service, HasOrganizationUnit hasUnit, boolean readOnly) {
+    private OrganizationUnitDialog(OrganizationService service, HasOrganizationUnit hasUnit) {
         super();
 
         this.service = service;
@@ -56,7 +56,7 @@ public class OrganizationUnitDialog extends Dialog {
      * @param service
      * @param hasUnit
      */
-    public OrganizationUnitDialog(OrganizationService service, OrganizationUnit organization, boolean readOnly) {
+    private OrganizationUnitDialog(OrganizationService service, OrganizationUnit organization, boolean readOnly) {
         super();
         this.service = service;
         this.master = organization;
@@ -77,6 +77,15 @@ public class OrganizationUnitDialog extends Dialog {
 
     private void form() {
         this.form = new OrganizationUnitForm(readOnly, service);
+    }
+
+    public static OrganizationUnitDialog editOrganizationUnit(OrganizationService service, OrganizationUnit organization,
+            boolean readOnly) {
+        return new OrganizationUnitDialog(service, organization, readOnly);
+    }
+
+    public static OrganizationUnitDialog createOrganizationUnit(OrganizationService service, HasOrganizationUnit hasUnit) {
+        return new OrganizationUnitDialog(service, hasUnit);
     }
 
     private void buttons() {
@@ -121,7 +130,7 @@ public class OrganizationUnitDialog extends Dialog {
     private void data() {
         this.binder = new Binder<>(HasOrganizationUnit.class);
         binder.setBean(hasUnit);
-        binder.bindInstanceFields(form);
+       // binder.bindInstanceFields(form);
 
         this.binder2 = new Binder<>(OrganizationUnit.class);
         binder2.setBean(subordinate);

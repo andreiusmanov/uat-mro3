@@ -100,7 +100,7 @@ public class OrganizationStructureView extends VerticalLayout {
             boolean res = grid.getSelectionModel().getFirstSelectedItem().isPresent();
             if (res) {
                 this.hasUnit = grid.getSelectionModel().getFirstSelectedItem().get();
-                this.selectedUnit = hasUnit.getMaster();
+                this.selectedUnit = hasUnit.getSubordinate();
                 this.editItem.setEnabled(true);
                 this.deleteItem.setEnabled(true);
             } else {
@@ -138,7 +138,7 @@ public class OrganizationStructureView extends VerticalLayout {
     }
 
     private void dialog() {
-        this.dialog = new OrganizationUnitDialog(service2, organizationUnit, false);
+        this.dialog = OrganizationUnitDialog.editOrganizationUnit(service2, selectedUnit, false);
         dialog.addDialogCloseActionListener(event -> {
             grid.getDataProvider().refreshAll();
         });
@@ -146,7 +146,7 @@ public class OrganizationStructureView extends VerticalLayout {
     }
 
     private void dialogNew() {
-        this.dialog = new OrganizationUnitDialog(service2, organizationUnit, false);
+        this.dialog = OrganizationUnitDialog.createOrganizationUnit(service2, hasUnit);
         dialog.addDialogCloseActionListener(event -> {
             grid.getDataProvider().refreshAll();
         });
