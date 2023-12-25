@@ -23,7 +23,7 @@ public class OrganizationUnitForm extends FormLayout {
     private DatePicker endDate;
     private Checkbox active;
 
-    public OrganizationUnitForm(boolean readOnly, OrganizationService service) {
+    public OrganizationUnitForm(OrganizationService service, boolean readOnly ) {
         super();
         this.service = service;
         data();

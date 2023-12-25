@@ -86,7 +86,7 @@ public class OrganizationUnitDialog extends Dialog {
     }
 
     private void form() {
-        this.form = new OrganizationUnitForm(readOnly, service);
+        this.form = new OrganizationUnitForm( service, readOnly);
     }
 
     public static OrganizationUnitDialog editOrganizationUnit(OrganizationService service,
@@ -112,8 +112,8 @@ public class OrganizationUnitDialog extends Dialog {
 
     private void delete() {
         try {
-            service.delete(subordinate);
             service.deleteHasUnit(hasUnit);
+            service.delete(subordinate);
         } catch (Exception e) {
             // TODO: handle exception
         }
