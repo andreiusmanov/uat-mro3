@@ -77,10 +77,13 @@ public class OrganizationView extends VerticalLayout {
 
     private void save() {
         try {
-            service.save(binder.getBean());
+            binder.writeBeanIfValid(organization);
+            OrganizationUnit unit = binder.getBean();
+            service.save(unit);
             Notification.show("Запись " + organization.getName() + " сохранена", 5000, Position.MIDDLE);
         } catch (Exception e) {
-            Notification.show(e.getMessage());
+            e.getCause();
+            // Notification.show(e.getMessage());
         }
     }
 
