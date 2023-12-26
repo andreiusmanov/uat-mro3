@@ -18,13 +18,12 @@ public class NewOrgUnitDialog extends Dialog {
     private Button cancelButton;
     private boolean readOnly;
 
-    /**
-     * конструктор для редактирования и удаления связки между master и subordinate
-     * units
-     * 
-     * @param service
-     * @param hasUnit
-     */
+/**
+ * 
+ * @param service
+ * @param master
+ * @param isReadOnly
+ */
     public NewOrgUnitDialog(StructureService service, OrganizationUnit master, boolean isReadOnly) {
         super();
         this.service = service;

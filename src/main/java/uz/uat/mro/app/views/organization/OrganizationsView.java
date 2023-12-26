@@ -71,11 +71,12 @@ public class OrganizationsView extends VerticalLayout {
             return combo;
         });
         button();
-        crud.getContent().add(viewButton);
+        crud.getCrudLayout().addToolbarComponent(viewButton);
     }
 
     private void button() {
         this.viewButton = new Button("Обзор");
+        this.viewButton.setEnabled(false);
         viewButton.addClickListener(click -> {
             MyUtils.setAttribute(Keys.ORGANIZATION, organization);
             UI.getCurrent().navigate(OrganizationView.class);

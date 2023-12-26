@@ -20,7 +20,7 @@ public class NewOrganizationForm extends FormLayout {
     private StructureService service;
     private boolean isReadOnly;
 
-    private OrganizationUnit master;
+    private final OrganizationUnit master;
     private OrganizationUnit subordinate;
     private HasOrganizationUnit hasUnit;
     private DatePicker startDate;
@@ -37,7 +37,7 @@ public class NewOrganizationForm extends FormLayout {
 
     private ComboBox<OrganizationUnitType> type;
 
-    public NewOrganizationForm(StructureService service, OrganizationUnit master, boolean readOnly) {
+    public NewOrganizationForm(StructureService service, final OrganizationUnit master, boolean readOnly) {
         this.service = service;
         this.master = master;
         this.subordinate = new OrganizationUnit();
@@ -92,6 +92,7 @@ public class NewOrganizationForm extends FormLayout {
             throw e;
         }
     }
+
     protected void cancel() {
         try {
             service.saveUnit(binderUnit.getBean());
