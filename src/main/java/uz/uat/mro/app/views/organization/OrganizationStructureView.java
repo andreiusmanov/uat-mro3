@@ -16,25 +16,22 @@ import com.vaadin.flow.component.tabs.TabSheet;
 import com.vaadin.flow.router.PageTitle;
 import com.vaadin.flow.router.Route;
 
-import uz.uat.mro.app.model.documents.organization.OrganizationService;
 import uz.uat.mro.app.model.documents.organization.OrganizationStructure;
 import uz.uat.mro.app.model.documents.organization.OrganizationUnit;
 import uz.uat.mro.app.model.documents.organization.StructureService;
 import uz.uat.mro.app.model.documents.organization.edges.HasOrganizationUnit;
 import uz.uat.mro.app.utils.Keys;
 import uz.uat.mro.app.utils.MyUtils;
-import uz.uat.mro.app.views.organization.forms.OrganizationUnitDialog;
+import uz.uat.mro.app.views.organization.forms.NewOrgUnitDialog;
 
 @PageTitle(value = "Орг. Структура")
 @Route(value = "org-structure")
 public class OrganizationStructureView extends VerticalLayout {
-    // private StructureService service;
-    private OrganizationService service2;
+    private StructureService service;
     private OrganizationStructure structure;
     private TabSheet tabSheet;
     private Grid<HasOrganizationUnit> grid;
     private OrganizationUnit organization;
-    private OrganizationUnit organizationUnit;
     private MenuBar menu;
     private MenuItem findItem;
     private MenuItem addItem;
@@ -43,11 +40,10 @@ public class OrganizationStructureView extends VerticalLayout {
     private HasOrganizationUnit hasUnit;
     private GridListDataView<HasOrganizationUnit> dataView;
     private OrganizationUnit selectedUnit;
-    private OrganizationUnitDialog dialog;
+    private NewOrgUnitDialog newDialog;
 
-    public OrganizationStructureView(StructureService service, OrganizationService service2) {
-        // this.service = service;
-        this.service2 = service2;
+    public OrganizationStructureView(StructureService service) {
+        this.service = service;
         this.structure = (OrganizationStructure) MyUtils.getAttribute(Keys.STRUCTURE);
         this.organization = structure.getOrganization();
         tabs();
@@ -63,17 +59,18 @@ public class OrganizationStructureView extends VerticalLayout {
 
         findItem = menu.addItem("Показать", "Показать орг. структуру", click -> {
             editDialog();
-            dialog.open();
+            newDialog.open();
             Notification.show("Показать");
         });
         addItem = menu.addItem("Добавить", "Добавить орг. структуру", click -> {
             newDialog();
-            dialog.open();
-            Notification.show("Добавить");
+            newDialog.open();
+            Notification.show("Клик кнопка Добавить");
         });
+
         editItem = menu.addItem("Редактировать", "Редактировать орг. структуру", click -> {
             editDialog();
-            dialog.open();
+            newDialog.open();
             Notification.show("Редактировать");
         });
         deleteItem = menu.addItem("Удалить", "Удалить орг. структуру", click -> {
@@ -83,7 +80,7 @@ public class OrganizationStructureView extends VerticalLayout {
 
     private void grid() {
         this.grid = new Grid<>(HasOrganizationUnit.class);
-        this.grid.setItems(service2.findOrganizationUnits(organization));
+        this.grid.setItems(service.findOrganizationUnits(organization));
         this.grid.setColumns("subordinate.name", "subordinate.code", "subordinate.shortName", "subordinate.description",
                 "active");
         this.grid.getColumnByKey("subordinate.name").setHeader("Наименование");
@@ -104,13 +101,12 @@ public class OrganizationStructureView extends VerticalLayout {
             boolean res = grid.getSelectionModel().getFirstSelectedItem().isPresent();
             if (res) {
                 this.hasUnit = grid.getSelectionModel().getFirstSelectedItem().get();
-                this.selectedUnit = hasUnit.getSubordinate();
+                this.selectedUnit = hasUnit.getMaster();
                 this.findItem.setEnabled(res);
                 this.editItem.setEnabled(res);
                 this.deleteItem.setEnabled(res);
             } else {
-                HasOrganizationUnit emptyHasUnit = new HasOrganizationUnit();
-                emptyHasUnit.setMaster(organization);
+                this.selectedUnit = organization;
                 this.findItem.setEnabled(!res);
                 this.editItem.setEnabled(!res);
                 this.deleteItem.setEnabled(!res);
@@ -146,18 +142,18 @@ public class OrganizationStructureView extends VerticalLayout {
     }
 
     private void editDialog() {
-        this.dialog = OrganizationUnitDialog.editOrganizationUnit(service2, selectedUnit, true);
-        dialog.addDialogCloseActionListener(event -> {
+        this.newDialog = new NewOrgUnitDialog(service, selectedUnit, false);
+        newDialog.addDialogCloseActionListener(event -> {
             grid.getDataProvider().refreshAll();
         });
-        this.dialog.open();
+        this.newDialog.open();
     }
 
     private void newDialog() {
-        this.dialog = OrganizationUnitDialog.createOrganizationUnit(service2, hasUnit);
-        dialog.addDialogCloseActionListener(event -> {
+        this.newDialog = new NewOrgUnitDialog(service, selectedUnit, false);
+        newDialog.addDialogCloseActionListener(event -> {
             grid.getDataProvider().refreshAll();
         });
-        this.dialog.open();
+        this.newDialog.open();
     }
 }

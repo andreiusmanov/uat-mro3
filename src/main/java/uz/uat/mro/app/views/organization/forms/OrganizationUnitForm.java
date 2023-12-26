@@ -23,6 +23,10 @@ public class OrganizationUnitForm extends FormLayout {
     private DatePicker endDate;
     private Checkbox active;
 
+
+
+    
+
     public OrganizationUnitForm(OrganizationService service, boolean readOnly ) {
         super();
         this.service = service;
@@ -52,14 +56,16 @@ public class OrganizationUnitForm extends FormLayout {
     }
 
     private void setReadOnly(boolean readOnly) {
-        name.setReadOnly(readOnly);
-        code.setReadOnly(readOnly);
-        shortName.setReadOnly(readOnly);
-        type.setReadOnly(readOnly);
-        description.setReadOnly(readOnly);
-        startDate.setReadOnly(readOnly);
-        endDate.setReadOnly(readOnly);
-        active.setReadOnly(readOnly);
+        // name.setReadOnly(readOnly);
+        // code.setReadOnly(readOnly);
+        // shortName.setReadOnly(readOnly);
+        // type.setReadOnly(readOnly);
+        // description.setReadOnly(readOnly);
+        // startDate.setReadOnly(readOnly);
+        // endDate.setReadOnly(readOnly);
+        // active.setReadOnly(readOnly);
+
+        this.setReadOnly(readOnly);
     }
 
 }
