@@ -24,7 +24,7 @@ public class OrganizationStructureView extends VerticalLayout {
     public OrganizationStructureView(StructureService service) {
         this.service = service;
         this.structure = (OrganizationStructure) MyUtils.getAttribute(Keys.STRUCTURE);
-        this.organization = structure.getOrganization();
+        this.organization = (OrganizationUnit) MyUtils.getAttribute(Keys.ORGANIZATION);
         tabs();
         add(tabSheet);
     }

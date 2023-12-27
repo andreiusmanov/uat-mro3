@@ -35,6 +35,7 @@ public class StructureListView extends VerticalLayout {
     public StructureListView(StructureService service, OrganizationUnit organization) {
         this.service = service;
         this.organization = organization;
+        this.selectedUnit = organization;
         header();
         menu();
         grid();
@@ -93,7 +94,7 @@ public class StructureListView extends VerticalLayout {
         dataView = grid.getListDataView();
 
         // listener
-        grid.getSelectionModel().addSelectionListener(selected -> {
+        grid.getSelectionModel().addSelectionListener(event -> {
             boolean res = !grid.getSelectedItems().isEmpty();
             enabledMenuItems(res);
             if (res) {

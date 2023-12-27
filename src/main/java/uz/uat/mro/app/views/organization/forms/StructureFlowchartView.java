@@ -8,6 +8,7 @@ public class StructureFlowchartView extends VerticalLayout {
 
     public StructureFlowchartView() {
         header();
+        add(header);
     }
 
     private void header() {

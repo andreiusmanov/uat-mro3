@@ -38,6 +38,7 @@ public class OrganizationStructuresView extends VerticalLayout {
         this.reviewButton = new Button("Обзор");
         this.reviewButton.addClickListener(click -> {
             MyUtils.setAttribute(Keys.STRUCTURE, structure);
+            MyUtils.setAttribute(Keys.ORGANIZATION, organization);
             UI.getCurrent().navigate(OrganizationStructureView.class);
         });
         reviewButton.setEnabled(false);

@@ -27,15 +27,21 @@ public class StructureService {
     public OrganizationUnit saveUnit(OrganizationUnit unit) {
         return unitRepo.save(unit);
     }
-    
+
     public HasOrganizationUnit saveHasUnit(HasOrganizationUnit hasUnit) {
         return hasUnitRepo.save(hasUnit);
     }
 
-    public List<HasOrganizationUnit> findOrganizationUnits(OrganizationUnit unit){
+    public List<HasOrganizationUnit> findOrganizationUnits(OrganizationUnit unit) {
         return hasUnitRepo.findOrganizationUnits(unit.getArangoId());
-     }
+    }
 
+    public OrganizationStructure saveStructure(OrganizationStructure entity) {
+        return repo.save(entity);
+    }
 
+    public void deleteStructure(OrganizationStructure entity) {
+        repo.delete(entity);
+    }
 
 }
