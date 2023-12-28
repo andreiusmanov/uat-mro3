@@ -13,6 +13,7 @@ import uz.uat.mro.app.model.documents.organization.StructureService;
 public class NewOrgUnitDialog extends Dialog {
     private StructureService service;
     private NewOrganizationForm form;
+    private NewHasOrganizationForm hasForm;
     private OrganizationUnit master;
     private Button saveButton;
     private Button cancelButton;
@@ -33,10 +34,11 @@ public class NewOrgUnitDialog extends Dialog {
             this.close();
         }));
         form();
+        hasForm();
         buttons();
         header();
         setCloseOnEsc(true);
-        add(form, new HorizontalLayout(saveButton, cancelButton));
+        add(form, hasForm, new HorizontalLayout(saveButton, cancelButton));
     }
 
     private void header() {
@@ -56,9 +58,16 @@ public class NewOrgUnitDialog extends Dialog {
         this.form = new NewOrganizationForm(service, master, readOnly);
     }
 
+    private void hasForm() {
+        this.hasForm = new NewHasOrganizationForm(service);
+    }
+
     private void buttons() {
         this.saveButton = new Button("Сохранить");
-        saveButton.addClickListener(click -> form.save());
+        saveButton.addClickListener(click -> {
+        OrganizationUnit subordinate =    form.save();
+        hasForm.save(master, subordinate);
+        });
         this.cancelButton = new Button("Отменить");
         cancelButton.addClickListener(click -> form.cancel());
     }
