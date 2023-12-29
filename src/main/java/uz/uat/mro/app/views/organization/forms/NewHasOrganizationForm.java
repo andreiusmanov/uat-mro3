@@ -14,7 +14,6 @@ import uz.uat.mro.app.model.documents.organization.edges.HasOrganizationUnit;
 public class NewHasOrganizationForm extends FormLayout {
 
     private StructureService service;
-    private boolean isReadOnly;
 
     private HasOrganizationUnit hasUnit;
     private DatePicker startDate;
@@ -33,23 +32,16 @@ public class NewHasOrganizationForm extends FormLayout {
 
     private void binders() {
         this.binderEdge = new Binder<>(HasOrganizationUnit.class);
-
         binderEdge.setBean(hasUnit);
         binderEdge.bindInstanceFields(this);
     }
 
     private void form() {
-        setReadOnly();
         startDate = new DatePicker("Дата создания");
         endDate = new DatePicker("Дата отмены");
         active = new Checkbox();
     }
 
-    private void setReadOnly() {
-        startDate.setReadOnly(isReadOnly);
-        endDate.setReadOnly(isReadOnly);
-        active.setReadOnly(isReadOnly);
-    }
 
     protected void save(OrganizationUnit master, OrganizationUnit subordinate) {
         try {
