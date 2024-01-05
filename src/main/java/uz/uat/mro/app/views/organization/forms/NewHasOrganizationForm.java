@@ -26,11 +26,11 @@ public class NewHasOrganizationForm extends FormLayout {
         this.service = service;
         this.hasUnit = new HasOrganizationUnit();
         form();
-        binders();
+        binder();
         add(startDate, endDate, active);
     }
 
-    private void binders() {
+    private void binder() {
         this.binderEdge = new Binder<>(HasOrganizationUnit.class);
         binderEdge.setBean(hasUnit);
         binderEdge.bindInstanceFields(this);
@@ -42,11 +42,10 @@ public class NewHasOrganizationForm extends FormLayout {
         active = new Checkbox();
     }
 
-
     protected void save(OrganizationUnit master, OrganizationUnit subordinate) {
         try {
-this.hasUnit.setMaster(master);
-this.hasUnit.setSubordinate(subordinate);
+            this.hasUnit.setMaster(master);
+            this.hasUnit.setSubordinate(subordinate);
             service.saveHasUnit(hasUnit);
             Notification.show("Запись " + subordinate.getName() + " сохранена", 5000, Position.MIDDLE);
         } catch (Exception e) {

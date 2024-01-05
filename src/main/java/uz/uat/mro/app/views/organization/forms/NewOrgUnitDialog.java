@@ -17,7 +17,6 @@ public class NewOrgUnitDialog extends Dialog {
     private OrganizationUnit master;
     private Button saveButton;
     private Button cancelButton;
-    private boolean readOnly;
 
 /**
  * 
@@ -25,14 +24,11 @@ public class NewOrgUnitDialog extends Dialog {
  * @param master
  * @param isReadOnly
  */
-    public NewOrgUnitDialog(StructureService service, OrganizationUnit master, boolean isReadOnly) {
+    public NewOrgUnitDialog(StructureService service, OrganizationUnit master) {
         super();
         this.service = service;
         this.master = master;
         this.setCloseOnEsc(true);
-        this.getHeader().add(new Button(VaadinIcon.CLOSE.create(), click -> {
-            this.close();
-        }));
         form();
         hasForm();
         buttons();
@@ -49,13 +45,14 @@ public class NewOrgUnitDialog extends Dialog {
 
         HorizontalLayout h = new HorizontalLayout();
         h.add(text, close);
-        h.setAlignItems(FlexComponent.Alignment.STRETCH);
+        
+        h.setAlignItems(FlexComponent.Alignment.AUTO);
         this.getHeader().add(h);
 
     }
 
     private void form() {
-        this.form = new NewOrganizationForm(service, master, readOnly);
+        this.form = new NewOrganizationForm(service);
     }
 
     private void hasForm() {
