@@ -20,7 +20,7 @@ import uz.uat.mro.app.views.common.CommonsView;
 import uz.uat.mro.app.views.common.CountriesView;
 import uz.uat.mro.app.views.common.CurrenciesView;
 import uz.uat.mro.app.views.common.MaintenancesView;
-import uz.uat.mro.app.views.common.OrganizationUnitNamesView;
+import uz.uat.mro.app.views.common.OrganizationUnitTypesView;
 import uz.uat.mro.app.views.common.StationsView;
 import uz.uat.mro.app.views.common.UomTypesView;
 import uz.uat.mro.app.views.common.UomsView;
@@ -74,7 +74,7 @@ public class MainLayout extends AppLayout {
                 LineAwesomeIcon.MONEY_BILL_ALT.create());
         SideNavItem maintenance = new SideNavItem("Виды работ", MaintenancesView.class,
                 LineAwesomeIcon.MONEY_BILL_ALT.create());
-        SideNavItem unitTypes = new SideNavItem("Типы подразделений", OrganizationUnitNamesView.class,
+        SideNavItem unitTypes = new SideNavItem("Типы подразделений", OrganizationUnitTypesView.class,
                 VaadinIcon.AIRPLANE.create());
         SideNavItem uomTypes = new SideNavItem("Виды Ед. измерения", UomTypesView.class,
                 LineAwesomeIcon.FEMALE_SOLID.create());

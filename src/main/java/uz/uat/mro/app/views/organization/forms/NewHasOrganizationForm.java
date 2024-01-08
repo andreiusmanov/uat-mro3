@@ -3,31 +3,24 @@ package uz.uat.mro.app.views.organization.forms;
 import com.vaadin.flow.component.checkbox.Checkbox;
 import com.vaadin.flow.component.datepicker.DatePicker;
 import com.vaadin.flow.component.formlayout.FormLayout;
-import com.vaadin.flow.component.notification.Notification;
-import com.vaadin.flow.component.notification.Notification.Position;
 import com.vaadin.flow.data.binder.Binder;
 
-import uz.uat.mro.app.model.documents.organization.OrganizationUnit;
-import uz.uat.mro.app.model.documents.organization.StructureService;
 import uz.uat.mro.app.model.documents.organization.edges.HasOrganizationUnit;
 
 public class NewHasOrganizationForm extends FormLayout {
 
-    private StructureService service;
-
     private HasOrganizationUnit hasUnit;
-    private DatePicker startDate;
-    private DatePicker endDate;
+    private DatePicker dateStart;
+    private DatePicker dateEnd;
     private Checkbox active;
 
     private Binder<HasOrganizationUnit> binderEdge;
 
-    public NewHasOrganizationForm(StructureService service) {
-        this.service = service;
+    public NewHasOrganizationForm() {
         this.hasUnit = new HasOrganizationUnit();
         form();
         binder();
-        add(startDate, endDate, active);
+        add(dateStart, dateEnd, active);
     }
 
     private void binder() {
@@ -37,28 +30,12 @@ public class NewHasOrganizationForm extends FormLayout {
     }
 
     private void form() {
-        startDate = new DatePicker("Дата создания");
-        endDate = new DatePicker("Дата отмены");
-        active = new Checkbox();
+        dateStart = new DatePicker("Дата создания");
+        dateEnd = new DatePicker("Дата отмены");
+        active = new Checkbox("Действующий");
     }
 
-    protected void save(OrganizationUnit master, OrganizationUnit subordinate) {
-        try {
-            this.hasUnit.setMaster(master);
-            this.hasUnit.setSubordinate(subordinate);
-            service.saveHasUnit(hasUnit);
-            Notification.show("Запись " + subordinate.getName() + " сохранена", 5000, Position.MIDDLE);
-        } catch (Exception e) {
-            throw e;
-        }
+    public HasOrganizationUnit getEdge() {
+        return binderEdge.getBean();
     }
-
-    protected void cancel() {
-        try {
-            Notification.show("Запись не сохранена", 5000, Position.MIDDLE);
-        } catch (Exception e) {
-            throw e;
-        }
-    }
-
 }

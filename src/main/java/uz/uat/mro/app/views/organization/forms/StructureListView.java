@@ -25,7 +25,6 @@ public class StructureListView extends VerticalLayout {
     private MenuItem editItem;
     private MenuItem deleteItem;
     private Grid<HasOrganizationUnit> grid;
-    private NewOrgUnitDialog newDialog;
     private OrganizationUnit organization;
     private OrganizationUnit selectedUnit;
     private HasOrganizationUnit hasUnit;
@@ -54,18 +53,18 @@ public class StructureListView extends VerticalLayout {
         });
 
         findItem = menu.addItem("Показать", "Показать орг. структуру", click -> {
-            newDialog();
+            NewOrgUnitDialog newDialog = newDialog();
             newDialog.open();
             Notification.show("Показать");
         });
         addItem = menu.addItem("Добавить", "Добавить орг. структуру", click -> {
-            newDialog();
+            NewOrgUnitDialog newDialog = newDialog();
             newDialog.open();
             Notification.show("Клик кнопка Добавить");
         });
 
         editItem = menu.addItem("Редактировать", "Редактировать орг. структуру", click -> {
-            newDialog();
+            NewOrgUnitDialog newDialog = newDialog();
             newDialog.open();
             Notification.show("Редактировать");
         });
@@ -106,12 +105,12 @@ public class StructureListView extends VerticalLayout {
         });
     }
 
-    private void newDialog() {
-        this.newDialog = new NewOrgUnitDialog(service, selectedUnit);
+    private NewOrgUnitDialog newDialog() {
+        NewOrgUnitDialog newDialog = new NewOrgUnitDialog(service, selectedUnit);
         newDialog.addDialogCloseActionListener(event -> {
             grid.getDataProvider().refreshAll();
         });
-        this.newDialog.open();
+        return newDialog;
     }
 
     private void enabledMenuItems(boolean enable) {

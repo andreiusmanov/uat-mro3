@@ -25,6 +25,7 @@ public class OrganizationService {
     private HasOrganizationUnitRepo hasUnitRepo;
     private OrganizationStructureRepo structureRepo;
 
+
     public List<Country> findAllCountries() {
         return StreamSupport.stream(countriesRepo.findAll().spliterator(), false).toList();
     }
@@ -64,7 +65,17 @@ public class OrganizationService {
     }
 
     public List<OrganizationUnit> findMainOrganizations(String type) {
+       Object o = unitRepo.findMainOrganizations(type);
+
+       if(o instanceof List){
         return unitRepo.findMainOrganizations(type);
+       }
+        return null;
+    }
+
+    public List<OrganizationUnit> findUnitsByType(String type) {
+       List<OrganizationUnit> units = unitRepo.findUnitByType(type);
+        return unitRepo.findUnitByType(type);
     }
 
     public Optional<OrganizationUnitType> findOrganizationType(String typeCode) {

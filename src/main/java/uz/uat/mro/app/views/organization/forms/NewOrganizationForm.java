@@ -2,8 +2,6 @@ package uz.uat.mro.app.views.organization.forms;
 
 import com.vaadin.flow.component.combobox.ComboBox;
 import com.vaadin.flow.component.formlayout.FormLayout;
-import com.vaadin.flow.component.notification.Notification;
-import com.vaadin.flow.component.notification.Notification.Position;
 import com.vaadin.flow.component.textfield.TextArea;
 import com.vaadin.flow.component.textfield.TextField;
 import com.vaadin.flow.data.binder.Binder;
@@ -15,16 +13,12 @@ import uz.uat.mro.app.model.documents.organization.StructureService;
 public class NewOrganizationForm extends FormLayout {
 
     private StructureService service;
-
     private OrganizationUnit subordinate;
-
     private Binder<OrganizationUnit> binderUnit;
-
     private TextField name;
     private TextField code;
     private TextArea description;
     private TextField shortName;
-
     private ComboBox<OrganizationUnitType> type;
 
     public NewOrganizationForm(StructureService service) {
@@ -51,22 +45,7 @@ public class NewOrganizationForm extends FormLayout {
         this.description = new TextArea("Описание");
     }
 
-    protected OrganizationUnit save() {
-        try {
-            OrganizationUnit subordinate = service.saveUnit(binderUnit.getBean());
-            Notification.show("Запись " + subordinate.getName() + " сохранена", 5000, Position.MIDDLE);
-            return subordinate;
-        } catch (Exception e) {
-            throw e;
-        }
+    public OrganizationUnit getUnit() {
+        return binderUnit.getBean();
     }
-
-    protected void cancel() {
-        try {
-            Notification.show("Запись не сохранена", 5000, Position.MIDDLE);
-        } catch (Exception e) {
-            throw e;
-        }
-    }
-
 }

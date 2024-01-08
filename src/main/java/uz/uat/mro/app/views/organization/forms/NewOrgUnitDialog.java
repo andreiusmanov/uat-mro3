@@ -2,13 +2,11 @@ package uz.uat.mro.app.views.organization.forms;
 
 import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.dialog.Dialog;
-import com.vaadin.flow.component.html.H3;
 import com.vaadin.flow.component.icon.VaadinIcon;
-import com.vaadin.flow.component.orderedlayout.FlexComponent;
-import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 
 import uz.uat.mro.app.model.documents.organization.OrganizationUnit;
 import uz.uat.mro.app.model.documents.organization.StructureService;
+import uz.uat.mro.app.model.documents.organization.edges.HasOrganizationUnit;
 
 public class NewOrgUnitDialog extends Dialog {
     private StructureService service;
@@ -18,12 +16,12 @@ public class NewOrgUnitDialog extends Dialog {
     private Button saveButton;
     private Button cancelButton;
 
-/**
- * 
- * @param service
- * @param master
- * @param isReadOnly
- */
+    /**
+     * 
+     * @param service
+     * @param master
+     * @param isReadOnly
+     */
     public NewOrgUnitDialog(StructureService service, OrganizationUnit master) {
         super();
         this.service = service;
@@ -34,21 +32,19 @@ public class NewOrgUnitDialog extends Dialog {
         buttons();
         header();
         setCloseOnEsc(true);
-        add(form, hasForm, new HorizontalLayout(saveButton, cancelButton));
+
+        this.getFooter().add(saveButton, cancelButton);
+
+        add(form, hasForm);
+
     }
 
     private void header() {
-        H3 text = new H3("Новое подразделение в составе " + master.getShortName());
         Button close = new Button(VaadinIcon.CLOSE.create(), click -> {
             this.close();
         });
-
-        HorizontalLayout h = new HorizontalLayout();
-        h.add(text, close);
-        
-        h.setAlignItems(FlexComponent.Alignment.AUTO);
-        this.getHeader().add(h);
-
+        this.setHeaderTitle("Новое подразделение в составе " + master.getShortName());
+        this.getHeader().add(close);
     }
 
     private void form() {
@@ -56,17 +52,21 @@ public class NewOrgUnitDialog extends Dialog {
     }
 
     private void hasForm() {
-        this.hasForm = new NewHasOrganizationForm(service);
+        this.hasForm = new NewHasOrganizationForm();
     }
 
     private void buttons() {
         this.saveButton = new Button("Сохранить");
         saveButton.addClickListener(click -> {
-        OrganizationUnit subordinate =    form.save();
-        hasForm.save(master, subordinate);
+            OrganizationUnit subordinate = form.getUnit();
+            HasOrganizationUnit edge = hasForm.getEdge();
+            service.saveNewUnitAndEdge(master, subordinate, edge);
+            this.close();
         });
         this.cancelButton = new Button("Отменить");
-        cancelButton.addClickListener(click -> form.cancel());
+        cancelButton.addClickListener(click -> {
+            this.close();
+        });
     }
 
 }

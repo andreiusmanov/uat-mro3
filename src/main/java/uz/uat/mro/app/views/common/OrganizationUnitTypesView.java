@@ -15,11 +15,11 @@ import uz.uat.mro.app.views.MainLayout;
 
 @Route(value = "terms/unit-names", layout = MainLayout.class)
 @PageTitle(value = "Типы структурных единиц предприятия")
-public class OrganizationUnitNamesView extends VerticalLayout {
+public class OrganizationUnitTypesView extends VerticalLayout {
     private OrganizationUnitTypeService service;
     private GridCrud<OrganizationUnitType> crud;
 
-    public OrganizationUnitNamesView(OrganizationUnitTypeService service) {
+    public OrganizationUnitTypesView(OrganizationUnitTypeService service) {
         super();
         this.service = service;
         crud();
@@ -30,8 +30,8 @@ public class OrganizationUnitNamesView extends VerticalLayout {
         this.crud = new GridCrud<>(OrganizationUnitType.class);
         Grid<OrganizationUnitType> grid = crud.getGrid();
 
-        grid.setColumns("name", "code", "description");
-        grid.getColumnByKey("name").setHeader("Наименование");
+        grid.setColumns("id", "code", "description");
+        grid.getColumnByKey("id").setHeader("Наименование");
         grid.getColumnByKey("code").setHeader("Код");
         grid.getColumnByKey("description").setHeader("Описание");
 
@@ -41,7 +41,7 @@ public class OrganizationUnitNamesView extends VerticalLayout {
         crud.setFindAllOperation(service::queryAllUnitNames);
 
         CrudFormFactory<OrganizationUnitType> factory = crud.getCrudFormFactory();
-        factory.setVisibleProperties("name", "code", "description");
+        factory.setVisibleProperties("id", "code", "description");
         factory.setFieldCaptions("Наименование", "Код", "Описание");
 
         factory.setFieldProvider("description", val -> {

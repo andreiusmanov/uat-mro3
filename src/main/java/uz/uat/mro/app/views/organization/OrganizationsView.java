@@ -1,5 +1,6 @@
 package uz.uat.mro.app.views.organization;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.vaadin.crudui.crud.impl.GridCrud;
@@ -38,7 +39,7 @@ public class OrganizationsView extends VerticalLayout {
 
     private void grid() {
         this.crud = new GridCrud<>(OrganizationUnit.class);
-        List<OrganizationUnit> units = service.findMainOrganizations("Организация");
+        List<OrganizationUnit> units = service.findUnitsByType("organization_unit_types/organization");
 
         Grid<OrganizationUnit> grid = crud.getGrid();
 

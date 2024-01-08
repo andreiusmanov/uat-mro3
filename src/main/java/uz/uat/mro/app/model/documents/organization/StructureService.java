@@ -44,4 +44,16 @@ public class StructureService {
         repo.delete(entity);
     }
 
+    public void saveNewUnitAndEdge(OrganizationUnit master, OrganizationUnit subordinate, HasOrganizationUnit edge) {
+        try {
+            saveUnit(subordinate);
+            edge.setMaster(master);
+            edge.setSubordinate(subordinate);
+            saveHasUnit(edge);
+        } catch (Exception e) {
+
+        }
+
+    }
+
 }
