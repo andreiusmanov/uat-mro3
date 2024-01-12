@@ -25,7 +25,6 @@ public class OrganizationService {
     private HasOrganizationUnitRepo hasUnitRepo;
     private OrganizationStructureRepo structureRepo;
 
-
     public List<Country> findAllCountries() {
         return StreamSupport.stream(countriesRepo.findAll().spliterator(), false).toList();
     }
@@ -64,17 +63,7 @@ public class OrganizationService {
         hasUnitRepo.save(hasUnit);
     }
 
-    public List<OrganizationUnit> findMainOrganizations(String type) {
-       Object o = unitRepo.findMainOrganizations(type);
-
-       if(o instanceof List){
-        return unitRepo.findMainOrganizations(type);
-       }
-        return null;
-    }
-
     public List<OrganizationUnit> findUnitsByType(String type) {
-       List<OrganizationUnit> units = unitRepo.findUnitByType(type);
         return unitRepo.findUnitByType(type);
     }
 
@@ -89,38 +78,37 @@ public class OrganizationService {
     }
 
     /**
-     * List all links between organization and its's units 
+     * List all links between organization and its's units
      */
 
-     public List<HasOrganizationUnit> findOrganizationUnits(OrganizationUnit unit){
+    public List<HasOrganizationUnit> findOrganizationUnits(OrganizationUnit unit) {
         return hasUnitRepo.findOrganizationUnits(unit.getArangoId());
-     }
+    }
 
-     public HasOrganizationUnit saveHasUnit(HasOrganizationUnit hasUnit){
+    public HasOrganizationUnit saveHasUnit(HasOrganizationUnit hasUnit) {
         return hasUnitRepo.save(hasUnit);
-     }
+    }
 
-     public void deleteHasUnit(HasOrganizationUnit hasUnit){
+    public void deleteHasUnit(HasOrganizationUnit hasUnit) {
         hasUnitRepo.delete(hasUnit);
-     }
+    }
 
-     public HasOrganizationUnit findHasOrganizationUnitById(HasOrganizationUnit hasUnit){
+    public HasOrganizationUnit findHasOrganizationUnitById(HasOrganizationUnit hasUnit) {
         return hasUnitRepo.findById(hasUnit.getArangoId()).get();
-     }
+    }
 
+    // Organization structures
 
-
-     // Organization structures
-
-     public OrganizationStructure saveStructure(OrganizationStructure structure){
+    public OrganizationStructure saveStructure(OrganizationStructure structure) {
         return structureRepo.save(structure);
-     }
-     public void deleteStructure(OrganizationStructure structure){
+    }
+
+    public void deleteStructure(OrganizationStructure structure) {
         structureRepo.delete(structure);
-     }
-     
-public List<OrganizationStructure> findAllStructures(OrganizationUnit organization){
-    return structureRepo.getStructuresByOrganization(organization.getArangoId());
-}
+    }
+
+    public List<OrganizationStructure> findAllStructures(OrganizationUnit organization) {
+        return structureRepo.getStructuresByOrganization(organization.getArangoId());
+    }
 
 }

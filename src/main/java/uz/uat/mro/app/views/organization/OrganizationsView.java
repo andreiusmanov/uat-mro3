@@ -1,8 +1,5 @@
 package uz.uat.mro.app.views.organization;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import org.vaadin.crudui.crud.impl.GridCrud;
 
 import com.vaadin.flow.component.UI;
@@ -28,7 +25,7 @@ public class OrganizationsView extends VerticalLayout {
     private OrganizationService service;
     private GridCrud<OrganizationUnit> crud;
     private OrganizationUnit organization;
-    private GridListDataView<OrganizationUnit> dataView;
+    // private GridListDataView<OrganizationUnit> dataView;
     private Button viewButton;
 
     public OrganizationsView(OrganizationService service) {
@@ -39,7 +36,6 @@ public class OrganizationsView extends VerticalLayout {
 
     private void grid() {
         this.crud = new GridCrud<>(OrganizationUnit.class);
-        List<OrganizationUnit> units = service.findUnitsByType("organization_unit_types/organization");
 
         Grid<OrganizationUnit> grid = crud.getGrid();
 
@@ -48,7 +44,6 @@ public class OrganizationsView extends VerticalLayout {
             this.viewButton.setEnabled(res);
             this.organization = grid.getSelectionModel().getFirstSelectedItem().orElse(new OrganizationUnit());
         });
-        grid.setItems(units);
         grid.setColumns("name", "code", "description");
         grid.getColumnByKey("name").setHeader("Наименование");
         grid.getColumnByKey("code").setHeader("Код");
@@ -57,7 +52,9 @@ public class OrganizationsView extends VerticalLayout {
         crud.setAddOperation(service::save);
         crud.setUpdateOperation(service::save);
         crud.setDeleteOperation(service::delete);
-        crud.setFindAllOperation(() -> service.findMainOrganizations("Организация"));
+        crud.setFindAllOperation(() -> 
+        service.findUnitsByType("organization_unit_types/office"));
+        //service.findUnitsByType("organization_unit_types/organization"));
 
         crud.getCrudFormFactory().setVisibleProperties("name", "code", "description", "shortName", "country", "type");
         crud.getCrudFormFactory().setFieldCaptions("Наименование", "Код", "Описание", "Аббрев.", "Страна", "Тип");
