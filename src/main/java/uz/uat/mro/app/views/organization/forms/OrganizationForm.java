@@ -11,7 +11,6 @@ import uz.uat.mro.app.model.terms.common.Country;
 
 public class OrganizationForm extends FormLayout {
     private OrganizationService service;
-    private final String typeName = "organization_unit_types/organization";
     private ComboBox<Country> country;
     private TextField name;
     private TextField code;

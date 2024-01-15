@@ -20,6 +20,7 @@ public class StructureService {
     private OrganizationUnitRepo unitRepo;
     private HasOrganizationUnitRepo hasUnitRepo;
 
+    
     public List<OrganizationUnitType> findAllTypes() {
         return StreamSupport.stream(typeRepo.findAll().spliterator(), false).toList();
     }

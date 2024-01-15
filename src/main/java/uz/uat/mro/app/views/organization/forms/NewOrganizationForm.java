@@ -41,7 +41,7 @@ public class NewOrganizationForm extends FormLayout {
         this.code = new TextField("Код");
         this.shortName = new TextField("Аббревиатура");
         this.type = new ComboBox<>("Тип орг. структуры", service.findAllTypes());
-        this.type.setItemLabelGenerator((entry) -> entry.getName());
+        this.type.setItemLabelGenerator((entry) -> entry.getCode());
         this.description = new TextArea("Описание");
     }
 
