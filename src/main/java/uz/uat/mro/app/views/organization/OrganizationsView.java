@@ -25,7 +25,6 @@ public class OrganizationsView extends VerticalLayout {
     private OrganizationService service;
     private GridCrud<OrganizationUnit> crud;
     private OrganizationUnit organization;
-    // private GridListDataView<OrganizationUnit> dataView;
     private Button viewButton;
 
     public OrganizationsView(OrganizationService service) {
@@ -44,6 +43,8 @@ public class OrganizationsView extends VerticalLayout {
             this.viewButton.setEnabled(res);
             this.organization = grid.getSelectionModel().getFirstSelectedItem().orElse(new OrganizationUnit());
         });
+
+
         grid.setColumns("name", "code", "description");
         grid.getColumnByKey("name").setHeader("Наименование");
         grid.getColumnByKey("code").setHeader("Код");
@@ -52,9 +53,7 @@ public class OrganizationsView extends VerticalLayout {
         crud.setAddOperation(service::save);
         crud.setUpdateOperation(service::save);
         crud.setDeleteOperation(service::delete);
-        crud.setFindAllOperation(() -> 
-        service.findUnitsByType("organization_unit_types/office"));
-        //service.findUnitsByType("organization_unit_types/organization"));
+        crud.setFindAllOperation(() -> service.findAllOrganizationUnits());
 
         crud.getCrudFormFactory().setVisibleProperties("name", "code", "description", "shortName", "country", "type");
         crud.getCrudFormFactory().setFieldCaptions("Наименование", "Код", "Описание", "Аббрев.", "Страна", "Тип");
