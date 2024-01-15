@@ -59,6 +59,7 @@ public class NewOrgUnitDialog extends Dialog {
         this.saveButton = new Button("Сохранить");
         saveButton.addClickListener(click -> {
             OrganizationUnit subordinate = form.getUnit();
+            subordinate.setCountry(master.getCountry());
             HasOrganizationUnit edge = hasForm.getEdge();
             service.saveNewUnitAndEdge(master, subordinate, edge);
             this.close();

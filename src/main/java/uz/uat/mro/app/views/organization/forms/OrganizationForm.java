@@ -11,7 +11,7 @@ import uz.uat.mro.app.model.terms.common.Country;
 
 public class OrganizationForm extends FormLayout {
     private OrganizationService service;
-    private final String typeName = "Организация";
+    private final String typeName = "organization_unit_types/organization";
     private ComboBox<Country> country;
     private TextField name;
     private TextField code;
@@ -32,8 +32,8 @@ public class OrganizationForm extends FormLayout {
         this.name = new TextField("Наименование");
         this.code = new TextField("Код");
         this.shortName = new TextField("Аббревиатура");
-        this.type = new ComboBox<>("Тип орг. структуры", service.findOrganizationType(typeName).get());
-        this.type.setItemLabelGenerator((entry) -> entry.getName());
+        this.type = new ComboBox<>("Тип орг. структуры", service.findAllOrganizationTypes());
+        this.type.setItemLabelGenerator((entry) -> entry.getCode());
         this.description = new TextArea("Описание");
         this.setColspan(description, 2);
     }

@@ -6,7 +6,6 @@ import com.vaadin.flow.component.UI;
 import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.combobox.ComboBox;
 import com.vaadin.flow.component.grid.Grid;
-import com.vaadin.flow.component.grid.dataview.GridListDataView;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.router.PageTitle;
 import com.vaadin.flow.router.Route;
@@ -37,7 +36,6 @@ public class OrganizationsView extends VerticalLayout {
         this.crud = new GridCrud<>(OrganizationUnit.class);
 
         Grid<OrganizationUnit> grid = crud.getGrid();
-
         grid.getSelectionModel().addSelectionListener(selected -> {
             boolean res = !grid.getSelectedItems().isEmpty();
             this.viewButton.setEnabled(res);
@@ -53,13 +51,14 @@ public class OrganizationsView extends VerticalLayout {
         crud.setAddOperation(service::save);
         crud.setUpdateOperation(service::save);
         crud.setDeleteOperation(service::delete);
-        crud.setFindAllOperation(() -> service.findAllOrganizationUnits());
+        crud.setFindAllOperation(service::findAllOrganizations);
+
 
         crud.getCrudFormFactory().setVisibleProperties("name", "code", "description", "shortName", "country", "type");
         crud.getCrudFormFactory().setFieldCaptions("Наименование", "Код", "Описание", "Аббрев.", "Страна", "Тип");
         crud.getCrudFormFactory().setFieldProvider("type", type -> {
             ComboBox<OrganizationUnitType> combo = new ComboBox<>("Тип", service.findAllOrganizationTypes());
-            combo.setItemLabelGenerator((c) -> c.getName());
+            combo.setItemLabelGenerator((c) -> c.getCode());
             return combo;
         });
         crud.getCrudFormFactory().setFieldProvider("country", type -> {

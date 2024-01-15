@@ -11,6 +11,7 @@ import com.vaadin.flow.component.menubar.MenuBarVariant;
 import com.vaadin.flow.component.notification.Notification;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 
+import uz.uat.mro.app.model.documents.organization.OrganizationStructure;
 import uz.uat.mro.app.model.documents.organization.OrganizationUnit;
 import uz.uat.mro.app.model.documents.organization.StructureService;
 import uz.uat.mro.app.model.documents.organization.edges.HasOrganizationUnit;
@@ -25,15 +26,17 @@ public class StructureListView extends VerticalLayout {
     private MenuItem editItem;
     private MenuItem deleteItem;
     private Grid<HasOrganizationUnit> grid;
+    private OrganizationStructure structure;
     private OrganizationUnit organization;
     private OrganizationUnit selectedUnit;
     private HasOrganizationUnit hasUnit;
     private GridListDataView<HasOrganizationUnit> dataView;
     private H3 header;
 
-    public StructureListView(StructureService service, OrganizationUnit organization) {
+    public StructureListView(StructureService service, OrganizationStructure structure) {
         this.service = service;
-        this.organization = organization;
+        this.structure = structure;
+        this.organization = structure.getOrganization();
         this.selectedUnit = organization;
         header();
         menu();

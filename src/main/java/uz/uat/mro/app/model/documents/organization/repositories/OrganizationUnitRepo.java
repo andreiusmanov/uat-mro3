@@ -14,11 +14,8 @@ public interface OrganizationUnitRepo extends ArangoRepository<OrganizationUnit,
     @Query("for u in has_unit for i in organization_units filter u._from == @organization && i._id == u._to return i")
     public List<OrganizationUnit> getOrganizationUnitsByOrganization(@Param("organization") String organization);
 
-    //@Query(value = "for i in organization_units filter i.type == @typeName return i")
-    //public List<OrganizationUnit> findMainOrganizations(@Param("typeName") String typeName);
-
-    @Query(value = "for i in organization_units filter i.type == @typeName return i")
-    public List<OrganizationUnit> findUnitByType(@Param("typeName") String typeName);
-
+    @Query(value = "for i in organization_units  filter i.type == @unit_type return i")
+    public List<OrganizationUnit> findUnitByType
+    (@Param("unit_type") String typeName);
 
 }
