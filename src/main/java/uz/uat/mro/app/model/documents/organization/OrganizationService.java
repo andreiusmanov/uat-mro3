@@ -101,4 +101,13 @@ public class OrganizationService {
         return structureRepo.getStructuresByOrganization(organization.getArangoId());
     }
 
+    public List<OrganizationUnit> f() {
+        OrganizationUnitType t = new OrganizationUnitType();
+        t.setId("organization_unit_types/organization");
+        OrganizationUnit u = new OrganizationUnit();
+        u.setType(t);
+        Iterable<OrganizationUnit> it = unitRepo.findAll(Example.of(u));
+        return StreamSupport.stream(it.spliterator(), false).toList();
+    }
+
 }

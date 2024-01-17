@@ -25,8 +25,7 @@ import uz.uat.mro.app.views.common.StationsView;
 import uz.uat.mro.app.views.common.UomTypesView;
 import uz.uat.mro.app.views.common.UomsView;
 import uz.uat.mro.app.views.common.WorkDaysView;
-import uz.uat.mro.app.views.organization.OrganizationsView;
-import uz.uat.mro.app.views.organization.OrganizationsView;
+import uz.uat.mro.app.views.organization.OrganizationsView2;
 import uz.uat.mro.app.views.start.StartView;
 
 /**
@@ -82,7 +81,7 @@ public class MainLayout extends AppLayout {
         SideNavItem calendar = new SideNavItem("Календарь", WorkDaysView.class, LineAwesomeIcon.FEMALE_SOLID.create());
 
         terms.addItem(countries, stations, currencies, maintenance, unitTypes, uomTypes, uoms, calendar);
-        SideNavItem org = new SideNavItem("Организации", OrganizationsView.class, VaadinIcon.OFFICE.create());
+        SideNavItem org = new SideNavItem("Организации", OrganizationsView2.class, VaadinIcon.OFFICE.create());
         nav.addItem(start, about, terms, org);
         return nav;
     }
