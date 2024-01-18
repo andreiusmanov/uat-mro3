@@ -72,7 +72,10 @@ public class StructureListView extends VerticalLayout {
             Notification.show("Редактировать");
         });
         deleteItem = menu.addItem("Удалить", "Удалить орг. структуру", click -> {
-            Notification.show("Удалить");
+            service.deleteUnit(selectedUnit);
+            service.deleteHasUnit(hasUnit);
+            Notification.show("Удалено подразделение " + selectedUnit.getName());
+            dataView.refreshAll();
         });
 
         this.findItem.setEnabled(false);

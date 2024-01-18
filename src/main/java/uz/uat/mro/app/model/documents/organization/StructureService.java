@@ -20,7 +20,6 @@ public class StructureService {
     private OrganizationUnitRepo unitRepo;
     private HasOrganizationUnitRepo hasUnitRepo;
 
-    
     public List<OrganizationUnitType> findAllTypes() {
         return StreamSupport.stream(typeRepo.findAll().spliterator(), false).toList();
     }
@@ -55,6 +54,14 @@ public class StructureService {
 
         }
 
+    }
+
+    public void deleteUnit(OrganizationUnit unit) {
+        unitRepo.delete(unit);
+    }
+
+    public void deleteHasUnit(HasOrganizationUnit hasUnit) {
+        hasUnitRepo.delete(hasUnit);
     }
 
 }
