@@ -67,8 +67,8 @@ public class StructureListView extends VerticalLayout {
         });
 
         editItem = menu.addItem("Редактировать", "Редактировать орг. структуру", click -> {
-            NewOrgUnitDialog newDialog = newDialog();
-            newDialog.open();
+            EditOrgUnitDialog editDialog = editDialog();
+            editDialog().open();
             Notification.show("Редактировать");
         });
         deleteItem = menu.addItem("Удалить", "Удалить орг. структуру", click -> {
@@ -119,6 +119,16 @@ public class StructureListView extends VerticalLayout {
             }
         });
         return newDialog;
+    }
+
+    private EditOrgUnitDialog editDialog() {
+        EditOrgUnitDialog editDialog = new EditOrgUnitDialog(service, hasUnit);
+        editDialog.addOpenedChangeListener(event -> {
+            if (!event.isOpened()) {
+                grid.setItems(service.findOrganizationUnits(organization));
+            }
+        });
+        return editDialog;
     }
 
     private void enabledMenuItems(boolean enable) {
