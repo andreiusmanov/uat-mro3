@@ -110,8 +110,10 @@ public class StructureListView extends VerticalLayout {
 
     private NewOrgUnitDialog newDialog() {
         NewOrgUnitDialog newDialog = new NewOrgUnitDialog(service, selectedUnit);
-        newDialog.addDialogCloseActionListener(event -> {
-            grid.getDataProvider().refreshAll();
+        newDialog.addOpenedChangeListener(event -> {
+            if (!event.isOpened()) {
+                grid.setItems(service.findOrganizationUnits(organization));
+            }
         });
         return newDialog;
     }

@@ -101,13 +101,14 @@ public class OrganizationService {
         return structureRepo.getStructuresByOrganization(organization.getArangoId());
     }
 
-    public List<OrganizationUnit> f() {
-        OrganizationUnitType t = new OrganizationUnitType();
-        t.setId("organization_unit_types/organization");
+    public List<OrganizationUnit> findOrganizations() {
+        String typeId = "organization_unit_types/organization";
+        OrganizationUnitType type = unitTypeRepo.findById(typeId).orElseThrow();
         OrganizationUnit u = new OrganizationUnit();
-        u.setType(t);
+        u.setType(type);
         Iterable<OrganizationUnit> it = unitRepo.findAll(Example.of(u));
-        return StreamSupport.stream(it.spliterator(), false).toList();
+        List<OrganizationUnit> l = StreamSupport.stream(it.spliterator(), false).toList();
+        return l;
     }
 
 }

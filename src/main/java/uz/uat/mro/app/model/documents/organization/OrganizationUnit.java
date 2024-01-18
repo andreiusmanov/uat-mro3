@@ -29,8 +29,8 @@ public class OrganizationUnit {
     private String shortName;
     @Ref(lazy = false)
     private OrganizationUnitType type;
-    @Relations(edges = HasOrganizationUnit.class, lazy = false)
+    @Relations(edges = HasOrganizationUnit.class, lazy = true)
     private Collection<OrganizationUnit> units;
-    @Relations(edges = HasFacility.class, lazy = false)
+    @Relations(edges = HasFacility.class, lazy = true)
     private Collection<Facility> facilities;
 }

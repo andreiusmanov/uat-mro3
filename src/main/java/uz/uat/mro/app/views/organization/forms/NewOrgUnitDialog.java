@@ -32,11 +32,8 @@ public class NewOrgUnitDialog extends Dialog {
         buttons();
         header();
         setCloseOnEsc(true);
-
         this.getFooter().add(saveButton, cancelButton);
-
         add(form, hasForm);
-
     }
 
     private void header() {
