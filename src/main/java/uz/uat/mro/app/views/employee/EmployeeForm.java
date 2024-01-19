@@ -7,7 +7,7 @@ import com.vaadin.flow.component.grid.Grid;
 import com.vaadin.flow.component.textfield.TextField;
 
 import uz.uat.mro.app.model.documents.organization.OrganizationUnit;
-import uz.uat.mro.app.model.documents.staff.Position;
+import uz.uat.mro.app.model.documents.staff.Staff;
 
 public class EmployeeForm extends FormLayout {
 
@@ -16,7 +16,7 @@ public class EmployeeForm extends FormLayout {
     private TextField surname;
     private TextField patronymic;
     private TextField tabel;
-    private Grid<Position> positions;
+    private Grid<Staff> positions;
 
     public EmployeeForm(OrganizationUnit org) {
         setup(org);
@@ -30,7 +30,7 @@ public class EmployeeForm extends FormLayout {
         this.surname = new TextField("Фамилия");
         this.patronymic = new TextField("Отчество");
         this.tabel = new TextField("Табельный номер");
-        this.positions = new Grid<>(Position.class);
+        this.positions = new Grid<>(Staff.class);
     }
 
 }

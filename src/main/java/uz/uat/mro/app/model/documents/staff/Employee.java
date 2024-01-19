@@ -24,8 +24,5 @@ public class Employee {
     private String patronymic;
     private String tabel;
     @Ref(lazy =true)
-    /**
-     * all positions
-     */
-    private List<Position> positions;
+    private List<Staff> staff;
 }

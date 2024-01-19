@@ -8,8 +8,8 @@ import com.arangodb.springframework.annotation.Document;
 import lombok.Data;
 
 @Data
-@Document(collection = "positions")
-public class Position {
+@Document(collection = "staff")
+public class Staff {
     @Id
     private String id;
     @ArangoId

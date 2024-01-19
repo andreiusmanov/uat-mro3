@@ -68,7 +68,7 @@ public class StructureListView extends VerticalLayout {
 
         editItem = menu.addItem("Редактировать", "Редактировать орг. структуру", click -> {
             EditOrgUnitDialog editDialog = editDialog();
-            editDialog().open();
+            editDialog.open();
             Notification.show("Редактировать");
         });
         deleteItem = menu.addItem("Удалить", "Удалить орг. структуру", click -> {
@@ -87,9 +87,11 @@ public class StructureListView extends VerticalLayout {
     private void grid() {
         this.grid = new Grid<>(HasOrganizationUnit.class);
         this.grid.setItems(service.findOrganizationUnits(organization));
-        this.grid.setColumns("subordinate.name", "subordinate.code", "subordinate.shortName", "subordinate.description",
+        this.grid.setColumns("subordinate.name","subordinate.type.code", "subordinate.code", "subordinate.shortName", "subordinate.description",
                 "active");
+        
         this.grid.getColumnByKey("subordinate.name").setHeader("Наименование");
+        this.grid.getColumnByKey("subordinate.type.code").setHeader("Тип");
         this.grid.getColumnByKey("subordinate.code").setHeader("Код");
         this.grid.getColumnByKey("subordinate.shortName").setHeader("Аббрев.");
         this.grid.getColumnByKey("subordinate.description").setHeader("Описание");

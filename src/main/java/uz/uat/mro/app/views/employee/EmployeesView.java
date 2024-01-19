@@ -1,11 +1,8 @@
 package uz.uat.mro.app.views.employee;
 
-import com.vaadin.flow.component.button.Button;
-import com.vaadin.flow.component.contextmenu.MenuItem;
-import com.vaadin.flow.component.dialog.Dialog;
+import org.vaadin.crudui.crud.impl.GridCrud;
+
 import com.vaadin.flow.component.grid.Grid;
-import com.vaadin.flow.component.menubar.MenuBar;
-import com.vaadin.flow.component.menubar.MenuBarVariant;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.router.PageTitle;
 import com.vaadin.flow.router.Route;
@@ -21,38 +18,30 @@ import uz.uat.mro.app.utils.MyUtils;
 public class EmployeesView extends VerticalLayout {
     private StaffService service;
     private OrganizationUnit organization;
-    private Grid<Employee> grid;
-    private MenuBar menu;
-    private MenuItem addItem;
+    private GridCrud<Employee> crud;
 
     public EmployeesView(StaffService service) {
         this.service = service;
         this.organization = (OrganizationUnit) MyUtils.getAttribute(Keys.ORGANIZATION);
         grid();
-        menu();
-        add(grid);
-    }
-
-    private void menu() {
-        this.menu = new MenuBar();
-        menu.addThemeVariants(MenuBarVariant.LUMO_TERTIARY);
-        addItem = menu.addItem("Добавить");
-        addItem.addClickListener(click -> {
-            dialog();
-        });
-    }
-
-    private void dialog() {
-    Dialog d = new Dialog("Редактирование данных сотрудника");
-    d.add(new EmployeeForm(organization));
-    Button saveButton = new Button("Сохранить");
-    // saveButton.addClickListener(null);
-    
+        add(crud);
     }
 
     private void grid() {
-        this.grid = new Grid<>(Employee.class);
+        this.crud = new GridCrud<>(Employee.class);
+        Grid<Employee> grid = crud.getGrid();
 
+        grid.setColumns("surname", "name", "patronymic", "tabel");
+
+        grid.getColumnByKey("surname").setHeader("Фамилия");
+        grid.getColumnByKey("name").setHeader("Имя");
+        grid.getColumnByKey("patronymic").setHeader("Отчество");
+        grid.getColumnByKey("tabel").setHeader("Таб. Номер");
+
+        crud.setAddOperation(service::saveEmployee);
+        crud.setUpdateOperation(service::saveEmployee);
+        crud.setDeleteOperation(service::deleteEmployee);
+        crud.setFindAllOperation(() -> service.findAllEmployees(organization));
     }
 
 }
