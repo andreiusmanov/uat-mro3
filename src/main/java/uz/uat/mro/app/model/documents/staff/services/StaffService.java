@@ -24,7 +24,10 @@ public class StaffService {
         return employeesRepo.findByOrganization(organization.getArangoId());
     }
 
-    public Employee saveEmployee(Employee employee) {
+    public Employee saveEmployeeCard(EmployeeCard card) {
+        
+        
+        
         return employeesRepo.save(employee);
     }
 

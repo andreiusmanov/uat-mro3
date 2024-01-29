@@ -8,7 +8,7 @@ import com.vaadin.flow.router.PageTitle;
 import com.vaadin.flow.router.Route;
 
 import uz.uat.mro.app.model.documents.organization.OrganizationUnit;
-import uz.uat.mro.app.model.documents.staff.Employee;
+import uz.uat.mro.app.model.documents.staff.edges.HasEmployee;
 import uz.uat.mro.app.model.documents.staff.services.StaffService;
 import uz.uat.mro.app.utils.Keys;
 import uz.uat.mro.app.utils.MyUtils;
@@ -18,7 +18,7 @@ import uz.uat.mro.app.utils.MyUtils;
 public class EmployeesView extends VerticalLayout {
     private StaffService service;
     private OrganizationUnit organization;
-    private GridCrud<Employee> crud;
+    private GridCrud<HasEmployee> crud;
 
     public EmployeesView(StaffService service) {
         this.service = service;
@@ -28,20 +28,22 @@ public class EmployeesView extends VerticalLayout {
     }
 
     private void grid() {
-        this.crud = new GridCrud<>(Employee.class);
-        Grid<Employee> grid = crud.getGrid();
+        this.crud = new GridCrud<>(HasEmployee.class);
+        Grid<HasEmployee> grid = crud.getGrid();
 
-        grid.setColumns("surname", "name", "patronymic", "tabel");
+        grid.setColumns("employee.surname", "employee.name", "employee.patronymic", "employee.tabel", );
 
-        grid.getColumnByKey("surname").setHeader("Фамилия");
-        grid.getColumnByKey("name").setHeader("Имя");
-        grid.getColumnByKey("patronymic").setHeader("Отчество");
-        grid.getColumnByKey("tabel").setHeader("Таб. Номер");
+        grid.getColumnByKey("employee.surname").setHeader("Фамилия");
+        grid.getColumnByKey("employee.name").setHeader("Имя");
+        grid.getColumnByKey("employee.patronymic").setHeader("Отчество");
+        grid.getColumnByKey("employee.tabel").setHeader("Таб. Номер");
+grid.getColumnByKey("dateStart").setHeader("Дата приема");
+grid.getColumnByKey("dateEnd").setHeader("Дата увольнения");
 
-        crud.setAddOperation(service::saveEmployee);
-        crud.setUpdateOperation(service::saveEmployee);
-        crud.setDeleteOperation(service::deleteEmployee);
-        crud.setFindAllOperation(() -> service.findAllEmployees(organization));
+        crud.setAddOperation(service::saveEmployeeCard);
+        crud.setUpdateOperation(service::saveEmployeeCard);
+        crud.setDeleteOperation(service::deleteEmployeeCard);
+        crud.setFindAllOperation(() -> service.findAllEmployeeCards(organization));
     }
 
 }
