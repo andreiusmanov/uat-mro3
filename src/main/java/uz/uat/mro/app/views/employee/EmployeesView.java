@@ -31,19 +31,20 @@ public class EmployeesView extends VerticalLayout {
         this.crud = new GridCrud<>(HasEmployee.class);
         Grid<HasEmployee> grid = crud.getGrid();
 
-        grid.setColumns("employee.surname", "employee.name", "employee.patronymic", "employee.tabel", );
+        grid.setColumns("employee.surname", "employee.name", "employee.patronymic", "employee.tabel");
 
         grid.getColumnByKey("employee.surname").setHeader("Фамилия");
         grid.getColumnByKey("employee.name").setHeader("Имя");
         grid.getColumnByKey("employee.patronymic").setHeader("Отчество");
         grid.getColumnByKey("employee.tabel").setHeader("Таб. Номер");
-grid.getColumnByKey("dateStart").setHeader("Дата приема");
-grid.getColumnByKey("dateEnd").setHeader("Дата увольнения");
+        grid.getColumnByKey("dateStart").setHeader("Дата приема");
+        grid.getColumnByKey("dateEnd").setHeader("Дата увольнения");
 
-        crud.setAddOperation(service::saveEmployeeCard);
-        crud.setUpdateOperation(service::saveEmployeeCard);
-        crud.setDeleteOperation(service::deleteEmployeeCard);
-        crud.setFindAllOperation(() -> service.findAllEmployeeCards(organization));
+        // crud.setAddOperation(service::saveHasEmployee);
+        // crud.setUpdateOperation(service::saveHasEmployee);
+        // crud.setDeleteOperation(service::deleteHasEmployee);
+        // crud.setFindAllOperation(() -> service.findAllHasEmployee(organization));
+
     }
 
 }
